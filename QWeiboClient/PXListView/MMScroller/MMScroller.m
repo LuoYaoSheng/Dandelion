@@ -57,8 +57,8 @@
     if ([self bounds].size.width < [self bounds].size.height) {
         [[NSColor colorWithCalibratedWhite:0.0 alpha:alphaValue] setFill];
         NSRect rect = [self rectForPart:NSScrollerKnob];
-        rect.size.width = 9;
-        rect.origin.x += 3.0;
+        rect.size.width = 8;
+        rect.origin.x += 5.0;
         MMFillRoundedRect(rect, 4, 4);
     }
     else {

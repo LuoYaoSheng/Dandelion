@@ -13,7 +13,11 @@
 
 @implementation MyListViewCell
 
-@synthesize titleLabel;
+
+@synthesize headButton = _headButton;
+@synthesize nameLabel = _nameLabel;
+@synthesize timeLabel = _timeLabel;
+@synthesize textLabel = _textLabel;
 
 #pragma mark -
 #pragma mark Init/Dealloc
@@ -29,8 +33,6 @@
 
 - (void)dealloc
 {
-	[titleLabel release], titleLabel=nil;
-    
 	[super dealloc];
 }
 
@@ -39,7 +41,8 @@
 
 - (void)prepareForReuse
 {
-	[titleLabel setStringValue:@""];
+    self.headButton.image = nil;
+	self.textLabel.stringValue = @"";
 }
 
 #pragma mark -
@@ -98,7 +101,7 @@
     if([attribute isEqualToString:NSAccessibilityDescriptionAttribute]
 			or [attribute isEqualToString:NSAccessibilityTitleAttribute])
 	{
-		return [titleLabel stringValue];
+		return [self.textLabel stringValue];
 	}
     
 	if([attribute isEqualToString:NSAccessibilityEnabledAttribute])

@@ -25,7 +25,7 @@
     [[NSColor whiteColor] set];
     NSRect rectInFrame = NSInsetRect(frame, 2, 2);
     NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRoundedRect:rectInFrame xRadius:5.0 yRadius:5.0];
-    [roundedRect setClip];
+    [roundedRect addClip];
 	[roundedRect fill];
 }
 

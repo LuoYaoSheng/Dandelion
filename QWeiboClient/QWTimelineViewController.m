@@ -11,6 +11,8 @@
 #import "QWMessage.h"
 #import "MyListViewCell.h"
 
+#define MIN_HEIGHT  70
+
 @interface QWTimelineViewController()
 
 @property (nonatomic, retain) NSMutableArray *heightList;
@@ -86,8 +88,8 @@
         textField.stringValue = message.text;
         NSSize size = [textField.cell cellSizeForBounds:textField.frame];
         [textField release];
-        
-        [self.heightList addObject:[NSNumber numberWithFloat:(float)size.height]];
+        float height = size.height<70 ? 70 : size.height;
+        [self.heightList addObject:[NSNumber numberWithFloat:height]];
     }
 }
 
@@ -109,7 +111,8 @@
 	
 	// Set up the new cell:
     QWMessage *message = [self.listContent objectAtIndex:row];
-	[[cell titleLabel] setStringValue:message.text];
+    cell.headButton.image = [NSImage imageNamed:@"logo.png"];
+	cell.textLabel.stringValue = message.text;
 	
 	return cell;
 }
