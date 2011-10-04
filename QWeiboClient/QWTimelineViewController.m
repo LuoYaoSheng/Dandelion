@@ -83,12 +83,12 @@
     [self.heightList removeAllObjects];
     for (QWMessage *message in self.listContent) {
         CGFloat width = self.listView.contentView.frame.size.width;
-        NSTextField *textField = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, width, 1000)];
+        NSTextField *textField = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, width-60-15, 1000)];
         textField.font = [NSFont systemFontOfSize:12];
         textField.stringValue = message.text;
         NSSize size = [textField.cell cellSizeForBounds:textField.frame];
         [textField release];
-        float height = size.height<70 ? 70 : size.height;
+        float height = (size.height+24)<MIN_HEIGHT ? MIN_HEIGHT : (size.height+24);
         [self.heightList addObject:[NSNumber numberWithFloat:height]];
     }
 }
