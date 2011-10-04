@@ -12,3 +12,4 @@
 #define AppTokenSecret	@"tokenSecret"
 #define VERIFY_URL @"http://open.t.qq.com/cgi-bin/authorize?oauth_token="
 #define LISTVIEW_RESIZED_NOTIFICATION @"LISTVIEW_RESIZED_NOTIFICATION"
+#define RGBCOLOR(R,G,B) [NSColor colorWithDeviceRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]

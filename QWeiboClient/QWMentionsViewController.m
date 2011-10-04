@@ -20,4 +20,9 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    self.title = @"Methions";
+}
+
 @end

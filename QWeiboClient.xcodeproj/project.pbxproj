@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		35099AD1142246A000638CC4 /* QWMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 35099AD0142246A000638CC4 /* QWMessage.m */; };
+		35171890143B035E00DB2726 /* RoundedButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3517188F143B035E00DB2726 /* RoundedButtonCell.m */; };
+		35171897143B0CFB00DB2726 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 35171896143B0CFB00DB2726 /* logo.png */; };
 		352379B714107288007C5AB5 /* QWPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 352379B614107288007C5AB5 /* QWPerson.m */; };
 		35263AAC140F1F4800944D3E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35263AAB140F1F4800944D3E /* Cocoa.framework */; };
 		35263AB6140F1F4800944D3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35263AB4140F1F4800944D3E /* InfoPlist.strings */; };
@@ -78,6 +80,9 @@
 /* Begin PBXFileReference section */
 		35099ACF142246A000638CC4 /* QWMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMessage.h; sourceTree = "<group>"; };
 		35099AD0142246A000638CC4 /* QWMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMessage.m; sourceTree = "<group>"; };
+		3517188E143B035E00DB2726 /* RoundedButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedButtonCell.h; sourceTree = "<group>"; };
+		3517188F143B035E00DB2726 /* RoundedButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedButtonCell.m; sourceTree = "<group>"; };
+		35171896143B0CFB00DB2726 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		352379B514107288007C5AB5 /* QWPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWPerson.h; sourceTree = "<group>"; };
 		352379B614107288007C5AB5 /* QWPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWPerson.m; sourceTree = "<group>"; };
 		35263AA7140F1F4800944D3E /* QWeiboClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QWeiboClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +165,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35171895143B0CFB00DB2726 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				35171896143B0CFB00DB2726 /* logo.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		352379B414107225007C5AB5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +229,7 @@
 				35D7C00114397A4B000F82DD /* PXListView */,
 				35E98D2E14287EA0005B9A15 /* Catogories */,
 				352379B414107225007C5AB5 /* Model */,
+				35171895143B0CFB00DB2726 /* Images */,
 				352A7D22140F34DC00F3E6B3 /* Engine */,
 				35263ABD140F1F4800944D3E /* AppDelegate.h */,
 				35263ABE140F1F4800944D3E /* AppDelegate.m */,
@@ -238,6 +252,8 @@
 				35D2FCDF1427488F006410B9 /* QWMentionsViewController.xib */,
 				35D7C02214397B51000F82DD /* MyView.h */,
 				35D7C02314397B51000F82DD /* MyView.m */,
+				3517188E143B035E00DB2726 /* RoundedButtonCell.h */,
+				3517188F143B035E00DB2726 /* RoundedButtonCell.m */,
 				35263AB2140F1F4800944D3E /* Supporting Files */,
 			);
 			path = QWeiboClient;
@@ -419,6 +435,7 @@
 				35D2FCE11427488F006410B9 /* QWMentionsViewController.xib in Resources */,
 				35E98D2D142872FA005B9A15 /* json.txt in Resources */,
 				35D7C01C14397A4B000F82DD /* MyListViewCell.xib in Resources */,
+				35171897143B0CFB00DB2726 /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +468,7 @@
 				35D7C02014397A4B000F82DD /* PXListView+UserInteraction.m in Sources */,
 				35D7C02114397A4B000F82DD /* PXListView.m in Sources */,
 				35D7C02414397B51000F82DD /* MyView.m in Sources */,
+				35171890143B035E00DB2726 /* RoundedButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

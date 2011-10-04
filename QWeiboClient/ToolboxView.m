@@ -24,7 +24,7 @@
 {
     // Drawing code here.
     CGContextRef context = (CGContextRef) [[NSGraphicsContext currentContext] graphicsPort];
-    CGContextSetRGBFillColor(context, 0.227,0.251,0.337,0.8);
+    [RGBCOLOR(33,33,33) set];
     CGContextFillRect(context, NSRectToCGRect(dirtyRect));
 }
 

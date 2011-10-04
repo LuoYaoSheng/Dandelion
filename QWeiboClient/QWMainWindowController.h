@@ -16,6 +16,7 @@
 }
 
 @property (assign) NSViewController* currentViewController;
+@property (assign) IBOutlet NSTextField *statusLabel;
 
 - (IBAction)homeTappped:(id)sender;
 - (IBAction)metionsTapped:(id)sender;

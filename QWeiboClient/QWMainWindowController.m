@@ -19,6 +19,7 @@
 @implementation QWMainWindowController
 
 @synthesize currentViewController = _currentViewController;
+@synthesize statusLabel = _statusLabel;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -36,6 +37,7 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    self.statusLabel.stringValue = [NSString stringWithFormat:@"关注:%d 粉丝:%d 微博:%d", 1, 0, 9];
     [self homeTappped:nil];
 }
 
@@ -69,13 +71,14 @@
     // setup new view controller.
     currentViewController = controller;
     [[self.window contentView] addSubview:controller.view];
+    self.window.title = controller.title;
     
     // adjust for window margin.
     NSWindow* window = self.window;  
     NSRect frame    = [window.contentView frame];
-    frame.size.width -= 77;
+    frame.size.width -= 65;
     frame.size.height -= 21;
-    frame.origin.x += 77;
+    frame.origin.x += 65;
     controller.view.frame = frame;
 }
 

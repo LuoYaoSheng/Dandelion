@@ -46,6 +46,7 @@
 
 - (void)awakeFromNib
 {
+    self.title = @"Timeline";
     [self.listView setCellSpacing:0.0f];
 	[self.listView setAllowsEmptySelection:YES];
 	[self.listView setAllowsMultipleSelection:YES];
@@ -81,7 +82,7 @@
     for (QWMessage *message in self.listContent) {
         CGFloat width = self.listView.contentView.frame.size.width;
         NSTextField *textField = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, width, 1000)];
-        textField.font = [NSFont boldSystemFontOfSize:13];
+        textField.font = [NSFont systemFontOfSize:12];
         textField.stringValue = message.text;
         NSSize size = [textField.cell cellSizeForBounds:textField.frame];
         [textField release];

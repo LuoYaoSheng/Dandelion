@@ -51,7 +51,7 @@
 		[RGBCOLOR(220, 220, 220) set];
 	}
 	else {
-		[RGBCOLOR(250,250,250) set];
+		[RGBCOLOR(240,240,240) set];
     }
 
     //Draw the border and background
