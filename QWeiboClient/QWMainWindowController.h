@@ -9,15 +9,24 @@
 #import <Cocoa/Cocoa.h>
 #import "QWVerifyWindowController.h"
 
+typedef enum {
+    QWShowTabTimeline = 1,
+    QWShowTabMethions,
+    QWShowTabFavorite,
+    QWShowTabPeople,
+    QWShowTabSearch
+} QWShowTab;
+
 @interface QWMainWindowController : NSWindowController
 {
     NSMutableDictionary *allControllers;
     NSViewController *currentViewController;
+    NSInteger selectedIndex;
 }
 
 @property (assign) NSViewController* currentViewController;
 @property (assign) IBOutlet NSTextField *statusLabel;
 
-- (IBAction)homeTappped:(id)sender;
-- (IBAction)metionsTapped:(id)sender;
+- (IBAction)toggleTab:(id)sender;
+
 @end

@@ -12,7 +12,11 @@
 #import "QWTimelineViewController.h"
 #import "QWMentionsViewController.h"
 
-@interface QWMainWindowController (Private)
+@interface QWMainWindowController ()
+
+- (void)activateViewController:(NSViewController*)controller;
+- (NSViewController*)viewControllerForName:(NSString*)name;
+- (void)switchImageForButton:(NSButton *)button;
 
 @end
 
@@ -27,6 +31,7 @@
     if (self) {
         // Initialization code here.
         allControllers = [[NSMutableDictionary alloc] init];
+        selectedIndex = 1;
     }
     
     return self;
@@ -38,7 +43,9 @@
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     self.statusLabel.stringValue = [NSString stringWithFormat:@"关注:%d 粉丝:%d 微博:%d", 1, 0, 9];
-    [self homeTappped:nil];
+
+    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
+    [self activateViewController:viewController];
 }
 
 - (void)dealloc
@@ -47,7 +54,8 @@
     [super dealloc];
 }
 
-- (NSViewController*)viewControllerForName:(NSString*)name {
+- (NSViewController*)viewControllerForName:(NSString*)name
+{
     
     // see if this view already exists.
     NSViewController* controller = [allControllers objectForKey:name];
@@ -63,7 +71,7 @@
     return controller;
 }
 
-- (void)activateViewController:(NSViewController*)controller 
+- (void)activateViewController:(NSViewController*)controller
 {    
     // remove current view.
     [currentViewController.view removeFromSuperview];
@@ -82,16 +90,43 @@
     controller.view.frame = frame;
 }
 
-- (IBAction)homeTappped:(id)sender 
+- (IBAction)toggleTab:(id)sender 
 {
-    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
-    [self activateViewController:viewController];
+    NSMatrix *matrix = (NSMatrix *)sender;
+    NSButton *button = (NSButton *)matrix.selectedCell;
+    [self switchImageForButton:button];
+    [self switchImageForButton:[matrix cellWithTag:selectedIndex]];
+    selectedIndex = button.tag;
+    switch (selectedIndex) {
+        case QWShowTabTimeline:
+        {
+            NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
+            [self activateViewController:viewController];
+            break;
+        }
+        case QWShowTabMethions:
+        {
+            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
+            [self activateViewController:viewController];
+            break;
+        }
+        case QWShowTabFavorite:
+            break;
+        case QWShowTabPeople:
+            break;
+        case QWShowTabSearch:
+            break;
+        default:
+            break;
+    }
 }
 
-- (IBAction)metionsTapped:(id)sender 
+- (void)switchImageForButton:(NSButton *)button
 {
-    NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
-    [self activateViewController:viewController];
+    NSImage *image = [button.image retain];
+    button.image = button.alternateImage;
+    button.alternateImage = image;
+    [image release];
 }
 
 @end

@@ -111,7 +111,8 @@
 	
 	// Set up the new cell:
     QWMessage *message = [self.listContent objectAtIndex:row];
-    cell.headButton.image = [NSImage imageNamed:@"logo.png"];
+    cell.nameLabel.stringValue = message.nick;
+    cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
 	cell.textLabel.stringValue = message.text;
 	
 	return cell;
