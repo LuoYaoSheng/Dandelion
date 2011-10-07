@@ -12,12 +12,14 @@
 #import "QWTimelineViewController.h"
 #import "QWMentionsViewController.h"
 #import "QWPerson.h"
+#import "QWPublishMessageWindowController.h"
 
 @interface QWMainWindowController ()
 
 - (void)activateViewController:(NSViewController*)controller;
 - (NSViewController*)viewControllerForName:(NSString*)name;
 - (void)switchImageForButton:(NSButton *)button;
+- (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 
 @end
 
@@ -127,6 +129,16 @@
         default:
             break;
     }
+}
+
+- (IBAction)publishMessage:(id)sender {
+    QWPublishMessageWindowController *messageWindowController= [[QWPublishMessageWindowController alloc] initWithWindowNibName:@"QWPublishMessageWindowController"];
+    [NSApp beginSheet:messageWindowController.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
+}
+
+- (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    [sheet orderOut:self];
 }
 
 - (void)switchImageForButton:(NSButton *)button

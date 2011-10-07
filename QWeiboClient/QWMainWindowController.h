@@ -30,5 +30,6 @@ typedef enum {
 @property (assign) IBOutlet NSButton *headButton;
 
 - (IBAction)toggleTab:(id)sender;
+- (IBAction)publishMessage:(id)sender;
 
 @end

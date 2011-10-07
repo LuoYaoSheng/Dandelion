@@ -43,6 +43,8 @@
 		35B61E4A143E85630001741D /* NSObject+Universal.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B61E49143E85630001741D /* NSObject+Universal.m */; };
 		35B61E56143EE1780001741D /* messages_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E54143EE1780001741D /* messages_off.png */; };
 		35B61E57143EE1780001741D /* messages_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E55143EE1780001741D /* messages_on.png */; };
+		35B61E67143EF13D0001741D /* QWPublishMessageWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */; };
+		35B61E69143EF1550001741D /* QWPublishMessageWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */; };
 		35D2FCDB142747F7006410B9 /* QWTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */; };
 		35D2FCDC142747F7006410B9 /* QWTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */; };
 		35D2FCE01427488F006410B9 /* QWMentionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D2FCDE1427488F006410B9 /* QWMentionsViewController.m */; };
@@ -144,6 +146,9 @@
 		35B61E49143E85630001741D /* NSObject+Universal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Universal.m"; sourceTree = "<group>"; };
 		35B61E54143EE1780001741D /* messages_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messages_off.png; sourceTree = "<group>"; };
 		35B61E55143EE1780001741D /* messages_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messages_on.png; sourceTree = "<group>"; };
+		35B61E65143EF13C0001741D /* QWPublishMessageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWPublishMessageWindowController.h; sourceTree = "<group>"; };
+		35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWPublishMessageWindowController.m; sourceTree = "<group>"; };
+		35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWPublishMessageWindowController.xib; sourceTree = "<group>"; };
 		35D2FCD8142747F6006410B9 /* QWTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWTimelineViewController.h; sourceTree = "<group>"; };
 		35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWTimelineViewController.m; sourceTree = "<group>"; };
 		35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWTimelineViewController.xib; sourceTree = "<group>"; };
@@ -265,11 +270,12 @@
 		35263AB1140F1F4800944D3E /* QWeiboClient */ = {
 			isa = PBXGroup;
 			children = (
+				35B61E64143EF0CE0001741D /* CustomControl */,
 				35D7C00114397A4B000F82DD /* PXListView */,
 				35E98D2E14287EA0005B9A15 /* Catogories */,
 				352379B414107225007C5AB5 /* Model */,
 				35171895143B0CFB00DB2726 /* Images */,
-				352A7D22140F34DC00F3E6B3 /* Engine */,
+				352A7D22140F34DC00F3E6B3 /* WeiboEngine */,
 				35263ABD140F1F4800944D3E /* AppDelegate.h */,
 				35263ABE140F1F4800944D3E /* AppDelegate.m */,
 				35263AC0140F1F4800944D3E /* MainMenu.xib */,
@@ -281,18 +287,15 @@
 				35B12EB2141FB18F00F963FC /* QWVerifyWindowController.h */,
 				35B12EB3141FB18F00F963FC /* QWVerifyWindowController.m */,
 				35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */,
-				35B12EAF141FAF3000F963FC /* ToolboxView.h */,
-				35B12EB0141FAF3000F963FC /* ToolboxView.m */,
 				35D2FCD8142747F6006410B9 /* QWTimelineViewController.h */,
 				35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */,
 				35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */,
 				35D2FCDD1427488F006410B9 /* QWMentionsViewController.h */,
 				35D2FCDE1427488F006410B9 /* QWMentionsViewController.m */,
 				35D2FCDF1427488F006410B9 /* QWMentionsViewController.xib */,
-				35D7C02214397B51000F82DD /* MyView.h */,
-				35D7C02314397B51000F82DD /* MyView.m */,
-				3517188E143B035E00DB2726 /* RoundedButtonCell.h */,
-				3517188F143B035E00DB2726 /* RoundedButtonCell.m */,
+				35B61E65143EF13C0001741D /* QWPublishMessageWindowController.h */,
+				35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */,
+				35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */,
 				35263AB2140F1F4800944D3E /* Supporting Files */,
 			);
 			path = QWeiboClient;
@@ -311,7 +314,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		352A7D22140F34DC00F3E6B3 /* Engine */ = {
+		352A7D22140F34DC00F3E6B3 /* WeiboEngine */ = {
 			isa = PBXGroup;
 			children = (
 				359250491426E60900F164D0 /* JSONURLConnection.h */,
@@ -321,7 +324,7 @@
 				352A7D25140F34F100F3E6B3 /* QWeiboSyncApi.h */,
 				352A7D26140F34F100F3E6B3 /* QWeiboSyncApi.m */,
 			);
-			name = Engine;
+			name = WeiboEngine;
 			sourceTree = "<group>";
 		};
 		352A7D48140F39C500F3E6B3 /* Products */ = {
@@ -330,6 +333,19 @@
 				352A7D4C140F39C500F3E6B3 /* libQWeiboSDK4iOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		35B61E64143EF0CE0001741D /* CustomControl */ = {
+			isa = PBXGroup;
+			children = (
+				35B12EAF141FAF3000F963FC /* ToolboxView.h */,
+				35B12EB0141FAF3000F963FC /* ToolboxView.m */,
+				35D7C02214397B51000F82DD /* MyView.h */,
+				35D7C02314397B51000F82DD /* MyView.m */,
+				3517188E143B035E00DB2726 /* RoundedButtonCell.h */,
+				3517188F143B035E00DB2726 /* RoundedButtonCell.m */,
+			);
+			name = CustomControl;
 			sourceTree = "<group>";
 		};
 		35D7C00114397A4B000F82DD /* PXListView */ = {
@@ -489,6 +505,7 @@
 				3509E858143CACA00053EF3F /* timeline_on.png in Resources */,
 				35B61E56143EE1780001741D /* messages_off.png in Resources */,
 				35B61E57143EE1780001741D /* messages_on.png in Resources */,
+				35B61E69143EF1550001741D /* QWPublishMessageWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +540,7 @@
 				35D7C02414397B51000F82DD /* MyView.m in Sources */,
 				35171890143B035E00DB2726 /* RoundedButtonCell.m in Sources */,
 				35B61E4A143E85630001741D /* NSObject+Universal.m in Sources */,
+				35B61E67143EF13D0001741D /* QWPublishMessageWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
