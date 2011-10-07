@@ -8,28 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "QWeiboSyncApi.h"
+#import "JSONURLConnection.h"
 
+enum {
+	JSONURLConnectionTagGetHomeMessage = 0,
+	JSONURLConnectionTagGetUserInfo,
+	JSONURLConnectionTagPostMessage,
+};
 
-@interface QWeiboAsyncApi : NSObject {
+@interface QWeiboAsyncApi : NSObject<JSONURLConnectionDelegate> {
 
 }
 
-- (NSURLConnection *)getHomeMsgWithConsumerKey:(NSString *)aConsumerKey
-						 consumerSecret:(NSString *)aConsumerSecret 
-						 accessTokenKey:(NSString *)aAccessTokenKey 
-					  accessTokenSecret:(NSString *)aAccessTokenSecret 
-							 resultType:(ResultType)aResultType 
-							  pageFlage:(PageFlag)aPageFlag 
-								nReqNum:(NSInteger)aReqNum 
-							   delegate:(id)aDelegate;
-
-- (NSURLConnection *)publishMsgWithConsumerKey:(NSString *)aConsumerKey 
-						 consumerSecret:(NSString *)aConsumerSecret 
-						 accessTokenKey:(NSString *)aAccessTokenKey 
-					  accessTokenSecret:(NSString *)aAccessTokenSecret 
-								content:(NSString *)aContent 
-							  imageFile:(NSString *)aImageFile 
-							 resultType:(ResultType)aResultType 
-							   delegate:(id)aDelegate;
+- (void)getHomeMessage;
+- (void)getUserInfo;
 
 @end

@@ -9,47 +9,52 @@
 #import "QWeiboAsyncApi.h"
 #import "QOauthKey.h"
 #import "QweiboRequest.h"
-#import "JSONURLConnection.h"
+#import "AppDelegate.h"
+#import "QWMessage.h"
+#import "QWPerson.h"
+
+@interface QWeiboAsyncApi()
+
+- (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
+
+@end
 
 @implementation QWeiboAsyncApi
 
-- (NSURLConnection *)getHomeMsgWithConsumerKey:(NSString *)aConsumerKey
-						 consumerSecret:(NSString *)aConsumerSecret 
-						 accessTokenKey:(NSString *)aAccessTokenKey 
-					  accessTokenSecret:(NSString *)aAccessTokenSecret 
-							 resultType:(ResultType)aResultType 
-							  pageFlage:(PageFlag)aPageFlag 
-								nReqNum:(NSInteger)aReqNum 
-							   delegate:(id)aDelegate {
-	
-	NSString *url = @"http://open.t.qq.com/api/statuses/home_timeline";
-	
+- (void)getHomeMessage
+{
+    NSString *url = GET_HOME_MESSAGE_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	[parameters setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"pageflag"];
+	[parameters setObject:[NSString stringWithFormat:@"%d", 20] forKey:@"reqnum"];
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetHomeMessage];
+}
+
+- (void)getUserInfo
+{
+    NSString *url = GET_USER_INFO_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetUserInfo];
+}
+
+- (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
+{
+    AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
+
 	QOauthKey *oauthKey = [[QOauthKey alloc] init];
-	oauthKey.consumerKey = aConsumerKey;
-	oauthKey.consumerSecret = aConsumerSecret;
-	oauthKey.tokenKey = aAccessTokenKey;
-	oauthKey.tokenSecret= aAccessTokenSecret;
+	oauthKey.consumerKey = appDelegate.appKey;
+	oauthKey.consumerSecret = appDelegate.appSecret;
+	oauthKey.tokenKey = appDelegate.tokenKey;
+	oauthKey.tokenSecret= appDelegate.tokenSecret;
 	
-	NSString *format = nil;
-	if (aResultType == RESULTTYPE_XML) {
-		format = @"xml";
-	} else if (aResultType == RESULTTYPE_JSON) {
-		format = @"json";
-	} else {
-		format = @"json";
-	}
+	[parameters setObject:@"json" forKey:@"format"];
 	
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-	[parameters setObject:format forKey:@"format"];
-	[parameters setObject:[NSString stringWithFormat:@"%d", aPageFlag] forKey:@"pageflag"];
-	[parameters setObject:[NSString stringWithFormat:@"%d", aReqNum] forKey:@"reqnum"];
-	
+    JSONURLConnection *jsonConnection = [[JSONURLConnection alloc] initWithDelegate:self connectionTag:tag];
 	QWeiboRequest *request = [[QWeiboRequest alloc] init];
-	NSURLConnection *connection = [request asyncRequestWithUrl:url httpMethod:@"GET" oauthKey:oauthKey parameters:parameters files:nil delegate:aDelegate];
-	
+	NSURLConnection *connection = [request asyncRequestWithUrl:url httpMethod:@"GET" oauthKey:oauthKey parameters:parameters files:nil delegate:jsonConnection];
+	[connection start];
 	[request release];
 	[oauthKey release];
-	return connection;
 }
 
 - (NSURLConnection *)publishMsgWithConsumerKey:(NSString *)aConsumerKey 
@@ -96,6 +101,42 @@
 	[request release];
 	[oauthKey release];
 	return connection;
+}
+
+#pragma mark - JSONURLConnectionDelegate
+
+- (void)dURLConnection:(JSONURLConnection *)connection didFinishLoadingJSONValue:(NSDictionary *)json
+{
+    switch (connection.connectionTag) {
+        case JSONURLConnectionTagGetHomeMessage:
+        {
+            NSMutableArray *messages = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:GET_HOME_MESSAGE_NOTIFICATION object:messages];
+            [messages release];
+            break;
+        }
+        case JSONURLConnectionTagGetUserInfo:
+        {
+            QWPerson *person = [[QWPerson alloc] initWithJSON:[json valueForKeyPath:@"data"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:GET_USER_INFO_NOTIFICATION object:person];
+            [person release];
+            break;
+        }
+        case JSONURLConnectionTagPostMessage:
+            break;
+
+            
+        default:
+            break;
+    }
+}
+
+- (void)dURLConnection:(JSONURLConnection *)connection didFailWithError:(NSError *)error
+{
+    
 }
 
 @end

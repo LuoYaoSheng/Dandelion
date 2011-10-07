@@ -114,6 +114,7 @@
     cell.nameLabel.stringValue = message.nick;
     cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
 	cell.textLabel.stringValue = message.text;
+    cell.timeLabel.stringValue = message.time;
 	
 	return cell;
 }

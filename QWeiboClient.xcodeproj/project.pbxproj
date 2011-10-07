@@ -40,6 +40,7 @@
 		35B12EB1141FAF3000F963FC /* ToolboxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB0141FAF3000F963FC /* ToolboxView.m */; };
 		35B12EB4141FB18F00F963FC /* QWVerifyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB3141FB18F00F963FC /* QWVerifyWindowController.m */; };
 		35B12EB6141FB1A300F963FC /* QWVerifyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */; };
+		35B61E4A143E85630001741D /* NSObject+Universal.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B61E49143E85630001741D /* NSObject+Universal.m */; };
 		35D2FCDB142747F7006410B9 /* QWTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */; };
 		35D2FCDC142747F7006410B9 /* QWTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */; };
 		35D2FCE01427488F006410B9 /* QWMentionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D2FCDE1427488F006410B9 /* QWMentionsViewController.m */; };
@@ -137,6 +138,8 @@
 		35B12EB2141FB18F00F963FC /* QWVerifyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWVerifyWindowController.h; sourceTree = "<group>"; };
 		35B12EB3141FB18F00F963FC /* QWVerifyWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWVerifyWindowController.m; sourceTree = "<group>"; };
 		35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWVerifyWindowController.xib; sourceTree = "<group>"; };
+		35B61E48143E85630001741D /* NSObject+Universal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Universal.h"; sourceTree = "<group>"; };
+		35B61E49143E85630001741D /* NSObject+Universal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Universal.m"; sourceTree = "<group>"; };
 		35D2FCD8142747F6006410B9 /* QWTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWTimelineViewController.h; sourceTree = "<group>"; };
 		35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWTimelineViewController.m; sourceTree = "<group>"; };
 		35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWTimelineViewController.xib; sourceTree = "<group>"; };
@@ -385,6 +388,8 @@
 		35E98D2E14287EA0005B9A15 /* Catogories */ = {
 			isa = PBXGroup;
 			children = (
+				35B61E48143E85630001741D /* NSObject+Universal.h */,
+				35B61E49143E85630001741D /* NSObject+Universal.m */,
 				35E98D3914287ECF005B9A15 /* NSDate+Categories.h */,
 				35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */,
 			);
@@ -509,6 +514,7 @@
 				35D7C02114397A4B000F82DD /* PXListView.m in Sources */,
 				35D7C02414397B51000F82DD /* MyView.m in Sources */,
 				35171890143B035E00DB2726 /* RoundedButtonCell.m in Sources */,
+				35B61E4A143E85630001741D /* NSObject+Universal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

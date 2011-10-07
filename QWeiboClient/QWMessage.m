@@ -53,7 +53,7 @@
 - (id)initWithJSON:(NSDictionary *)dict
 {
     NSString *nick = [dict objectForKey:@"nick"];
-    NSString *head = [[[dict objectForKey:@"head"] stringByReplacingOccurrencesOfString:@"app" withString:@"t2"] stringByAppendingPathComponent:@"50"];
+    NSString *head = [[dict objectForKey:@"head"] stringByAppendingPathComponent:@"50"];
     NSString *text = [[dict objectForKey:@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     double timestamp = [[dict objectForKey:@"timestamp"] doubleValue];
     NSString *image = [dict objectForKey:@"image"];

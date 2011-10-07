@@ -3,14 +3,16 @@
 
 @protocol JSONURLConnectionDelegate;
 
-typedef enum {
+enum {
 	JSONURLConnectionTagDefault	= 0,
 	JSONURLConnectionTagFirst,
 	JSONURLConnectionTagSecond,
 	JSONURLConnectionTagThird,
 	JSONURLConnectionTagForth,
 	JSONURLConnectionTagFifth
-}JSONURLConnectionTag;
+};
+
+typedef NSUInteger JSONURLConnectionTag;
 
 @interface JSONURLConnection : NSObject<NSURLConnectionDelegate> {
 

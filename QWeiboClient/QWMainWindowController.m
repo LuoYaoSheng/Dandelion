@@ -8,9 +8,10 @@
 
 #import "QWMainWindowController.h"
 #import "AppDelegate.h"
-#import "QWeiboSyncApi.h"
+#import "QWeiboAsyncApi.h"
 #import "QWTimelineViewController.h"
 #import "QWMentionsViewController.h"
+#import "QWPerson.h"
 
 @interface QWMainWindowController ()
 
@@ -32,6 +33,7 @@
         // Initialization code here.
         allControllers = [[NSMutableDictionary alloc] init];
         selectedIndex = 1;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
     }
     
     return self;
@@ -42,7 +44,8 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    self.statusLabel.stringValue = [NSString stringWithFormat:@"关注:%d 粉丝:%d 微博:%d", 1, 0, 9];
+    QWeiboAsyncApi *api = [[QWeiboAsyncApi alloc] init];
+    [api getUserInfo];
 
     NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
     [self activateViewController:viewController];
@@ -127,6 +130,12 @@
     button.image = button.alternateImage;
     button.alternateImage = image;
     [image release];
+}
+
+- (void)updateUserInfo:(NSNotification *)notification
+{
+    QWPerson *person = (QWPerson *)notification.object;
+    self.statusLabel.stringValue = [NSString stringWithFormat:@"关注:%d 粉丝:%d 微博:%d", person.idolNum, person.fansNum, person.tweetNum];    
 }
 
 @end

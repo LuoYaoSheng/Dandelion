@@ -7,4 +7,5 @@
 #endif
 
 #import "QWConstants.h"
+#import "NSObject+Universal.h"
 #import "NSDate+Categories.h"
