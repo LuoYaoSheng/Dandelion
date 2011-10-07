@@ -8,14 +8,11 @@
 
 #import "NSDate+Categories.h"
 
-#define kDEFAULT_DATE_TIME_FORMAT (@"yyyy/MM/dd")
-
 @implementation NSDate(Categories)
 
 + (NSDate *)dateFromString:(NSString *)string format:(NSString *)format{    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-  //  [formatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [formatter setTimeZone:[NSTimeZone systemTimeZone]];
 	[formatter setDateFormat:format];
     NSDate *date = [formatter dateFromString:string];
     [formatter release];
@@ -37,16 +34,18 @@
 - (NSString *)normalizeDateString
 {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSUInteger unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    NSDateComponents *components = [gregorian components:unitFlags fromDate:self toDate:[NSDate date] options:0];
-    if ([components day] > 30) {
-        return [NSDate stringFromDate:self format:@"yyyy-MM-dd"];
-    } else if ([components day] > 0) {
-        return [NSString stringWithFormat:@"%d天前", [components day]];
-    } else if ([components hour] > 0) {
-        return [NSString stringWithFormat:@"%d小时前", [components hour]];
+    
+    NSDateComponents *dayComponents = [gregorian components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:[NSDate date]];
+    NSDate *today = [gregorian dateFromComponents:dayComponents];
+    [dayComponents setDay:(dayComponents.day - 1)];
+    NSDate *yestoday = [gregorian dateFromComponents:dayComponents];
+    
+    if ([self timeIntervalSinceDate:yestoday] < 0) {
+        return [NSDate stringFromDate:self format:@"MM月d日 HH:mm"];
+    } else if ([self timeIntervalSinceDate:yestoday] > 0 && [self timeIntervalSinceDate:today] < 0) {
+        return [NSDate stringFromDate:self format:@"昨天 HH:mm"];
     } else {
-        return @"刚刚";
+        return [NSDate stringFromDate:self format:@"今天 HH:mm"];
     }
 }
 

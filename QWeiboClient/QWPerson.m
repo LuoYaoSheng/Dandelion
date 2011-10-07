@@ -85,6 +85,8 @@
     NSString *email = EmptyString([dict objectForKey:@"email"]);
     int fansNum = [[dict objectForKey:@"fansnum"] intValue];
     NSString *head = EmptyString([dict objectForKey:@"head"]);
+    if (![head isEqualToString:@""])
+        head = [head stringByAppendingPathComponent:@"50"];
     int idolNum = [[dict objectForKey:@"idolnum"] intValue];
     NSString *introduction = EmptyString([dict objectForKey:@"introduction"]);
     BOOL isEnt = [[dict objectForKey:@"isent"] boolValue];

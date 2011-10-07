@@ -41,6 +41,8 @@
 		35B12EB4141FB18F00F963FC /* QWVerifyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB3141FB18F00F963FC /* QWVerifyWindowController.m */; };
 		35B12EB6141FB1A300F963FC /* QWVerifyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */; };
 		35B61E4A143E85630001741D /* NSObject+Universal.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B61E49143E85630001741D /* NSObject+Universal.m */; };
+		35B61E56143EE1780001741D /* messages_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E54143EE1780001741D /* messages_off.png */; };
+		35B61E57143EE1780001741D /* messages_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E55143EE1780001741D /* messages_on.png */; };
 		35D2FCDB142747F7006410B9 /* QWTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */; };
 		35D2FCDC142747F7006410B9 /* QWTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */; };
 		35D2FCE01427488F006410B9 /* QWMentionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D2FCDE1427488F006410B9 /* QWMentionsViewController.m */; };
@@ -140,6 +142,8 @@
 		35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWVerifyWindowController.xib; sourceTree = "<group>"; };
 		35B61E48143E85630001741D /* NSObject+Universal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Universal.h"; sourceTree = "<group>"; };
 		35B61E49143E85630001741D /* NSObject+Universal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Universal.m"; sourceTree = "<group>"; };
+		35B61E54143EE1780001741D /* messages_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messages_off.png; sourceTree = "<group>"; };
+		35B61E55143EE1780001741D /* messages_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messages_on.png; sourceTree = "<group>"; };
 		35D2FCD8142747F6006410B9 /* QWTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWTimelineViewController.h; sourceTree = "<group>"; };
 		35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWTimelineViewController.m; sourceTree = "<group>"; };
 		35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWTimelineViewController.xib; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 		35171895143B0CFB00DB2726 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				35B61E54143EE1780001741D /* messages_off.png */,
+				35B61E55143EE1780001741D /* messages_on.png */,
 				3509E845143CACA00053EF3F /* favorite_off.png */,
 				3509E846143CACA00053EF3F /* favorite_on.png */,
 				3509E847143CACA00053EF3F /* mentions_off.png */,
@@ -481,6 +487,8 @@
 				3509E856143CACA00053EF3F /* search_on.png in Resources */,
 				3509E857143CACA00053EF3F /* timeline_off.png in Resources */,
 				3509E858143CACA00053EF3F /* timeline_on.png in Resources */,
+				35B61E56143EE1780001741D /* messages_off.png in Resources */,
+				35B61E57143EE1780001741D /* messages_on.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 typedef enum {
     QWShowTabTimeline = 1,
     QWShowTabMethions,
+    QWShowTabMessages,
     QWShowTabFavorite,
     QWShowTabPeople,
     QWShowTabSearch
@@ -26,6 +27,7 @@ typedef enum {
 
 @property (assign) NSViewController* currentViewController;
 @property (assign) IBOutlet NSTextField *statusLabel;
+@property (assign) IBOutlet NSButton *headButton;
 
 - (IBAction)toggleTab:(id)sender;
 

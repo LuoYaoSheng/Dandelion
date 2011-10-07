@@ -25,6 +25,7 @@
 
 @synthesize currentViewController = _currentViewController;
 @synthesize statusLabel = _statusLabel;
+@synthesize headButton = _headButton;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -113,6 +114,10 @@
             [self activateViewController:viewController];
             break;
         }
+        case QWShowTabMessages:
+        {
+            break;
+        }
         case QWShowTabFavorite:
             break;
         case QWShowTabPeople:
@@ -135,7 +140,8 @@
 - (void)updateUserInfo:(NSNotification *)notification
 {
     QWPerson *person = (QWPerson *)notification.object;
-    self.statusLabel.stringValue = [NSString stringWithFormat:@"关注:%d 粉丝:%d 微博:%d", person.idolNum, person.fansNum, person.tweetNum];    
+    self.statusLabel.stringValue = [NSString stringWithFormat:@"关注:%d 粉丝:%d 微博:%d", person.idolNum, person.fansNum, person.tweetNum];
+    self.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:person.head]] autorelease];
 }
 
 @end
