@@ -10,11 +10,14 @@
 
 @implementation QWPublishMessageWindowController
 
+@synthesize messageTextView = _messageTextView;
+
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
+        api = [[QWeiboAsyncApi alloc] init];
     }
     
     return self;
@@ -25,10 +28,22 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    self.messageTextView.font = [NSFont systemFontOfSize:13];
 }
 
-- (IBAction)publish:(id)sender {
+- (void)dealloc
+{
+    [api release];
+    [super dealloc];
+}
+
+- (IBAction)publishClicked:(id)sender {
+    [api publishMessage:self.messageTextView.string];
     [NSApp endSheet:self.window];
+}
+
+- (IBAction)cacelClicked:(id)sender {
+    [NSApp endSheet:self.window];    
 }
 
 @end

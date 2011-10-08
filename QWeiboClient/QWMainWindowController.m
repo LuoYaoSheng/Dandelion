@@ -8,7 +8,6 @@
 
 #import "QWMainWindowController.h"
 #import "AppDelegate.h"
-#import "QWeiboAsyncApi.h"
 #import "QWTimelineViewController.h"
 #import "QWMentionsViewController.h"
 #import "QWPerson.h"
@@ -36,6 +35,7 @@
         // Initialization code here.
         allControllers = [[NSMutableDictionary alloc] init];
         selectedIndex = 1;
+        api = [[QWeiboAsyncApi alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
     }
     
@@ -47,7 +47,6 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    QWeiboAsyncApi *api = [[QWeiboAsyncApi alloc] init];
     [api getUserInfo];
 
     NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
@@ -57,6 +56,7 @@
 - (void)dealloc
 {
     [allControllers release];
+    [api release];
     [super dealloc];
 }
 

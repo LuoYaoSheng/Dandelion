@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "QWVerifyWindowController.h"
+#import "QWeiboAsyncApi.h"
 
 typedef enum {
     QWShowTabTimeline = 1,
@@ -23,6 +24,7 @@ typedef enum {
     NSMutableDictionary *allControllers;
     NSViewController *currentViewController;
     NSInteger selectedIndex;
+    QWeiboAsyncApi *api;
 }
 
 @property (assign) NSViewController* currentViewController;

@@ -7,9 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "QWeiboAsyncApi.h"
 
-@interface QWPublishMessageWindowController : NSWindowController
+@interface QWPublishMessageWindowController : NSWindowController {
+    QWeiboAsyncApi *api;
+}
 
-- (IBAction)publish:(id)sender;
+@property (assign) IBOutlet NSTextView *messageTextView;
+
+- (IBAction)publishClicked:(id)sender;
+- (IBAction)cacelClicked:(id)sender;
 
 @end

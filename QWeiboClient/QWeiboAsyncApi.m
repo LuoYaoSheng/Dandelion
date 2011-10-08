@@ -16,6 +16,7 @@
 @interface QWeiboAsyncApi()
 
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
+- (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
 
 @end
 
@@ -37,10 +38,17 @@
     [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetUserInfo];
 }
 
+- (void)publishMessage:(NSString *)message
+{
+    NSString *url = PUBLISH_MESSAGE_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:message forKey:@"content"];
+    [self postDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagPublishMessage];
+}
+
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
 {
     AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
-
 	QOauthKey *oauthKey = [[QOauthKey alloc] init];
 	oauthKey.consumerKey = appDelegate.appKey;
 	oauthKey.consumerSecret = appDelegate.appSecret;
@@ -48,10 +56,32 @@
 	oauthKey.tokenSecret= appDelegate.tokenSecret;
 	
 	[parameters setObject:@"json" forKey:@"format"];
-	
+    
     JSONURLConnection *jsonConnection = [[JSONURLConnection alloc] initWithDelegate:self connectionTag:tag];
 	QWeiboRequest *request = [[QWeiboRequest alloc] init];
 	NSURLConnection *connection = [request asyncRequestWithUrl:url httpMethod:@"GET" oauthKey:oauthKey parameters:parameters files:nil delegate:jsonConnection];
+	[connection start];
+	[request release];
+	[oauthKey release];
+}
+
+- (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
+{
+    NSMutableDictionary *files = [NSMutableDictionary dictionary];
+	
+    AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
+	QOauthKey *oauthKey = [[QOauthKey alloc] init];
+	oauthKey.consumerKey = appDelegate.appKey;
+	oauthKey.consumerSecret = appDelegate.appSecret;
+	oauthKey.tokenKey = appDelegate.tokenKey;
+	oauthKey.tokenSecret= appDelegate.tokenSecret;
+	
+	[parameters setObject:@"json" forKey:@"format"];
+    [parameters setObject:@"127.0.0.1" forKey:@"clientip"];
+	
+    JSONURLConnection *jsonConnection = [[JSONURLConnection alloc] initWithDelegate:self connectionTag:tag];
+	QWeiboRequest *request = [[QWeiboRequest alloc] init];
+	NSURLConnection *connection = [request asyncRequestWithUrl:url httpMethod:@"POST" oauthKey:oauthKey parameters:parameters files:files delegate:jsonConnection];
 	[connection start];
 	[request release];
 	[oauthKey release];
@@ -125,18 +155,23 @@
             [person release];
             break;
         }
-        case JSONURLConnectionTagPostMessage:
+        case JSONURLConnectionTagPublishMessage:
+        {
+            
             break;
-
+        }
             
         default:
             break;
     }
+    [connection release];
+    connection = nil;
 }
 
 - (void)dURLConnection:(JSONURLConnection *)connection didFailWithError:(NSError *)error
 {
-    
+    [connection release];
+    connection = nil;
 }
 
 @end

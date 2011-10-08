@@ -13,7 +13,7 @@
 enum {
 	JSONURLConnectionTagGetHomeMessage = 0,
 	JSONURLConnectionTagGetUserInfo,
-	JSONURLConnectionTagPostMessage,
+	JSONURLConnectionTagPublishMessage,
 };
 
 @interface QWeiboAsyncApi : NSObject<JSONURLConnectionDelegate> {
@@ -22,5 +22,6 @@ enum {
 
 - (void)getHomeMessage;
 - (void)getUserInfo;
+- (void)publishMessage:(NSString *)message;
 
 @end
