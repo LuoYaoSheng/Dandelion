@@ -157,7 +157,7 @@
         }
         case JSONURLConnectionTagPublishMessage:
         {
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:PUBLISH_MESSAGE_NOTIFICATION object:[json objectForKey:@"msg"]];
             break;
         }
             

@@ -19,6 +19,7 @@
 
 - (void)reloadData;
 - (void)measureData;
+- (void)reloadTable:(BOOL)scrollToTop;
 
 @end
 
@@ -36,6 +37,8 @@
         self.listContent = [[[NSMutableArray alloc] init] autorelease];
         self.heightList = [[[NSMutableArray alloc] init] autorelease];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedHomeMessage:) name:GET_HOME_MESSAGE_NOTIFICATION object:nil];
+        api = [[QWeiboAsyncApi alloc] init];
     }
     
     return self;
@@ -57,25 +60,40 @@
 
 - (void)windowResized:(NSNotification *)notification
 {
-    [self measureData];
-	[self.listView reloadData];
+    [self reloadTable:NO];
 }
 
 - (void)reloadData
 {
+    [api getHomeMessage];
+}
+
+- (void)receivedHomeMessage:(NSNotification *)notification
+{
+//    [self.listContent removeAllObjects];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"json" ofType:@"txt"];
+//    NSString *jsonString = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+//    NSDictionary *json = [jsonString yajl_JSON];
+//    for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+//        QWMessage *message = [[QWMessage alloc] initWithJSON:dict];
+//        //        [self willChangeValueForKey:@"listContent"];
+//        [self.listContent addObject:message];
+//        //        [self didChangeValueForKey:@"listContent"];
+//        [message release];
+//    }
+    
     [self.listContent removeAllObjects];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"json" ofType:@"txt"];
-    NSString *jsonString = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    NSDictionary *json = [jsonString yajl_JSON];
-    for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-        QWMessage *message = [[QWMessage alloc] initWithJSON:dict];
-//        [self willChangeValueForKey:@"listContent"];
-        [self.listContent addObject:message];
-//        [self didChangeValueForKey:@"listContent"];
-        [message release];
-    }
+    NSArray *messages = (NSArray *)notification.object;
+    [self.listContent addObjectsFromArray:messages];
+    [self reloadTable:YES];
+}
+
+- (void)reloadTable:(BOOL)scrollToTop
+{
     [self measureData];
 	[self.listView reloadData];
+    if (scrollToTop)
+        [self.listView scrollToTop];
 }
 
 - (void)measureData
@@ -131,7 +149,7 @@
 
 - (void)listViewResize:(PXListView *)aListView
 {
-    [self reloadData];
+    [self reloadTable:NO];
 }
 
 - (void)dealloc

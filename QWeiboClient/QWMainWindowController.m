@@ -37,6 +37,7 @@
         selectedIndex = 1;
         api = [[QWeiboAsyncApi alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hasSendMessage:) name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
     }
     
     return self;
@@ -134,6 +135,16 @@
 - (IBAction)publishMessage:(id)sender {
     QWPublishMessageWindowController *messageWindowController= [[QWPublishMessageWindowController alloc] initWithWindowNibName:@"QWPublishMessageWindowController"];
     [NSApp beginSheet:messageWindowController.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
+}
+
+- (void)hasSendMessage:(NSNotification *)notification
+{
+    NSString *result = notification.object;
+    NSLog(@"%@", result);
+    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
+    [self activateViewController:viewController];
+    QWTimelineViewController *timelineController = (QWTimelineViewController *)viewController;
+    [timelineController reloadData];
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo

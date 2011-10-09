@@ -34,6 +34,8 @@
 		352A7D28140F34F100F3E6B3 /* QWeiboSyncApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 352A7D26140F34F100F3E6B3 /* QWeiboSyncApi.m */; };
 		352A7D50140F39D400F3E6B3 /* libQWeiboSDK4iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 352A7D4C140F39C500F3E6B3 /* libQWeiboSDK4iOS.a */; };
 		352A7D5D140F5C5B00F3E6B3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */; };
+		352EE05B1441314500AB7913 /* weibo.icns in Resources */ = {isa = PBXBuildFile; fileRef = 352EE05A1441314500AB7913 /* weibo.icns */; };
+		352EE05E14413F3D00AB7913 /* NSScrollView+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE05D14413F3D00AB7913 /* NSScrollView+Categories.m */; };
 		3592504B1426E60900F164D0 /* JSONURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3592504A1426E60900F164D0 /* JSONURLConnection.m */; };
 		359250521426E85500F164D0 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
@@ -134,6 +136,9 @@
 		352A7D25140F34F100F3E6B3 /* QWeiboSyncApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWeiboSyncApi.h; sourceTree = "<group>"; };
 		352A7D26140F34F100F3E6B3 /* QWeiboSyncApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWeiboSyncApi.m; sourceTree = "<group>"; };
 		352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		352EE05A1441314500AB7913 /* weibo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = weibo.icns; path = ../../weibo.icns; sourceTree = "<group>"; };
+		352EE05C14413F3D00AB7913 /* NSScrollView+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+Categories.h"; sourceTree = "<group>"; };
+		352EE05D14413F3D00AB7913 /* NSScrollView+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+Categories.m"; sourceTree = "<group>"; };
 		359250491426E60900F164D0 /* JSONURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONURLConnection.h; sourceTree = "<group>"; };
 		3592504A1426E60900F164D0 /* JSONURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONURLConnection.m; sourceTree = "<group>"; };
 		359250511426E85500F164D0 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = QWeiboClient/Frameworks/YAJL.framework; sourceTree = "<group>"; };
@@ -200,6 +205,7 @@
 		35171895143B0CFB00DB2726 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				352EE05A1441314500AB7913 /* weibo.icns */,
 				35B61E54143EE1780001741D /* messages_off.png */,
 				35B61E55143EE1780001741D /* messages_on.png */,
 				3509E845143CACA00053EF3F /* favorite_off.png */,
@@ -414,6 +420,8 @@
 				35B61E49143E85630001741D /* NSObject+Universal.m */,
 				35E98D3914287ECF005B9A15 /* NSDate+Categories.h */,
 				35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */,
+				352EE05C14413F3D00AB7913 /* NSScrollView+Categories.h */,
+				352EE05D14413F3D00AB7913 /* NSScrollView+Categories.m */,
 			);
 			name = Catogories;
 			sourceTree = "<group>";
@@ -506,6 +514,7 @@
 				35B61E56143EE1780001741D /* messages_off.png in Resources */,
 				35B61E57143EE1780001741D /* messages_on.png in Resources */,
 				35B61E69143EF1550001741D /* QWPublishMessageWindowController.xib in Resources */,
+				352EE05B1441314500AB7913 /* weibo.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +550,7 @@
 				35171890143B035E00DB2726 /* RoundedButtonCell.m in Sources */,
 				35B61E4A143E85630001741D /* NSObject+Universal.m in Sources */,
 				35B61E67143EF13D0001741D /* QWPublishMessageWindowController.m in Sources */,
+				352EE05E14413F3D00AB7913 /* NSScrollView+Categories.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
