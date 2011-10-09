@@ -20,7 +20,7 @@ enum {
 
 }
 
-- (void)getHomeMessage;
+- (void)getHomeMessageWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
 - (void)getUserInfo;
 - (void)publishMessage:(NSString *)message;
 

@@ -28,6 +28,7 @@ typedef enum {
 @property (copy) NSString *text;
 @property (copy, readonly) NSString *time;
 @property (copy) NSString *image;
+@property (assign) double timestamp;
 @property (retain) QWMessage *source;
 @property (assign) QWMessageType type;
 

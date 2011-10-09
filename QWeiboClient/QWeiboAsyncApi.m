@@ -22,12 +22,13 @@
 
 @implementation QWeiboAsyncApi
 
-- (void)getHomeMessage
+- (void)getHomeMessageWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
 {
     NSString *url = GET_HOME_MESSAGE_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-	[parameters setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"pageflag"];
-	[parameters setObject:[NSString stringWithFormat:@"%d", 20] forKey:@"reqnum"];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
+    [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
     [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetHomeMessage];
 }
 
@@ -144,8 +145,10 @@
             for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
                 [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:GET_HOME_MESSAGE_NOTIFICATION object:messages];
+            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:GET_HOME_MESSAGE_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
+            [userInfo release];
             break;
         }
         case JSONURLConnectionTagGetUserInfo:

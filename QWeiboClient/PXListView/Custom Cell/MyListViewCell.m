@@ -19,8 +19,7 @@
 @synthesize timeLabel = _timeLabel;
 @synthesize textLabel = _textLabel;
 
-#pragma mark -
-#pragma mark Init/Dealloc
+#pragma mark - Init/Dealloc
 
 - (id)initWithReusableIdentifier: (NSString*)identifier
 {
@@ -36,8 +35,7 @@
 	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark Reuse
+#pragma mark - Reuse
 
 - (void)prepareForReuse
 {
@@ -45,8 +43,7 @@
 	self.textLabel.stringValue = @"";
 }
 
-#pragma mark -
-#pragma mark Drawing
+#pragma mark - Drawing
 
 - (void)drawRect:(NSRect)dirtyRect
 {
@@ -62,9 +59,7 @@
 	[roundedRect fill];
 }
 
-
-#pragma mark -
-#pragma mark Accessibility
+#pragma mark - Accessibility
 
 - (NSArray*)accessibilityAttributeNames
 {

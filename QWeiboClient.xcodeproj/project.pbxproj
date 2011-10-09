@@ -36,6 +36,9 @@
 		352A7D5D140F5C5B00F3E6B3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */; };
 		352EE05B1441314500AB7913 /* weibo.icns in Resources */ = {isa = PBXBuildFile; fileRef = 352EE05A1441314500AB7913 /* weibo.icns */; };
 		352EE05E14413F3D00AB7913 /* NSScrollView+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE05D14413F3D00AB7913 /* NSScrollView+Categories.m */; };
+		352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE06A1441457300AB7913 /* ListViewEndCell.m */; };
+		352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE06C1441458200AB7913 /* ListViewEndCell.xib */; };
+		352EE0781441916700AB7913 /* end.png in Resources */ = {isa = PBXBuildFile; fileRef = 352EE0771441916700AB7913 /* end.png */; };
 		3592504B1426E60900F164D0 /* JSONURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3592504A1426E60900F164D0 /* JSONURLConnection.m */; };
 		359250521426E85500F164D0 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
@@ -139,6 +142,10 @@
 		352EE05A1441314500AB7913 /* weibo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = weibo.icns; path = ../../weibo.icns; sourceTree = "<group>"; };
 		352EE05C14413F3D00AB7913 /* NSScrollView+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+Categories.h"; sourceTree = "<group>"; };
 		352EE05D14413F3D00AB7913 /* NSScrollView+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+Categories.m"; sourceTree = "<group>"; };
+		352EE0691441457300AB7913 /* ListViewEndCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewEndCell.h; sourceTree = "<group>"; };
+		352EE06A1441457300AB7913 /* ListViewEndCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewEndCell.m; sourceTree = "<group>"; };
+		352EE06C1441458200AB7913 /* ListViewEndCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewEndCell.xib; sourceTree = "<group>"; };
+		352EE0771441916700AB7913 /* end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = end.png; sourceTree = "<group>"; };
 		359250491426E60900F164D0 /* JSONURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONURLConnection.h; sourceTree = "<group>"; };
 		3592504A1426E60900F164D0 /* JSONURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONURLConnection.m; sourceTree = "<group>"; };
 		359250511426E85500F164D0 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = QWeiboClient/Frameworks/YAJL.framework; sourceTree = "<group>"; };
@@ -219,6 +226,7 @@
 				3509E84D143CACA00053EF3F /* timeline_off.png */,
 				3509E84E143CACA00053EF3F /* timeline_on.png */,
 				35171896143B0CFB00DB2726 /* logo.png */,
+				352EE0771441916700AB7913 /* end.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -389,6 +397,9 @@
 				35D7C00814397A4B000F82DD /* MyListViewCell.h */,
 				35D7C00914397A4B000F82DD /* MyListViewCell.m */,
 				35D7C00A14397A4B000F82DD /* MyListViewCell.xib */,
+				352EE0691441457300AB7913 /* ListViewEndCell.h */,
+				352EE06A1441457300AB7913 /* ListViewEndCell.m */,
+				352EE06C1441458200AB7913 /* ListViewEndCell.xib */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -515,6 +526,8 @@
 				35B61E57143EE1780001741D /* messages_on.png in Resources */,
 				35B61E69143EF1550001741D /* QWPublishMessageWindowController.xib in Resources */,
 				352EE05B1441314500AB7913 /* weibo.icns in Resources */,
+				352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */,
+				352EE0781441916700AB7913 /* end.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +564,7 @@
 				35B61E4A143E85630001741D /* NSObject+Universal.m in Sources */,
 				35B61E67143EF13D0001741D /* QWPublishMessageWindowController.m in Sources */,
 				352EE05E14413F3D00AB7913 /* NSScrollView+Categories.m in Sources */,
+				352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

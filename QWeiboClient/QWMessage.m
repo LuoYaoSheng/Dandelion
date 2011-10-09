@@ -10,8 +10,6 @@
 
 @interface QWMessage ()
 
-@property (assign) double timestamp;
-
 @end
 
 @implementation QWMessage

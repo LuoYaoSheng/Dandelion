@@ -9,15 +9,20 @@
 #import <Cocoa/Cocoa.h>
 #import "PXListView.h"
 #import "QWeiboAsyncApi.h"
+#import "ListViewEndCell.h"
 
 @interface QWTimelineViewController : NSViewController<PXListViewDelegate> {
     QWeiboAsyncApi *api;
+    BOOL hasNext;
+    int pageFlag;
+    int pageSize;
+    double pageTime;
 }
 
 
 @property (nonatomic, retain) NSMutableArray *listContent;
 @property (assign) IBOutlet PXListView *listView;
 
-- (void)reloadData;
+- (void)reloadData:(BOOL)reset;
 
 @end

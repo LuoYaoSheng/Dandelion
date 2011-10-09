@@ -10,14 +10,15 @@
 #import <YAJL/YAJL.h>
 #import "QWMessage.h"
 #import "MyListViewCell.h"
+#import "ListViewEndCell.h"
 
 #define MIN_HEIGHT  70
 
 @interface QWTimelineViewController()
 
 @property (nonatomic, retain) NSMutableArray *heightList;
+@property (nonatomic, retain) ListViewEndCell *reloadCell;
 
-- (void)reloadData;
 - (void)measureData;
 - (void)reloadTable:(BOOL)scrollToTop;
 
@@ -28,6 +29,7 @@
 @synthesize listContent = _listContent;
 @synthesize listView = _listView;
 @synthesize heightList = _heightList;
+@synthesize reloadCell = _reloadCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +41,11 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedHomeMessage:) name:GET_HOME_MESSAGE_NOTIFICATION object:nil];
         api = [[QWeiboAsyncApi alloc] init];
+        
+        hasNext = YES;
+        pageFlag = 0;
+        pageSize = 20;
+        pageTime = 0;
     }
     
     return self;
@@ -55,7 +62,7 @@
     [self.listView setCellSpacing:0.0f];
 	[self.listView setAllowsEmptySelection:YES];
 	[self.listView setAllowsMultipleSelection:YES];
-    [self reloadData];
+//    [self reloadData:YES];
 }
 
 - (void)windowResized:(NSNotification *)notification
@@ -63,9 +70,13 @@
     [self reloadTable:NO];
 }
 
-- (void)reloadData
+- (void)reloadData:(BOOL)reset
 {
-    [api getHomeMessage];
+    if (reset) {
+        pageFlag = 0;
+        pageTime = 0;
+    }
+    [api getHomeMessageWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
 }
 
 - (void)receivedHomeMessage:(NSNotification *)notification
@@ -81,11 +92,18 @@
 //        //        [self didChangeValueForKey:@"listContent"];
 //        [message release];
 //    }
-    
-    [self.listContent removeAllObjects];
+    BOOL reset = NO;
+    if (pageTime == 0) {
+        [self.listContent removeAllObjects];
+        reset = YES;
+    }
     NSArray *messages = (NSArray *)notification.object;
     [self.listContent addObjectsFromArray:messages];
-    [self reloadTable:YES];
+    pageTime = ((QWMessage *)[messages lastObject]).timestamp;
+    hasNext = ![[notification.userInfo objectForKey:@"hasNext"] boolValue];
+    if (hasNext)
+        pageFlag = 1;
+    [self reloadTable:reset];
 }
 
 - (void)reloadTable:(BOOL)scrollToTop
@@ -115,31 +133,49 @@
 
 - (NSUInteger)numberOfRowsInListView: (PXListView*)aListView
 {
-	return [self.listContent count];
+	return [self.listContent count] + 1;
 }
 
 - (PXListViewCell*)listView:(PXListView*)aListView cellForRow:(NSUInteger)row
 {
-    static NSString *LISTVIEW_CELL_IDENTIFIER = @"MyListViewCell";
-	MyListViewCell *cell = (MyListViewCell*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
-	
-	if(!cell) {
-		cell = [MyListViewCell cellLoadedFromNibNamed:@"MyListViewCell" reusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+    if (row == [self.listContent count]) {
+        static NSString *LISTVIEW_CELL_IDENTIFIER = @"ListViewEndCell";
+        ListViewEndCell *cell = (ListViewEndCell *)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+        if(!cell) {
+            cell = [ListViewEndCell cellLoadedFromNibNamed:@"ListViewEndCell" reusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+        }
+        self.reloadCell = [cell retain];
+        if (hasNext) {
+            [self.reloadCell startAnimating];
+            [self reloadData:NO];
+        } else {
+            [self.reloadCell stopAnimating];
+        }
+        return cell;
+    } else {
+        static NSString *LISTVIEW_CELL_IDENTIFIER = @"MyListViewCell";
+        MyListViewCell *cell = (MyListViewCell *)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+        if(!cell) {
+            cell = [MyListViewCell cellLoadedFromNibNamed:@"MyListViewCell" reusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+        }
+        
+        // Set up the new cell:
+        QWMessage *message = [self.listContent objectAtIndex:row];
+        cell.nameLabel.stringValue = message.nick;
+        cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
+        cell.textLabel.stringValue = message.text;
+        cell.timeLabel.stringValue = message.time;
+        
+        return cell;
 	}
-	
-	// Set up the new cell:
-    QWMessage *message = [self.listContent objectAtIndex:row];
-    cell.nameLabel.stringValue = message.nick;
-    cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
-	cell.textLabel.stringValue = message.text;
-    cell.timeLabel.stringValue = message.time;
-	
-	return cell;
 }
 
 - (CGFloat)listView:(PXListView*)aListView heightOfRow:(NSUInteger)row
 {
-    return [[self.heightList objectAtIndex:row] floatValue];
+    if (row == [self.listContent count]) 
+        return 40;
+    else
+        return [[self.heightList objectAtIndex:row] floatValue];
 }
 
 - (void)listViewSelectionDidChange:(NSNotification*)aNotification
@@ -156,6 +192,7 @@
 {
     [_listContent release];
     [_heightList release];
+    [_reloadCell release];
     [super dealloc];  
 }
 

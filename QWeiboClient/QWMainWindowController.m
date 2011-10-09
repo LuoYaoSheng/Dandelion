@@ -144,7 +144,7 @@
     NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
     [self activateViewController:viewController];
     QWTimelineViewController *timelineController = (QWTimelineViewController *)viewController;
-    [timelineController reloadData];
+    [timelineController reloadData:YES];
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
