@@ -6,7 +6,7 @@
 //  Copyright 2011年 __MyCompanyName__. All rights reserved.
 //
 
-#import "QWTimelineViewController.h"
+#import "QWMessagesViewController.h"
 #import <YAJL/YAJL.h>
 #import "QWMessage.h"
 #import "MyListViewCell.h"
@@ -14,7 +14,7 @@
 
 #define MIN_HEIGHT  70
 
-@interface QWTimelineViewController()
+@interface QWMessagesViewController()
 
 @property (nonatomic, retain) NSMutableArray *heightList;
 @property (nonatomic, retain) ListViewEndCell *reloadCell;
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation QWTimelineViewController
+@implementation QWMessagesViewController
 
 @synthesize listContent = _listContent;
 @synthesize listView = _listView;
@@ -58,7 +58,7 @@
 
 - (void)awakeFromNib
 {
-    self.title = @"Timeline";
+    self.title = @"Messages";
     [self.listView setCellSpacing:0.0f];
 	[self.listView setAllowsEmptySelection:YES];
 	[self.listView setAllowsMultipleSelection:YES];

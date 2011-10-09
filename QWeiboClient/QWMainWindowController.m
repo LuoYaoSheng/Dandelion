@@ -119,14 +119,28 @@
         }
         case QWShowTabMessages:
         {
+            NSViewController *viewController = [self viewControllerForName:@"QWMessagesViewController"];
+            [self activateViewController:viewController];
             break;
         }
-        case QWShowTabFavorite:
+        case QWShowTabFavorites:
+        {
+            NSViewController *viewController = [self viewControllerForName:@"QWFavoritesViewController"];
+            [self activateViewController:viewController];
             break;
+        }
         case QWShowTabPeople:
+        {
+//            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
+//            [self activateViewController:viewController];
             break;
+        }
         case QWShowTabSearch:
+        {
+//            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
+//            [self activateViewController:viewController];
             break;
+        }
         default:
             break;
     }

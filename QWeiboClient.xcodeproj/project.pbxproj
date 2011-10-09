@@ -39,6 +39,10 @@
 		352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE06A1441457300AB7913 /* ListViewEndCell.m */; };
 		352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE06C1441458200AB7913 /* ListViewEndCell.xib */; };
 		352EE0781441916700AB7913 /* end.png in Resources */ = {isa = PBXBuildFile; fileRef = 352EE0771441916700AB7913 /* end.png */; };
+		352EE07C1441A6FA00AB7913 /* QWMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE07A1441A6F900AB7913 /* QWMessagesViewController.m */; };
+		352EE07D1441A6FA00AB7913 /* QWMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE07B1441A6FA00AB7913 /* QWMessagesViewController.xib */; };
+		352EE0811441A75D00AB7913 /* QWFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE07F1441A75B00AB7913 /* QWFavoritesViewController.m */; };
+		352EE0821441A75D00AB7913 /* QWFavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE0801441A75C00AB7913 /* QWFavoritesViewController.xib */; };
 		3592504B1426E60900F164D0 /* JSONURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3592504A1426E60900F164D0 /* JSONURLConnection.m */; };
 		359250521426E85500F164D0 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
@@ -146,6 +150,12 @@
 		352EE06A1441457300AB7913 /* ListViewEndCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewEndCell.m; sourceTree = "<group>"; };
 		352EE06C1441458200AB7913 /* ListViewEndCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewEndCell.xib; sourceTree = "<group>"; };
 		352EE0771441916700AB7913 /* end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = end.png; sourceTree = "<group>"; };
+		352EE0791441A6F800AB7913 /* QWMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMessagesViewController.h; sourceTree = "<group>"; };
+		352EE07A1441A6F900AB7913 /* QWMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMessagesViewController.m; sourceTree = "<group>"; };
+		352EE07B1441A6FA00AB7913 /* QWMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWMessagesViewController.xib; sourceTree = "<group>"; };
+		352EE07E1441A75A00AB7913 /* QWFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWFavoritesViewController.h; sourceTree = "<group>"; };
+		352EE07F1441A75B00AB7913 /* QWFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWFavoritesViewController.m; sourceTree = "<group>"; };
+		352EE0801441A75C00AB7913 /* QWFavoritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWFavoritesViewController.xib; sourceTree = "<group>"; };
 		359250491426E60900F164D0 /* JSONURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONURLConnection.h; sourceTree = "<group>"; };
 		3592504A1426E60900F164D0 /* JSONURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONURLConnection.m; sourceTree = "<group>"; };
 		359250511426E85500F164D0 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = QWeiboClient/Frameworks/YAJL.framework; sourceTree = "<group>"; };
@@ -307,6 +317,12 @@
 				35D2FCDD1427488F006410B9 /* QWMentionsViewController.h */,
 				35D2FCDE1427488F006410B9 /* QWMentionsViewController.m */,
 				35D2FCDF1427488F006410B9 /* QWMentionsViewController.xib */,
+				352EE0791441A6F800AB7913 /* QWMessagesViewController.h */,
+				352EE07A1441A6F900AB7913 /* QWMessagesViewController.m */,
+				352EE07B1441A6FA00AB7913 /* QWMessagesViewController.xib */,
+				352EE07E1441A75A00AB7913 /* QWFavoritesViewController.h */,
+				352EE07F1441A75B00AB7913 /* QWFavoritesViewController.m */,
+				352EE0801441A75C00AB7913 /* QWFavoritesViewController.xib */,
 				35B61E65143EF13C0001741D /* QWPublishMessageWindowController.h */,
 				35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */,
 				35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */,
@@ -528,6 +544,8 @@
 				352EE05B1441314500AB7913 /* weibo.icns in Resources */,
 				352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */,
 				352EE0781441916700AB7913 /* end.png in Resources */,
+				352EE07D1441A6FA00AB7913 /* QWMessagesViewController.xib in Resources */,
+				352EE0821441A75D00AB7913 /* QWFavoritesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,6 +583,8 @@
 				35B61E67143EF13D0001741D /* QWPublishMessageWindowController.m in Sources */,
 				352EE05E14413F3D00AB7913 /* NSScrollView+Categories.m in Sources */,
 				352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */,
+				352EE07C1441A6FA00AB7913 /* QWMessagesViewController.m in Sources */,
+				352EE0811441A75D00AB7913 /* QWFavoritesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

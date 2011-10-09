@@ -24,7 +24,7 @@
 
 - (void)getHomeMessageWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
 {
-    NSString *url = GET_HOME_MESSAGE_URL;
+    NSString *url = GET_TIMELINE_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
@@ -146,7 +146,7 @@
                 [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
             }
             NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:GET_HOME_MESSAGE_NOTIFICATION object:messages userInfo:userInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:GET_TIMELINE_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
             [userInfo release];
             break;

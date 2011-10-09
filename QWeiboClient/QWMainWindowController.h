@@ -14,7 +14,7 @@ typedef enum {
     QWShowTabTimeline = 1,
     QWShowTabMethions,
     QWShowTabMessages,
-    QWShowTabFavorite,
+    QWShowTabFavorites,
     QWShowTabPeople,
     QWShowTabSearch
 } QWShowTab;

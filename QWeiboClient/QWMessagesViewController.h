@@ -11,7 +11,7 @@
 #import "QWeiboAsyncApi.h"
 #import "ListViewEndCell.h"
 
-@interface QWMentionsViewController : NSViewController<PXListViewDelegate> {
+@interface QWMessagesViewController : NSViewController<PXListViewDelegate> {
     QWeiboAsyncApi *api;
     BOOL hasNext;
     int pageFlag;
