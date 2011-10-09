@@ -51,7 +51,9 @@
 - (id)initWithJSON:(NSDictionary *)dict
 {
     NSString *nick = [dict objectForKey:@"nick"];
-    NSString *head = [[dict objectForKey:@"head"] stringByAppendingPathComponent:@"50"];
+    NSString *head = [dict objectForKey:@"head"];
+    if (head && ![head isEqualToString:@""])
+        head = [head stringByAppendingPathComponent:@"50"];
     NSString *text = [[dict objectForKey:@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     double timestamp = [[dict objectForKey:@"timestamp"] doubleValue];
     NSString *image = [dict objectForKey:@"image"];

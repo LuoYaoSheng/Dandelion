@@ -22,14 +22,44 @@
 
 @implementation QWeiboAsyncApi
 
-- (void)getHomeMessageWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
+- (void)getTimelineWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
 {
     NSString *url = GET_TIMELINE_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
     [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
-    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetHomeMessage];
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetTimeline];
+}
+
+- (void)getMethionsWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
+{
+    NSString *url = GET_METHIONS_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
+    [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetMethions];
+}
+
+- (void)getMessagesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
+{
+    NSString *url = GET_MESSAGES_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
+    [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetMessages];
+}
+
+- (void)getFavoritesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
+{
+    NSString *url = GET_FAVORITES_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
+    [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetFavorites];
 }
 
 - (void)getUserInfo
@@ -139,7 +169,7 @@
 - (void)dURLConnection:(JSONURLConnection *)connection didFinishLoadingJSONValue:(NSDictionary *)json
 {
     switch (connection.connectionTag) {
-        case JSONURLConnectionTagGetHomeMessage:
+        case JSONURLConnectionTagGetTimeline:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
             for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
@@ -147,6 +177,42 @@
             }
             NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:GET_TIMELINE_NOTIFICATION object:messages userInfo:userInfo];
+            [messages release];
+            [userInfo release];
+            break;
+        }
+        case JSONURLConnectionTagGetMethions:
+        {
+            NSMutableArray *messages = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+            }
+            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:GET_METHIONS_NOTIFICATION object:messages userInfo:userInfo];
+            [messages release];
+            [userInfo release];
+            break;
+        }
+        case JSONURLConnectionTagGetMessages:
+        {
+            NSMutableArray *messages = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+            }
+            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:GET_MESSAGES_NOTIFICATION object:messages userInfo:userInfo];
+            [messages release];
+            [userInfo release];
+            break;
+        }
+        case JSONURLConnectionTagGetFavorites:
+        {
+            NSMutableArray *messages = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+            }
+            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:GET_FAVORITES_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
             [userInfo release];
             break;

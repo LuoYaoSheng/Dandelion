@@ -39,7 +39,7 @@
         self.listContent = [[[NSMutableArray alloc] init] autorelease];
         self.heightList = [[[NSMutableArray alloc] init] autorelease];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedHomeMessage:) name:GET_TIMELINE_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedHomeMessage:) name:GET_METHIONS_NOTIFICATION object:nil];
         api = [[QWeiboAsyncApi alloc] init];
         
         hasNext = YES;
@@ -62,7 +62,7 @@
     [self.listView setCellSpacing:0.0f];
 	[self.listView setAllowsEmptySelection:YES];
 	[self.listView setAllowsMultipleSelection:YES];
-//    [self reloadData:YES];
+    [self reloadData:YES];
 }
 
 - (void)windowResized:(NSNotification *)notification
@@ -76,7 +76,7 @@
         pageFlag = 0;
         pageTime = 0;
     }
-    [api getHomeMessageWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
+    [api getMethionsWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
 }
 
 - (void)receivedHomeMessage:(NSNotification *)notification
@@ -151,7 +151,10 @@
         // Set up the new cell:
         QWMessage *message = [self.listContent objectAtIndex:row];
         cell.nameLabel.stringValue = message.nick;
-        cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
+        if (message.head && ![message.head isEqualToString:@""])
+            cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
+        else
+            cell.headButton.image = [NSImage imageNamed:@"NSUser"];
         cell.textLabel.stringValue = message.text;
         cell.timeLabel.stringValue = message.time;
         

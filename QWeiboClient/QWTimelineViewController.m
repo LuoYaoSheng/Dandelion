@@ -76,7 +76,7 @@
         pageFlag = 0;
         pageTime = 0;
     }
-    [api getHomeMessageWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
+    [api getTimelineWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
 }
 
 - (void)receivedHomeMessage:(NSNotification *)notification
@@ -151,7 +151,10 @@
         // Set up the new cell:
         QWMessage *message = [self.listContent objectAtIndex:row];
         cell.nameLabel.stringValue = message.nick;
-        cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
+        if (message.head && ![message.head isEqualToString:@""])
+            cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
+        else
+            cell.headButton.image = [NSImage imageNamed:@"NSUser"];
         cell.textLabel.stringValue = message.text;
         cell.timeLabel.stringValue = message.time;
         
