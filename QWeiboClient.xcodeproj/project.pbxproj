@@ -27,7 +27,6 @@
 		35263ABC140F1F4800944D3E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 35263ABA140F1F4800944D3E /* Credits.rtf */; };
 		35263ABF140F1F4800944D3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 35263ABE140F1F4800944D3E /* AppDelegate.m */; };
 		35263AC2140F1F4800944D3E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35263AC0140F1F4800944D3E /* MainMenu.xib */; };
-		35263AC5140F1F4800944D3E /* QWeiboClient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 35263AC3140F1F4800944D3E /* QWeiboClient.xcdatamodeld */; };
 		35263ACD140F1F9800944D3E /* QWMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35263ACC140F1F9800944D3E /* QWMainWindowController.m */; };
 		35263ADC140F22A500944D3E /* QWMainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35263ADB140F22A500944D3E /* QWMainWindowController.xib */; };
 		352A7D27140F34F100F3E6B3 /* QWeiboAsyncApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 352A7D24140F34F100F3E6B3 /* QWeiboAsyncApi.m */; };
@@ -132,7 +131,6 @@
 		35263ABD140F1F4800944D3E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		35263ABE140F1F4800944D3E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		35263AC1140F1F4800944D3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		35263AC4140F1F4800944D3E /* QWeiboClient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QWeiboClient.xcdatamodel; sourceTree = "<group>"; };
 		35263ACB140F1F9800944D3E /* QWMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMainWindowController.h; sourceTree = "<group>"; };
 		35263ACC140F1F9800944D3E /* QWMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMainWindowController.m; sourceTree = "<group>"; };
 		35263ADB140F22A500944D3E /* QWMainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWMainWindowController.xib; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 				35263ABD140F1F4800944D3E /* AppDelegate.h */,
 				35263ABE140F1F4800944D3E /* AppDelegate.m */,
 				35263AC0140F1F4800944D3E /* MainMenu.xib */,
-				35263AC3140F1F4800944D3E /* QWeiboClient.xcdatamodeld */,
 				35263ACB140F1F9800944D3E /* QWMainWindowController.h */,
 				35263ACC140F1F9800944D3E /* QWMainWindowController.m */,
 				35263ADB140F22A500944D3E /* QWMainWindowController.xib */,
@@ -558,7 +555,6 @@
 			files = (
 				35263AB8140F1F4800944D3E /* main.m in Sources */,
 				35263ABF140F1F4800944D3E /* AppDelegate.m in Sources */,
-				35263AC5140F1F4800944D3E /* QWeiboClient.xcdatamodeld in Sources */,
 				35263ACD140F1F9800944D3E /* QWMainWindowController.m in Sources */,
 				352A7D27140F34F100F3E6B3 /* QWeiboAsyncApi.m in Sources */,
 				352A7D28140F34F100F3E6B3 /* QWeiboSyncApi.m in Sources */,
@@ -735,19 +731,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		35263AC3140F1F4800944D3E /* QWeiboClient.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				35263AC4140F1F4800944D3E /* QWeiboClient.xcdatamodel */,
-			);
-			currentVersion = 35263AC4140F1F4800944D3E /* QWeiboClient.xcdatamodel */;
-			path = QWeiboClient.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 35263A9E140F1F4800944D3E /* Project object */;
 }

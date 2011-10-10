@@ -33,5 +33,6 @@ typedef enum {
 
 - (IBAction)toggleTab:(id)sender;
 - (IBAction)publishMessage:(id)sender;
+- (IBAction)logout:(id)sender;
 
 @end

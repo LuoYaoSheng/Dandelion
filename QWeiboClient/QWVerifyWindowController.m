@@ -11,6 +11,7 @@
 #import <WebKit/WebFrame.h>
 #import <WebKit/WebPolicyDelegate.h>
 #import "QWeiboSyncApi.h"
+#import "NSURL+QAdditions.h"
 
 @interface QWVerifyWindowController (Private)
 
@@ -40,15 +41,18 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     [self.webView setPolicyDelegate:self];
     [self.webView setFrameLoadDelegate:self];
-    AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
-	NSString *url = [NSString stringWithFormat:@"%@%@", VERIFY_URL, appDelegate.tokenKey];
+    NSString *requestToken = [[NSUserDefaults standardUserDefaults] stringForKey:REQUEST_TOKEN_KEY];
+	NSString *url = [NSString stringWithFormat:@"%@%@", VERIFY_URL, requestToken];
 	NSURL *requestUrl = [NSURL URLWithString:url];
 	NSURLRequest *request = [NSURLRequest requestWithURL:requestUrl];
 	[self.webView.mainFrame loadRequest:request];
 }
 
 - (void)windowWillClose:(NSNotification *)aNotification {
-    [NSApp terminate:self];
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_KEY];
+    NSString *accessTokenSecret = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_SECRET_KEY];
+    if (!(accessToken && ![accessToken isEqualToString:@""] && accessTokenSecret && ![accessTokenSecret isEqualToString:@""]))
+        [NSApp terminate:self];
 }
 
 - (void)dealloc
@@ -76,15 +80,19 @@
     NSString *query = [request.URL query];
 	NSString *verifier = [self valueForParam:@"oauth_verifier" ofQuery:query];
     if (verifier && ![verifier isEqualToString:@""]) {
-		AppDelegate *appDelegate = [NSApp delegate];
+        NSString *requestToken = [[NSUserDefaults standardUserDefaults] stringForKey:REQUEST_TOKEN_KEY];
+        NSString *requestTokenSecret = [[NSUserDefaults standardUserDefaults] stringForKey:REQUEST_TOKEN_SECRET_KEY];
 		QWeiboSyncApi *api = [[[QWeiboSyncApi alloc] init] autorelease];
-		NSString *retString = [api getAccessTokenWithConsumerKey:appDelegate.appKey 
-												  consumerSecret:appDelegate.appSecret 
-												 requestTokenKey:appDelegate.tokenKey 
-											  requestTokenSecret:appDelegate.tokenSecret 
+		NSString *retString = [api getAccessTokenWithConsumerKey:APP_KEY 
+												  consumerSecret:APP_SECRET 
+												 requestTokenKey:requestToken 
+											  requestTokenSecret:requestTokenSecret 
 														  verify:verifier];
 		NSLog(@"\nget access token:%@", retString);
-		[appDelegate parseTokenKeyWithResponse:retString];
+        NSDictionary *params = [NSURL parseURLQueryString:retString];
+        [[NSUserDefaults standardUserDefaults] setObject:[params objectForKey:@"oauth_token"] forKey:ACCESS_TOKEN_KEY];
+        [[NSUserDefaults standardUserDefaults] setObject:[params objectForKey:@"oauth_token_secret"] forKey:ACCESS_TOKEN_SECRET_KEY];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         if ([self.delegate conformsToProtocol:@protocol(QWVerifyDelegate)]) {
             [self.delegate loginFinished:self];
         }

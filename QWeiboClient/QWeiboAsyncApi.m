@@ -79,12 +79,13 @@
 
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
 {
-    AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_KEY];
+    NSString *accessTokenSecret = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_SECRET_KEY];
 	QOauthKey *oauthKey = [[QOauthKey alloc] init];
-	oauthKey.consumerKey = appDelegate.appKey;
-	oauthKey.consumerSecret = appDelegate.appSecret;
-	oauthKey.tokenKey = appDelegate.tokenKey;
-	oauthKey.tokenSecret= appDelegate.tokenSecret;
+	oauthKey.consumerKey = APP_KEY;
+	oauthKey.consumerSecret = APP_SECRET;
+	oauthKey.tokenKey = accessToken;
+	oauthKey.tokenSecret= accessTokenSecret;
 	
 	[parameters setObject:@"json" forKey:@"format"];
     
@@ -100,12 +101,13 @@
 {
     NSMutableDictionary *files = [NSMutableDictionary dictionary];
 	
-    AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
+    NSString *accessToken = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_KEY];
+    NSString *accessTokenSecret = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_SECRET_KEY];
 	QOauthKey *oauthKey = [[QOauthKey alloc] init];
-	oauthKey.consumerKey = appDelegate.appKey;
-	oauthKey.consumerSecret = appDelegate.appSecret;
-	oauthKey.tokenKey = appDelegate.tokenKey;
-	oauthKey.tokenSecret= appDelegate.tokenSecret;
+	oauthKey.consumerKey = APP_KEY;
+	oauthKey.consumerSecret = APP_SECRET;
+	oauthKey.tokenKey = accessToken;
+	oauthKey.tokenSecret= accessTokenSecret;
 	
 	[parameters setObject:@"json" forKey:@"format"];
     [parameters setObject:@"127.0.0.1" forKey:@"clientip"];
