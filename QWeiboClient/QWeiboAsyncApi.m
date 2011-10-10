@@ -172,10 +172,15 @@
         case JSONURLConnectionTagGetTimeline:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
-            for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-                [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+            NSDictionary *userInfo = nil;
+            if ([json valueForKeyPath:@"data"] != [NSNull null]) {
+                for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                    [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+                }
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            } else {
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"hasNext", nil];
             }
-            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:GET_TIMELINE_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
             [userInfo release];
@@ -184,10 +189,15 @@
         case JSONURLConnectionTagGetMethions:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
-            for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-                [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+            NSDictionary *userInfo = nil;
+            if ([json valueForKeyPath:@"data"] != [NSNull null]) {
+                for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                    [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+                }
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            } else {
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
-            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:GET_METHIONS_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
             [userInfo release];
@@ -196,10 +206,15 @@
         case JSONURLConnectionTagGetMessages:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
-            for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-                [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+            NSDictionary *userInfo = nil;
+            if ([json valueForKeyPath:@"data"] != [NSNull null]) {
+                for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                    [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+                }
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            } else {
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
-            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:GET_MESSAGES_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
             [userInfo release];
@@ -208,10 +223,15 @@
         case JSONURLConnectionTagGetFavorites:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
-            for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-                [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+            NSDictionary *userInfo = nil;
+            if ([json valueForKeyPath:@"data"] != [NSNull null]) {
+                for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                    [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+                }
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            } else {
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
-            NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:GET_FAVORITES_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
             [userInfo release];
