@@ -46,6 +46,7 @@
         pageFlag = 0;
         pageSize = 20;
         pageTime = 0;
+        isLoading = NO;
     }
     
     return self;
@@ -62,7 +63,7 @@
     [self.listView setCellSpacing:0.0f];
 	[self.listView setAllowsEmptySelection:YES];
 	[self.listView setAllowsMultipleSelection:YES];
-    [self reloadData:YES];
+    [self reloadTable:NO];
 }
 
 - (void)windowResized:(NSNotification *)notification
@@ -72,15 +73,19 @@
 
 - (void)reloadData:(BOOL)reset
 {
-    if (reset) {
-        pageFlag = 0;
-        pageTime = 0;
+    if (!isLoading) {
+        isLoading = YES;
+        if (reset) {
+            pageFlag = 0;
+            pageTime = 0;
+        }
+        [api getMethionsWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
     }
-    [api getMethionsWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
 }
 
 - (void)receivedHomeMessage:(NSNotification *)notification
 {
+    isLoading = NO;
     BOOL reset = NO;
     if (pageTime == 0) {
         [self.listContent removeAllObjects];
@@ -136,7 +141,7 @@
         self.reloadCell = [cell retain];
         if (hasNext) {
             [self.reloadCell startAnimating];
-            [self performSelector:@selector(reloadData:) withObject:nil afterDelay:0.5];
+            [self performSelector:@selector(reloadData:) withObject:nil afterDelay:1];
         } else {
             [self.reloadCell stopAnimating];
         }

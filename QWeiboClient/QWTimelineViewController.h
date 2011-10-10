@@ -17,6 +17,7 @@
     int pageFlag;
     int pageSize;
     double pageTime;
+    BOOL isLoading;
 }
 
 

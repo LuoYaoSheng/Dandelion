@@ -360,9 +360,10 @@
 						<object class="NSBox" id="931996706">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">10</int>
-							<string key="NSFrame">{{65, 576}, {264, 5}}</string>
+							<string key="NSFrame">{{65, 576}, {331, 5}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:1459</string>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">

@@ -136,7 +136,7 @@
         self.reloadCell = [cell retain];
         if (hasNext) {
             [self.reloadCell startAnimating];
-            [self performSelector:@selector(reloadData:) withObject:nil afterDelay:0.5];
+            [self performSelector:@selector(reloadData:) withObject:nil afterDelay:1];
         } else {
             [self.reloadCell stopAnimating];
         }

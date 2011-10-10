@@ -73,8 +73,7 @@
     controller = [[controllerClass alloc] initWithNibName:name bundle:nil];
     [allControllers setObject:controller forKey:name];
     [controller release];
-    // use key-value coding to avoid compiler warnings.
-//    [controller setValue:self forKey:@"mainWindowController"];
+
     return controller;
 }
 

@@ -77,6 +77,10 @@
 
 - (void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
+    if ([request respondsToSelector:@selector(setValue:forHTTPHeaderField:)]) {
+        [request setValue:@"Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; zh-cn) AppleWebKit/533.17.9 (KHTML, like Gecko) Mobile/8H7" forHTTPHeaderField:@"User-Agent"];
+    }
+    
     NSString *query = [request.URL query];
 	NSString *verifier = [self valueForParam:@"oauth_verifier" ofQuery:query];
     if (verifier && ![verifier isEqualToString:@""]) {
