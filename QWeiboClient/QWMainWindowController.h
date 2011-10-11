@@ -33,7 +33,6 @@ typedef enum {
 @property (assign) IBOutlet NSImageView *timelineBadge;
 @property (assign) IBOutlet NSImageView *mentionsBadge;
 @property (assign) IBOutlet NSImageView *messagesBadge;
-@property (assign) IBOutlet NSImageView *favoritesBadge;
 
 - (IBAction)toggleTab:(id)sender;
 - (IBAction)publishMessage:(id)sender;

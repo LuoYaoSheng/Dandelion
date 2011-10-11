@@ -10,16 +10,9 @@
 #import "PXListView.h"
 #import "QWeiboAsyncApi.h"
 #import "ListViewEndCell.h"
+#import "QWMainWindowController.h"
 
-typedef enum {
-    TweetTypeNone = 0,
-    TweetTypeTimeline,
-    TweetTypeMethions,
-    TweetTypeMessages,
-    TweetTypeFavorites,
-} TweetType;
-
-@interface QWTweetViewController : NSViewController<PXListViewDelegate> {
+@interface QWTweetViewController : NSViewController<PXListViewDelegate, QWeiboAsyncApiDelegate> {
     QWeiboAsyncApi *api;
     BOOL hasNext;
     int pageFlag;
@@ -32,8 +25,11 @@ typedef enum {
 
 @property (nonatomic, retain) NSMutableArray *listContent;
 @property (assign) IBOutlet PXListView *listView;
+@property (assign) QWMainWindowController *mainWindowController;
+@property (assign) int newTweetCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type;
 - (void)reloadData:(BOOL)reset;
+- (void)fetchNewTweets;
 
 @end

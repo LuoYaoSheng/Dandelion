@@ -14,6 +14,7 @@
 
 @implementation QWMessage
 
+@synthesize tweetId = _tweetId;
 @synthesize nick = _nick;
 @synthesize head = _head;
 @synthesize text = _text;
@@ -34,9 +35,10 @@
     return self;
 }
 
-- (id)initWithNick:(NSString *)aNick head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType
+- (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType
 {
     if ((self = [super init])) {
+        self.tweetId = tweetId;
         self.nick = aNick;
         self.head = aHead;
         self.text = aText;
@@ -50,6 +52,7 @@
 
 - (id)initWithJSON:(NSDictionary *)dict
 {
+    NSString *tweetId = [dict objectForKey:@"id"];
     NSString *nick = [dict objectForKey:@"nick"];
     NSString *head = [dict objectForKey:@"head"];
     if (head && ![head isEqualToString:@""])
@@ -62,11 +65,12 @@
         source = [[[QWMessage alloc] initWithJSON:[dict objectForKey:@"source"]] autorelease];
     }
     QWMessageType type = (QWMessageType)[dict objectForKey:@"type"];
-    return [self initWithNick:nick head:head text:text timestamp:timestamp image:image source:source type:type];
+    return [self initWithTweetId:tweetId Nick:nick head:head text:text timestamp:timestamp image:image source:source type:type];
 }
 
 - (void)dealloc
 {
+    [_tweetId release];
     [_nick release];
     [_head release];
     [_text release];

@@ -13,15 +13,19 @@
 #import "QWMessage.h"
 #import "QWPerson.h"
 
+#define UPDATE_INTERVAL   30
+
 @interface QWeiboAsyncApi()
 
-- (void)getUpdateCount;
+- (void)getUpdateCount:(BOOL)reset udpateType:(UpdateType)updateType;
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
 - (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
 
 @end
 
 @implementation QWeiboAsyncApi
+
+@synthesize delegate = _delegate;
 
 - (id)init
 {
@@ -31,44 +35,43 @@
     return self;
 }
 
-- (void)getTimelineWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
+- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime new:(BOOL)new
 {
-    NSString *url = GET_TIMELINE_URL;
+    NSString *url;
+    switch (tweetType) {
+        case TweetTypeTimeline: {
+            url = GET_TIMELINE_URL;
+            break;
+        }
+        case TweetTypeMethions: {
+            url = GET_METHIONS_URL;
+            break;
+        }
+        case TweetTypeMessages: {
+            url = GET_MESSAGES_URL;
+            break;
+        }
+        case TweetTypeFavorites: {
+            url = GET_FAVORITES_URL;
+            break;
+        }
+        default:
+            break;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
     [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
-    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetTimeline];
+    if (new)
+        [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetNewTweets];
+    else
+        [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetTweets];
 }
 
-- (void)getMenthionsWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
+- (void)getNewTweetsWithTweetType:(TweetType)tweetType newTweetsCount:(int)count
 {
-    NSString *url = GET_METHIONS_URL;
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
-	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
-    [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
-    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetMethions];
-}
-
-- (void)getMessagesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
-{
-    NSString *url = GET_MESSAGES_URL;
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
-	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
-    [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
-    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetMessages];
-}
-
-- (void)getFavoritesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
-{
-    NSString *url = GET_FAVORITES_URL;
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
-	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
-    [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
-    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetFavorites];
+    [self getUpdateCount:YES udpateType:(UpdateType)tweetType];
+    [self getTweetsWithTweetType:tweetType pageFlag:0 pageSize:count pageTime:0 new:YES];
 }
 
 - (void)getUserInfo
@@ -78,12 +81,16 @@
     [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetUserInfo];
 }
 
-- (void)getUpdateCount
+- (void)getUpdateCount:(BOOL)reset udpateType:(UpdateType)updateType
 {
     NSString *url = UPDATE_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"op"];
-    [parameters setObject:[NSString stringWithFormat:@"%d", 9] forKey:@"type"];
+    int op = 0;
+    if (reset) {
+        [parameters setObject:[NSString stringWithFormat:@"%d", updateType] forKey:@"type"];
+        op = 1;
+    }
+    [parameters setObject:[NSString stringWithFormat:@"%d", op] forKey:@"op"];
     [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetUpdateCount];
 }
 
@@ -193,7 +200,7 @@
 - (void)dURLConnection:(JSONURLConnection *)connection didFinishLoadingJSONValue:(NSDictionary *)json
 {
     switch (connection.connectionTag) {
-        case JSONURLConnectionTagGetTimeline:
+        case JSONURLConnectionTagGetTweets:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
             NSDictionary *userInfo = nil;
@@ -205,62 +212,27 @@
             } else {
                 userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:GET_TIMELINE_NOTIFICATION object:messages userInfo:userInfo];
+            if ([self.delegate respondsToSelector:@selector(receivedTweets:info:)]) {
+                [self.delegate receivedTweets:messages info:userInfo];
+            }
             [messages release];
             [userInfo release];
             break;
         }
-        case JSONURLConnectionTagGetMethions:
+        case JSONURLConnectionTagGetNewTweets:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
-            NSDictionary *userInfo = nil;
             if ([json valueForKeyPath:@"data"] != [NSNull null]) {
                 for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
                     [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
                 }
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
-            } else {
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:GET_METHIONS_NOTIFICATION object:messages userInfo:userInfo];
-            [messages release];
-            [userInfo release];
-            break;
-        }
-        case JSONURLConnectionTagGetMessages:
-        {
-            NSMutableArray *messages = [[NSMutableArray alloc] init];
-            NSDictionary *userInfo = nil;
-            if ([json valueForKeyPath:@"data"] != [NSNull null]) {
-                for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-                    [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
-                }
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
-            } else {
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
+            if ([self.delegate respondsToSelector:@selector(receivedNewTweets:)]) {
+                [self.delegate receivedNewTweets:messages];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:GET_MESSAGES_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
-            [userInfo release];
             break;
-        }
-        case JSONURLConnectionTagGetFavorites:
-        {
-            NSMutableArray *messages = [[NSMutableArray alloc] init];
-            NSDictionary *userInfo = nil;
-            if ([json valueForKeyPath:@"data"] != [NSNull null]) {
-                for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-                    [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
-                }
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
-            } else {
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:GET_FAVORITES_NOTIFICATION object:messages userInfo:userInfo];
-            [messages release];
-            [userInfo release];
-            break;
-        }
+        }   
         case JSONURLConnectionTagGetUserInfo:
         {
             QWPerson *person = [[QWPerson alloc] initWithJSON:[json valueForKeyPath:@"data"]];
@@ -278,7 +250,6 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:GET_UPDATE_COUNT_NOTIFICATION object:[json objectForKey:@"data"]];
             break;            
         }
-            
         default:
             break;
     }
@@ -294,11 +265,13 @@
 
 - (void)beginUpdating
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval: 10
-                                             target: self
-                                           selector: @selector(getUpdateCount)
-                                           userInfo: nil
-                                            repeats: YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self selector:@selector(timerMethod) userInfo:nil repeats:YES];
+    [timer fire];
+}
+
+- (void)timerMethod
+{
+    [self getUpdateCount:NO udpateType:UpdateTypeAll];
 }
 
 - (void)stopUpdating
@@ -310,9 +283,7 @@
 {
     [self stopUpdating];
     for (JSONURLConnection *conn in connectionList) {
-        if ([conn respondsToSelector:@selector(cancelConnection)]) {
-            [conn cancelConnection];
-        }
+        [conn cancelConnection];
     }
     [connectionList release]; connectionList = nil;
     [super dealloc];

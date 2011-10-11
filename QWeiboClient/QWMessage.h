@@ -23,6 +23,7 @@ typedef enum {
 
 @interface QWMessage : NSObject
 
+@property (copy) NSString *tweetId;
 @property (copy) NSString *nick;
 @property (copy) NSString *head;
 @property (copy) NSString *text;
@@ -32,7 +33,7 @@ typedef enum {
 @property (retain) QWMessage *source;
 @property (assign) QWMessageType type;
 
-- (id)initWithNick:(NSString *)aNick head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType;
+- (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType;
 - (id)initWithJSON:(NSDictionary *)dict;
 
 @end

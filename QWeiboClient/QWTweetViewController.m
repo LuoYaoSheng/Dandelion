@@ -30,37 +30,21 @@
 @synthesize listView = _listView;
 @synthesize heightList = _heightList;
 @synthesize reloadCell = _reloadCell;
+@synthesize mainWindowController = _mainWindowController;
+@synthesize newTweetCount = _newTweetCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        self.newTweetCount = 0;
         tweetType = type;
         self.listContent = [[[NSMutableArray alloc] init] autorelease];
         self.heightList = [[[NSMutableArray alloc] init] autorelease];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
-        switch (tweetType) {
-            case TweetTypeTimeline: {
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTweets:) name:GET_TIMELINE_NOTIFICATION object:nil];
-                break;
-            }
-            case TweetTypeMethions: {
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTweets:) name:GET_METHIONS_NOTIFICATION object:nil];
-                break;
-            }
-            case TweetTypeMessages: {
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTweets:) name:GET_MESSAGES_NOTIFICATION object:nil];
-                break;
-            }
-            case TweetTypeFavorites: {
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTweets:) name:GET_FAVORITES_NOTIFICATION object:nil];
-                break;
-            }
-            default:
-                break;
-        }
         api = [[QWeiboAsyncApi alloc] init];
+        api.delegate = self;
         
         hasNext = YES;
         pageFlag = 0;
@@ -118,44 +102,71 @@
             pageFlag = 0;
             pageTime = 0;
         }
-        switch (tweetType) {
-            case TweetTypeTimeline: {
-                [api getTimelineWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
-                break;
-            }
-            case TweetTypeMethions: {
-                [api getMenthionsWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
-                break;
-            }
-            case TweetTypeMessages: {
-                [api getMessagesWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
-                break;
-            }
-            case TweetTypeFavorites: {
-                [api getFavoritesWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
-                break;
-            }
-            default:
-                break;
-        }
+        [api getTweetsWithTweetType:tweetType pageFlag:pageFlag pageSize:pageSize pageTime:pageTime new:NO];
     }
 }
 
-- (void)receivedTweets:(NSNotification *)notification
+- (void)fetchNewTweets
+{
+    if (self.newTweetCount > 0) {
+        [api getNewTweetsWithTweetType:tweetType newTweetsCount:self.newTweetCount];
+        self.newTweetCount = 0;
+    }
+}
+
+#pragma mark - QWeiboAsyncApiDelegate
+
+- (void)receivedTweets:(NSArray *)tweets info:(NSDictionary *)info
 {
     isLoading = NO;
-    BOOL reset = NO;
+    BOOL reset = NO; // reset mean set scollbar to top
     if (pageTime == 0) {
         [self.listContent removeAllObjects];
         reset = YES;
     }
-    NSArray *messages = (NSArray *)notification.object;
-    [self.listContent addObjectsFromArray:messages];
-    pageTime = ((QWMessage *)[messages lastObject]).timestamp;
-    hasNext = ![[notification.userInfo objectForKey:@"hasNext"] boolValue];
+    [self.listContent addObjectsFromArray:tweets];
+    pageTime = ((QWMessage *)[tweets lastObject]).timestamp;
+    hasNext = ![[info objectForKey:@"hasNext"] boolValue];
     if (hasNext)
         pageFlag = 1;
     [self reloadTable:reset];
+}
+
+- (void)receivedNewTweets:(NSArray *)tweets
+{
+//    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tweets.count)];
+//    [self.listContent insertObjects:tweets atIndexes:indexSet];
+    if (tweets.count > 0) {
+        for (int i=(int)(tweets.count-1); i>-1; i--) {
+            QWMessage *message = [tweets objectAtIndex:i];
+            BOOL exists = NO;
+            for (QWMessage *existMessage in self.listContent) {
+                if ([existMessage.tweetId isEqualToString:message.tweetId]) {
+                    exists = YES;
+                    break;
+                }
+            }
+            if (!exists)
+                [self.listContent insertObject:message atIndex:0];
+        }
+    }
+    [self reloadTable:YES];
+    switch (tweetType) {
+        case TweetTypeTimeline: {
+            [self.mainWindowController.timelineBadge setHidden:YES];
+            break;
+        }
+        case TweetTypeMethions: {
+            [self.mainWindowController.mentionsBadge setHidden:YES];
+            break;
+        }
+        case TweetTypeMessages: {
+            [self.mainWindowController.messagesBadge setHidden:YES];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 - (void)reloadTable:(BOOL)scrollToTop
@@ -245,10 +256,6 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_TIMELINE_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_METHIONS_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_MESSAGES_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_FAVORITES_NOTIFICATION object:nil];
     [_listContent release];
     [_heightList release];
     [_reloadCell release];

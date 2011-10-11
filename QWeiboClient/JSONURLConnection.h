@@ -24,6 +24,7 @@ typedef NSUInteger JSONURLConnectionTag;
 - (id)initWithDelegate:(id<JSONURLConnectionDelegate>)delegate;	// default tag
 - (id)initWithDelegate:(id<JSONURLConnectionDelegate>)delegate connectionTag:(JSONURLConnectionTag)tag;
 - (id)initWithDelegate:(id<JSONURLConnectionDelegate>)delegate connectionTag:(JSONURLConnectionTag)tag connection:(NSURLConnection *)connection;
+- (void)cancelConnection;
 
 @end
 

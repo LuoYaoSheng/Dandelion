@@ -18,6 +18,7 @@
 - (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type;
 - (void)switchImageForButton:(NSButton *)button;
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+- (void)updateBadge:(NSDictionary *)info;
 
 @end
 
@@ -29,7 +30,6 @@
 @synthesize timelineBadge = _timelineBadge;
 @synthesize mentionsBadge = _mentionsBadge;
 @synthesize messagesBadge = _messagesBadge;
-@synthesize favoritesBadge = _favoritesBadge;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -50,8 +50,8 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    [self updateBadge:nil];
+
     [api getUserInfo];
 
     NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
@@ -81,6 +81,7 @@
         controller = [[controllerClass alloc] initWithNibName:name bundle:nil];
     } else {
         controller = [[QWTweetViewController alloc] initWithNibName:@"QWTweetViewController" bundle:nil tweetType:type];
+        ((QWTweetViewController *)controller).mainWindowController = self;
     }
     [allControllers setObject:controller forKey:name];
     [controller release];
@@ -100,11 +101,15 @@
     
     // adjust for window margin.
     NSWindow* window = self.window;  
-    NSRect frame    = [window.contentView frame];
+    NSRect frame = [window.contentView frame];
     frame.size.width -= 65;
     frame.size.height -= 21;
     frame.origin.x += 65;
     controller.view.frame = frame;
+    
+    if ([controller respondsToSelector:@selector(fetchNewTweets)]) {
+        [controller fetchNewTweets];
+    }
 }
 
 - (IBAction)toggleTab:(id)sender 
@@ -201,6 +206,30 @@
 - (void)receivedUpdate:(NSNotification *)notification
 {
     NSLog(@"%@", notification.object);
+    [self updateBadge:notification.object];
+}
+
+- (void)updateBadge:(NSDictionary *)info
+{
+    int timelineCount = [[info objectForKey:@"home"] intValue];
+    int mentionsCount = [[info objectForKey:@"mentions"] intValue];
+    int messagesCount = [[info objectForKey:@"private"] intValue];
+    if (timelineCount > 0) {
+        [self.timelineBadge setHidden:NO];
+        ((QWTweetViewController *)[allControllers objectForKey:@"QWTimelineViewController"]).newTweetCount = timelineCount;
+    }
+    if (mentionsCount > 0) {
+        [self.mentionsBadge setHidden:NO];
+        ((QWTweetViewController *)[allControllers objectForKey:@"QWMentionsViewController"]).newTweetCount = mentionsCount;
+    }
+    if (messagesCount > 0) {
+        [self.messagesBadge setHidden:NO];
+        ((QWTweetViewController *)[allControllers objectForKey:@"QWMessagesViewController"]).newTweetCount = messagesCount;
+    }
+    
+    if ([currentViewController respondsToSelector:@selector(fetchNewTweets)]) {
+        [currentViewController fetchNewTweets];
+    }
 }
 
 @end

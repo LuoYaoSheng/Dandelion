@@ -98,7 +98,8 @@
 	}
 }
 
-- (void)cancelConnection {
+- (void)cancelConnection 
+{
 	self.delegate = nil;
 	[self.innerConnection cancel];
 	self.innerConnection = nil;

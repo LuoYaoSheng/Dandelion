@@ -11,24 +11,44 @@
 #import "JSONURLConnection.h"
 
 enum {
-	JSONURLConnectionTagGetTimeline = 0,
+    JSONURLConnectionTagGetTweets = 0,
+    JSONURLConnectionTagGetNewTweets,
 	JSONURLConnectionTagGetUserInfo,
 	JSONURLConnectionTagPublishMessage,
-    JSONURLConnectionTagGetMethions,
-    JSONURLConnectionTagGetMessages,
-    JSONURLConnectionTagGetFavorites,
     JSONURLConnectionTagGetUpdateCount,
 };
+
+typedef enum {
+    TweetTypeNone = 0,
+    TweetTypeTimeline = 5,
+    TweetTypeMethions,
+    TweetTypeMessages,
+    TweetTypeFavorites,
+} TweetType;
+
+typedef enum {
+    UpdateTypeAll = 0,
+    UpdateTypeTimeline = 5,
+    UpdateTypeMentions,
+    UpdateTypeMessages,
+} UpdateType;
+
+@protocol QWeiboAsyncApiDelegate <NSObject>
+
+- (void)receivedTweets:(NSArray *)tweets info:(NSDictionary *)info;
+- (void)receivedNewTweets:(NSArray *)tweets;
+
+@end
 
 @interface QWeiboAsyncApi : NSObject<JSONURLConnectionDelegate> {
     NSMutableArray *connectionList;
     NSTimer *timer;
 }
 
-- (void)getTimelineWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
-- (void)getMenthionsWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
-- (void)getMessagesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
-- (void)getFavoritesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
+@property(assign) id<QWeiboAsyncApiDelegate> delegate;
+
+- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime new:(BOOL)new;
+- (void)getNewTweetsWithTweetType:(TweetType)tweetType newTweetsCount:(int)count;
 - (void)getUserInfo;
 - (void)publishMessage:(NSString *)message;
 - (void)beginUpdating;
