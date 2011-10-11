@@ -26,6 +26,10 @@
 @synthesize currentViewController = _currentViewController;
 @synthesize statusLabel = _statusLabel;
 @synthesize headButton = _headButton;
+@synthesize timelineBadge = _timelineBadge;
+@synthesize mentionsBadge = _mentionsBadge;
+@synthesize messagesBadge = _messagesBadge;
+@synthesize favoritesBadge = _favoritesBadge;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -37,6 +41,7 @@
         api = [[QWeiboAsyncApi alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hasSendMessage:) name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedUpdate:) name:GET_UPDATE_COUNT_NOTIFICATION object:nil];
     }
     
     return self;
@@ -51,10 +56,16 @@
 
     NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
     [self activateViewController:viewController];
+    
+    [api beginUpdating];
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_USER_INFO_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_UPDATE_COUNT_NOTIFICATION object:nil];
+
     [allControllers release];
     [api release];
     [super dealloc];
@@ -185,6 +196,11 @@
     QWPerson *person = (QWPerson *)notification.object;
     self.statusLabel.stringValue = [NSString stringWithFormat:@"关注:%d 粉丝:%d 微博:%d", person.idolNum, person.fansNum, person.tweetNum];
     self.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:person.head]] autorelease];
+}
+
+- (void)receivedUpdate:(NSNotification *)notification
+{
+    NSLog(@"%@", notification.object);
 }
 
 @end

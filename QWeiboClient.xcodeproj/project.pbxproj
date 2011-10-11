@@ -42,6 +42,7 @@
 		35809B421443D1FC00CB02C2 /* QWTweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */; };
 		35809B6E1444229F00CB02C2 /* status_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B6C1444229F00CB02C2 /* status_on.png */; };
 		35809B6F1444229F00CB02C2 /* status_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B6D1444229F00CB02C2 /* status_off.png */; };
+		35809B711444441000CB02C2 /* blue_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B701444441000CB02C2 /* blue_dot.png */; };
 		3592504B1426E60900F164D0 /* JSONURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3592504A1426E60900F164D0 /* JSONURLConnection.m */; };
 		359250521426E85500F164D0 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
@@ -149,6 +150,7 @@
 		35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWTweetViewController.xib; sourceTree = "<group>"; };
 		35809B6C1444229F00CB02C2 /* status_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_on.png; sourceTree = "<group>"; };
 		35809B6D1444229F00CB02C2 /* status_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_off.png; sourceTree = "<group>"; };
+		35809B701444441000CB02C2 /* blue_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_dot.png; sourceTree = "<group>"; };
 		359250491426E60900F164D0 /* JSONURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONURLConnection.h; sourceTree = "<group>"; };
 		3592504A1426E60900F164D0 /* JSONURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONURLConnection.m; sourceTree = "<group>"; };
 		359250511426E85500F164D0 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = QWeiboClient/Frameworks/YAJL.framework; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				3509E84E143CACA00053EF3F /* timeline_on.png */,
 				35171896143B0CFB00DB2726 /* logo.png */,
 				352EE0771441916700AB7913 /* end.png */,
+				35809B701444441000CB02C2 /* blue_dot.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				35809B421443D1FC00CB02C2 /* QWTweetViewController.xib in Resources */,
 				35809B6E1444229F00CB02C2 /* status_on.png in Resources */,
 				35809B6F1444229F00CB02C2 /* status_off.png in Resources */,
+				35809B711444441000CB02C2 /* blue_dot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

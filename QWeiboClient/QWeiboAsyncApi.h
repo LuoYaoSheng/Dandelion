@@ -17,10 +17,12 @@ enum {
     JSONURLConnectionTagGetMethions,
     JSONURLConnectionTagGetMessages,
     JSONURLConnectionTagGetFavorites,
+    JSONURLConnectionTagGetUpdateCount,
 };
 
 @interface QWeiboAsyncApi : NSObject<JSONURLConnectionDelegate> {
     NSMutableArray *connectionList;
+    NSTimer *timer;
 }
 
 - (void)getTimelineWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;

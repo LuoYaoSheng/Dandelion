@@ -15,6 +15,7 @@
 
 @interface QWeiboAsyncApi()
 
+- (void)getUpdateCount;
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
 - (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
 
@@ -75,6 +76,15 @@
     NSString *url = GET_USER_INFO_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetUserInfo];
+}
+
+- (void)getUpdateCount
+{
+    NSString *url = UPDATE_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"op"];
+    [parameters setObject:[NSString stringWithFormat:@"%d", 9] forKey:@"type"];
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetUpdateCount];
 }
 
 - (void)publishMessage:(NSString *)message
@@ -263,6 +273,11 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:PUBLISH_MESSAGE_NOTIFICATION object:[json objectForKey:@"msg"]];
             break;
         }
+        case JSONURLConnectionTagGetUpdateCount:
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:GET_UPDATE_COUNT_NOTIFICATION object:[json objectForKey:@"data"]];
+            break;            
+        }
             
         default:
             break;
@@ -279,16 +294,21 @@
 
 - (void)beginUpdating
 {
-    
+    timer = [NSTimer scheduledTimerWithTimeInterval: 10
+                                             target: self
+                                           selector: @selector(getUpdateCount)
+                                           userInfo: nil
+                                            repeats: YES];
 }
 
 - (void)stopUpdating
 {
-    
+    [timer invalidate];
 }
 
 - (void)dealloc
 {
+    [self stopUpdating];
     for (JSONURLConnection *conn in connectionList) {
         if ([conn respondsToSelector:@selector(cancelConnection)]) {
             [conn cancelConnection];
