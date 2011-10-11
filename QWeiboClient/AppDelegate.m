@@ -26,6 +26,11 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    _statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
+    [_statusItem setImage:[NSImage imageNamed:@"status_on.png"]];
+    [_statusItem setAlternateImage:[NSImage imageNamed:@"status_off.png"]];
+    [_statusItem setHighlightMode:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForLogin:) name:LOGOUT_NOTIFICATION object:nil];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:AppTokenKey];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:AppTokenSecret];
@@ -70,7 +75,8 @@
 - (void)dealloc
 {
     [_windowController release];
-    
+    [[NSStatusBar systemStatusBar] removeStatusItem:_statusItem];
+	[_statusItem release];
     [super dealloc];
 }
 

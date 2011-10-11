@@ -29,5 +29,7 @@ enum {
 - (void)getFavoritesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
 - (void)getUserInfo;
 - (void)publishMessage:(NSString *)message;
+- (void)beginUpdating;
+- (void)stopUpdating;
 
 @end

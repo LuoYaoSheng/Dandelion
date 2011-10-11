@@ -10,7 +10,7 @@
 #import "QWVerifyWindowController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, QWVerifyDelegate> {
-
+    NSStatusItem *_statusItem;
 }
 
 @property (nonatomic, retain) NSWindowController *windowController;

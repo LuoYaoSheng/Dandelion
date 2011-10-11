@@ -277,6 +277,16 @@
     connection = nil;
 }
 
+- (void)beginUpdating
+{
+    
+}
+
+- (void)stopUpdating
+{
+    
+}
+
 - (void)dealloc
 {
     for (JSONURLConnection *conn in connectionList) {
