@@ -8,15 +8,14 @@
 
 #import "QWMainWindowController.h"
 #import "AppDelegate.h"
-#import "QWTimelineViewController.h"
-#import "QWMentionsViewController.h"
+#import "QWTweetViewController.h"
 #import "QWPerson.h"
 #import "QWPublishMessageWindowController.h"
 
 @interface QWMainWindowController ()
 
 - (void)activateViewController:(NSViewController*)controller;
-- (NSViewController*)viewControllerForName:(NSString*)name;
+- (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type;
 - (void)switchImageForButton:(NSButton *)button;
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 
@@ -50,7 +49,7 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     [api getUserInfo];
 
-    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
+    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
     [self activateViewController:viewController];
 }
 
@@ -61,16 +60,17 @@
     [super dealloc];
 }
 
-- (NSViewController*)viewControllerForName:(NSString*)name
+- (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type
 {
-    
-    // see if this view already exists.
     NSViewController* controller = [allControllers objectForKey:name];
     if ( controller ) return controller;
     
-    // create a new instance of the view.
-    Class controllerClass = NSClassFromString( name );
-    controller = [[controllerClass alloc] initWithNibName:name bundle:nil];
+    if (type == TweetTypeNone) {
+        Class controllerClass = NSClassFromString( name );
+        controller = [[controllerClass alloc] initWithNibName:name bundle:nil];
+    } else {
+        controller = [[QWTweetViewController alloc] initWithNibName:@"QWTweetViewController" bundle:nil tweetType:type];
+    }
     [allControllers setObject:controller forKey:name];
     [controller release];
 
@@ -106,25 +106,25 @@
     switch (selectedIndex) {
         case QWShowTabTimeline:
         {
-            NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
+            NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
             [self activateViewController:viewController];
             break;
         }
         case QWShowTabMethions:
         {
-            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
+            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions];
             [self activateViewController:viewController];
             break;
         }
         case QWShowTabMessages:
         {
-            NSViewController *viewController = [self viewControllerForName:@"QWMessagesViewController"];
+            NSViewController *viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages];
             [self activateViewController:viewController];
             break;
         }
         case QWShowTabFavorites:
         {
-            NSViewController *viewController = [self viewControllerForName:@"QWFavoritesViewController"];
+            NSViewController *viewController = [self viewControllerForName:@"QWFavoritesViewController" tweetType:TweetTypeFavorites];
             [self activateViewController:viewController];
             break;
         }
@@ -161,9 +161,9 @@
 {
     NSString *result = notification.object;
     NSLog(@"%@", result);
-    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController"];
+    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
     [self activateViewController:viewController];
-    QWTimelineViewController *timelineController = (QWTimelineViewController *)viewController;
+    QWTweetViewController *timelineController = (QWTweetViewController *)viewController;
     [timelineController reloadData:YES];
 }
 

@@ -6,7 +6,7 @@
 //  Copyright 2011年 __MyCompanyName__. All rights reserved.
 //
 
-#import "QWFavoritesViewController.h"
+#import "QWTweetViewController.h"
 #import <YAJL/YAJL.h>
 #import "QWMessage.h"
 #import "MyListViewCell.h"
@@ -14,7 +14,7 @@
 
 #define MIN_HEIGHT  70
 
-@interface QWFavoritesViewController()
+@interface QWTweetViewController()
 
 @property (nonatomic, retain) NSMutableArray *heightList;
 @property (nonatomic, retain) ListViewEndCell *reloadCell;
@@ -24,28 +24,49 @@
 
 @end
 
-@implementation QWFavoritesViewController
+@implementation QWTweetViewController
 
 @synthesize listContent = _listContent;
 @synthesize listView = _listView;
 @synthesize heightList = _heightList;
 @synthesize reloadCell = _reloadCell;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        tweetType = type;
         self.listContent = [[[NSMutableArray alloc] init] autorelease];
         self.heightList = [[[NSMutableArray alloc] init] autorelease];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedHomeMessage:) name:GET_FAVORITES_NOTIFICATION object:nil];
+        switch (tweetType) {
+            case TweetTypeTimeline: {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTweets:) name:GET_TIMELINE_NOTIFICATION object:nil];
+                break;
+            }
+            case TweetTypeMethions: {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTweets:) name:GET_METHIONS_NOTIFICATION object:nil];
+                break;
+            }
+            case TweetTypeMessages: {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTweets:) name:GET_MESSAGES_NOTIFICATION object:nil];
+                break;
+            }
+            case TweetTypeFavorites: {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTweets:) name:GET_FAVORITES_NOTIFICATION object:nil];
+                break;
+            }
+            default:
+                break;
+        }
         api = [[QWeiboAsyncApi alloc] init];
         
         hasNext = YES;
         pageFlag = 0;
         pageSize = 20;
         pageTime = 0;
+        isLoading = NO;
     }
     
     return self;
@@ -58,11 +79,30 @@
 
 - (void)awakeFromNib
 {
-    self.title = @"Favorites";
+    switch (tweetType) {
+        case TweetTypeTimeline: {
+            self.title = @"Timeline";
+            break;
+        }
+        case TweetTypeMethions: {
+            self.title = @"Methions";
+            break;
+        }
+        case TweetTypeMessages: {
+            self.title = @"Messages";
+            break;
+        }
+        case TweetTypeFavorites: {
+            self.title = @"Favorites";
+            break;
+        }
+        default:
+            break;
+    }
     [self.listView setCellSpacing:0.0f];
 	[self.listView setAllowsEmptySelection:YES];
 	[self.listView setAllowsMultipleSelection:YES];
-    [self reloadData:YES];
+    [self reloadTable:NO];
 }
 
 - (void)windowResized:(NSNotification *)notification
@@ -72,15 +112,38 @@
 
 - (void)reloadData:(BOOL)reset
 {
-    if (reset) {
-        pageFlag = 0;
-        pageTime = 0;
+    if (reset || !isLoading) {
+        isLoading = YES;
+        if (reset) {
+            pageFlag = 0;
+            pageTime = 0;
+        }
+        switch (tweetType) {
+            case TweetTypeTimeline: {
+                [api getTimelineWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
+                break;
+            }
+            case TweetTypeMethions: {
+                [api getMenthionsWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
+                break;
+            }
+            case TweetTypeMessages: {
+                [api getMessagesWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
+                break;
+            }
+            case TweetTypeFavorites: {
+                [api getFavoritesWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
+                break;
+            }
+            default:
+                break;
+        }
     }
-    [api getFavoritesWithPageFlag:pageFlag pageSize:pageSize pageTime:pageTime];
 }
 
-- (void)receivedHomeMessage:(NSNotification *)notification
+- (void)receivedTweets:(NSNotification *)notification
 {
+    isLoading = NO;
     BOOL reset = NO;
     if (pageTime == 0) {
         [self.listContent removeAllObjects];
@@ -136,7 +199,7 @@
         self.reloadCell = [cell retain];
         if (hasNext) {
             [self.reloadCell startAnimating];
-            [self performSelector:@selector(reloadData:) withObject:nil afterDelay:0.5];
+            [self performSelector:@selector(reloadData:) withObject:nil afterDelay:1];
         } else {
             [self.reloadCell stopAnimating];
         }

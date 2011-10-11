@@ -24,7 +24,7 @@ enum {
 }
 
 - (void)getTimelineWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
-- (void)getMethionsWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
+- (void)getMenthionsWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
 - (void)getMessagesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
 - (void)getFavoritesWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;
 - (void)getUserInfo;

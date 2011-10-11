@@ -38,10 +38,8 @@
 		352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE06A1441457300AB7913 /* ListViewEndCell.m */; };
 		352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE06C1441458200AB7913 /* ListViewEndCell.xib */; };
 		352EE0781441916700AB7913 /* end.png in Resources */ = {isa = PBXBuildFile; fileRef = 352EE0771441916700AB7913 /* end.png */; };
-		352EE07C1441A6FA00AB7913 /* QWMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE07A1441A6F900AB7913 /* QWMessagesViewController.m */; };
-		352EE07D1441A6FA00AB7913 /* QWMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE07B1441A6FA00AB7913 /* QWMessagesViewController.xib */; };
-		352EE0811441A75D00AB7913 /* QWFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE07F1441A75B00AB7913 /* QWFavoritesViewController.m */; };
-		352EE0821441A75D00AB7913 /* QWFavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE0801441A75C00AB7913 /* QWFavoritesViewController.xib */; };
+		35809B411443D1FC00CB02C2 /* QWTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35809B3F1443D1FC00CB02C2 /* QWTweetViewController.m */; };
+		35809B421443D1FC00CB02C2 /* QWTweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */; };
 		3592504B1426E60900F164D0 /* JSONURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3592504A1426E60900F164D0 /* JSONURLConnection.m */; };
 		359250521426E85500F164D0 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
@@ -55,8 +53,6 @@
 		35B61E69143EF1550001741D /* QWPublishMessageWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */; };
 		35D2FCDB142747F7006410B9 /* QWTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */; };
 		35D2FCDC142747F7006410B9 /* QWTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */; };
-		35D2FCE01427488F006410B9 /* QWMentionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D2FCDE1427488F006410B9 /* QWMentionsViewController.m */; };
-		35D2FCE11427488F006410B9 /* QWMentionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D2FCDF1427488F006410B9 /* QWMentionsViewController.xib */; };
 		35D7C01A14397A4B000F82DD /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C00514397A4B000F82DD /* PXListViewCell.m */; };
 		35D7C01B14397A4B000F82DD /* MyListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C00914397A4B000F82DD /* MyListViewCell.m */; };
 		35D7C01C14397A4B000F82DD /* MyListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D7C00A14397A4B000F82DD /* MyListViewCell.xib */; };
@@ -148,12 +144,9 @@
 		352EE06A1441457300AB7913 /* ListViewEndCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewEndCell.m; sourceTree = "<group>"; };
 		352EE06C1441458200AB7913 /* ListViewEndCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewEndCell.xib; sourceTree = "<group>"; };
 		352EE0771441916700AB7913 /* end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = end.png; sourceTree = "<group>"; };
-		352EE0791441A6F800AB7913 /* QWMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMessagesViewController.h; sourceTree = "<group>"; };
-		352EE07A1441A6F900AB7913 /* QWMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMessagesViewController.m; sourceTree = "<group>"; };
-		352EE07B1441A6FA00AB7913 /* QWMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWMessagesViewController.xib; sourceTree = "<group>"; };
-		352EE07E1441A75A00AB7913 /* QWFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWFavoritesViewController.h; sourceTree = "<group>"; };
-		352EE07F1441A75B00AB7913 /* QWFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWFavoritesViewController.m; sourceTree = "<group>"; };
-		352EE0801441A75C00AB7913 /* QWFavoritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWFavoritesViewController.xib; sourceTree = "<group>"; };
+		35809B3E1443D1FC00CB02C2 /* QWTweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWTweetViewController.h; sourceTree = "<group>"; };
+		35809B3F1443D1FC00CB02C2 /* QWTweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWTweetViewController.m; sourceTree = "<group>"; };
+		35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWTweetViewController.xib; sourceTree = "<group>"; };
 		359250491426E60900F164D0 /* JSONURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONURLConnection.h; sourceTree = "<group>"; };
 		3592504A1426E60900F164D0 /* JSONURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONURLConnection.m; sourceTree = "<group>"; };
 		359250511426E85500F164D0 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = QWeiboClient/Frameworks/YAJL.framework; sourceTree = "<group>"; };
@@ -172,9 +165,6 @@
 		35D2FCD8142747F6006410B9 /* QWTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWTimelineViewController.h; sourceTree = "<group>"; };
 		35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWTimelineViewController.m; sourceTree = "<group>"; };
 		35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWTimelineViewController.xib; sourceTree = "<group>"; };
-		35D2FCDD1427488F006410B9 /* QWMentionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMentionsViewController.h; sourceTree = "<group>"; };
-		35D2FCDE1427488F006410B9 /* QWMentionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMentionsViewController.m; sourceTree = "<group>"; };
-		35D2FCDF1427488F006410B9 /* QWMentionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWMentionsViewController.xib; sourceTree = "<group>"; };
 		35D7C00314397A4B000F82DD /* PXListViewCell+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXListViewCell+Private.h"; sourceTree = "<group>"; };
 		35D7C00414397A4B000F82DD /* PXListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewCell.h; sourceTree = "<group>"; };
 		35D7C00514397A4B000F82DD /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
@@ -308,18 +298,12 @@
 				35B12EB2141FB18F00F963FC /* QWVerifyWindowController.h */,
 				35B12EB3141FB18F00F963FC /* QWVerifyWindowController.m */,
 				35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */,
+				35809B3E1443D1FC00CB02C2 /* QWTweetViewController.h */,
+				35809B3F1443D1FC00CB02C2 /* QWTweetViewController.m */,
+				35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */,
 				35D2FCD8142747F6006410B9 /* QWTimelineViewController.h */,
 				35D2FCD9142747F7006410B9 /* QWTimelineViewController.m */,
 				35D2FCDA142747F7006410B9 /* QWTimelineViewController.xib */,
-				35D2FCDD1427488F006410B9 /* QWMentionsViewController.h */,
-				35D2FCDE1427488F006410B9 /* QWMentionsViewController.m */,
-				35D2FCDF1427488F006410B9 /* QWMentionsViewController.xib */,
-				352EE0791441A6F800AB7913 /* QWMessagesViewController.h */,
-				352EE07A1441A6F900AB7913 /* QWMessagesViewController.m */,
-				352EE07B1441A6FA00AB7913 /* QWMessagesViewController.xib */,
-				352EE07E1441A75A00AB7913 /* QWFavoritesViewController.h */,
-				352EE07F1441A75B00AB7913 /* QWFavoritesViewController.m */,
-				352EE0801441A75C00AB7913 /* QWFavoritesViewController.xib */,
 				35B61E65143EF13C0001741D /* QWPublishMessageWindowController.h */,
 				35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */,
 				35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */,
@@ -521,7 +505,6 @@
 				35263ADC140F22A500944D3E /* QWMainWindowController.xib in Resources */,
 				35B12EB6141FB1A300F963FC /* QWVerifyWindowController.xib in Resources */,
 				35D2FCDC142747F7006410B9 /* QWTimelineViewController.xib in Resources */,
-				35D2FCE11427488F006410B9 /* QWMentionsViewController.xib in Resources */,
 				35E98D2D142872FA005B9A15 /* json.txt in Resources */,
 				35D7C01C14397A4B000F82DD /* MyListViewCell.xib in Resources */,
 				35171897143B0CFB00DB2726 /* logo.png in Resources */,
@@ -541,8 +524,7 @@
 				352EE05B1441314500AB7913 /* weibo.icns in Resources */,
 				352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */,
 				352EE0781441916700AB7913 /* end.png in Resources */,
-				352EE07D1441A6FA00AB7913 /* QWMessagesViewController.xib in Resources */,
-				352EE0821441A75D00AB7913 /* QWFavoritesViewController.xib in Resources */,
+				35809B421443D1FC00CB02C2 /* QWTweetViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +546,6 @@
 				35099AD1142246A000638CC4 /* QWMessage.m in Sources */,
 				3592504B1426E60900F164D0 /* JSONURLConnection.m in Sources */,
 				35D2FCDB142747F7006410B9 /* QWTimelineViewController.m in Sources */,
-				35D2FCE01427488F006410B9 /* QWMentionsViewController.m in Sources */,
 				35E98D3B14287ECF005B9A15 /* NSDate+Categories.m in Sources */,
 				35D7C01A14397A4B000F82DD /* PXListViewCell.m in Sources */,
 				35D7C01B14397A4B000F82DD /* MyListViewCell.m in Sources */,
@@ -579,8 +560,7 @@
 				35B61E67143EF13D0001741D /* QWPublishMessageWindowController.m in Sources */,
 				352EE05E14413F3D00AB7913 /* NSScrollView+Categories.m in Sources */,
 				352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */,
-				352EE07C1441A6FA00AB7913 /* QWMessagesViewController.m in Sources */,
-				352EE0811441A75D00AB7913 /* QWFavoritesViewController.m in Sources */,
+				35809B411443D1FC00CB02C2 /* QWTweetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

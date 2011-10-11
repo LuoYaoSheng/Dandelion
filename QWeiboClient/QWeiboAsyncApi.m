@@ -32,7 +32,7 @@
     [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetTimeline];
 }
 
-- (void)getMethionsWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
+- (void)getMenthionsWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
 {
     NSString *url = GET_METHIONS_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -181,7 +181,7 @@
                 }
                 userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
             } else {
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"hasNext", nil];
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:GET_TIMELINE_NOTIFICATION object:messages userInfo:userInfo];
             [messages release];
