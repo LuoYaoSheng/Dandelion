@@ -15,6 +15,7 @@
 @synthesize connectionTag = _connectionTag;
 @synthesize buffer = _buffer;
 @synthesize delegate = _delegate;
+@synthesize innerConnection = _innerConnection;
 
 - (id)initWithDelegate:(id <JSONURLConnectionDelegate>)delegate {
 	return [self initWithDelegate:delegate connectionTag:JSONURLConnectionTagDefault];
@@ -29,10 +30,19 @@
 	return self;
 }
 
+- (id)initWithDelegate:(id<JSONURLConnectionDelegate>)delegate connectionTag:(JSONURLConnectionTag)tag connection:(NSURLConnection *)connection
+{
+    if (self = [self initWithDelegate:delegate connectionTag:tag]) {
+		self.innerConnection = connection;
+	}
+	return self;
+}
+
 /////////////////////////////////////////////////////////////
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
 	self.buffer = nil;
+    self.innerConnection = nil;
 	if ([_delegate respondsToSelector:@selector(dURLConnection:didFailWithError:)]) {
 		[_delegate dURLConnection:self didFailWithError:error];
 	}
@@ -47,6 +57,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
+    self.innerConnection = nil;
 	NSDictionary *jsonValue = nil;
 	
 	@try {
@@ -87,8 +98,15 @@
 	}
 }
 
-- (void)dealloc {
+- (void)cancelConnection {
+	self.delegate = nil;
+	[self.innerConnection cancel];
+	self.innerConnection = nil;
 	self.buffer = nil;
+}
+
+- (void)dealloc {
+	[self cancelConnection];
 	[super dealloc];
 }
 

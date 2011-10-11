@@ -20,7 +20,7 @@ enum {
 };
 
 @interface QWeiboAsyncApi : NSObject<JSONURLConnectionDelegate> {
-
+    NSMutableArray *connectionList;
 }
 
 - (void)getTimelineWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime;

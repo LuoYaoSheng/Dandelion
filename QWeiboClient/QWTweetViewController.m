@@ -245,9 +245,14 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_TIMELINE_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_METHIONS_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_MESSAGES_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_FAVORITES_NOTIFICATION object:nil];
     [_listContent release];
     [_heightList release];
     [_reloadCell release];
+    [api release];
     [super dealloc];  
 }
 

@@ -15,14 +15,15 @@ enum {
 typedef NSUInteger JSONURLConnectionTag;
 
 @interface JSONURLConnection : NSObject<NSURLConnectionDelegate> {
-
 }
 
 @property (nonatomic) JSONURLConnectionTag connectionTag;
 @property (nonatomic, assign)  id <JSONURLConnectionDelegate> delegate;
+@property (nonatomic, retain)  NSURLConnection *innerConnection;
 
 - (id)initWithDelegate:(id<JSONURLConnectionDelegate>)delegate;	// default tag
 - (id)initWithDelegate:(id<JSONURLConnectionDelegate>)delegate connectionTag:(JSONURLConnectionTag)tag;
+- (id)initWithDelegate:(id<JSONURLConnectionDelegate>)delegate connectionTag:(JSONURLConnectionTag)tag connection:(NSURLConnection *)connection;
 
 @end
 

@@ -22,6 +22,14 @@
 
 @implementation QWeiboAsyncApi
 
+- (id)init
+{
+    if ((self = [super init])) {
+        connectionList = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (void)getTimelineWithPageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime
 {
     NSString *url = GET_TIMELINE_URL;
@@ -90,8 +98,10 @@
 	[parameters setObject:@"json" forKey:@"format"];
     
     JSONURLConnection *jsonConnection = [[JSONURLConnection alloc] initWithDelegate:self connectionTag:tag];
+    [connectionList addObject:jsonConnection];
 	QWeiboRequest *request = [[QWeiboRequest alloc] init];
 	NSURLConnection *connection = [request asyncRequestWithUrl:url httpMethod:@"GET" oauthKey:oauthKey parameters:parameters files:nil delegate:jsonConnection];
+    jsonConnection.innerConnection = connection;
 	[connection start];
 	[request release];
 	[oauthKey release];
@@ -113,6 +123,8 @@
     [parameters setObject:@"127.0.0.1" forKey:@"clientip"];
 	
     JSONURLConnection *jsonConnection = [[JSONURLConnection alloc] initWithDelegate:self connectionTag:tag];
+    [connectionList addObject:jsonConnection];
+    [jsonConnection release];
 	QWeiboRequest *request = [[QWeiboRequest alloc] init];
 	NSURLConnection *connection = [request asyncRequestWithUrl:url httpMethod:@"POST" oauthKey:oauthKey parameters:parameters files:files delegate:jsonConnection];
 	[connection start];
@@ -255,14 +267,25 @@
         default:
             break;
     }
-    [connection release];
+    [connection release]; 
     connection = nil;
 }
 
 - (void)dURLConnection:(JSONURLConnection *)connection didFailWithError:(NSError *)error
 {
-    [connection release];
+    [connection release]; 
     connection = nil;
+}
+
+- (void)dealloc
+{
+    for (JSONURLConnection *conn in connectionList) {
+        if ([conn respondsToSelector:@selector(cancelConnection)]) {
+            [conn cancelConnection];
+        }
+    }
+    [connectionList release]; connectionList = nil;
+    [super dealloc];
 }
 
 @end
