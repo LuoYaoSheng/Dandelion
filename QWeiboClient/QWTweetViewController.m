@@ -151,22 +151,22 @@
         }
     }
     [self reloadTable:YES];
-    switch (tweetType) {
-        case TweetTypeTimeline: {
-            [self.mainWindowController.timelineBadge setHidden:YES];
-            break;
-        }
-        case TweetTypeMethions: {
-            [self.mainWindowController.mentionsBadge setHidden:YES];
-            break;
-        }
-        case TweetTypeMessages: {
-            [self.mainWindowController.messagesBadge setHidden:YES];
-            break;
-        }
-        default:
-            break;
-    }
+//    switch (tweetType) {
+//        case TweetTypeTimeline: {
+//            [self.mainWindowController.timelineBadge setHidden:YES];
+//            break;
+//        }
+//        case TweetTypeMethions: {
+//            [self.mainWindowController.mentionsBadge setHidden:YES];
+//            break;
+//        }
+//        case TweetTypeMessages: {
+//            [self.mainWindowController.messagesBadge setHidden:YES];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
 }
 
 - (void)reloadTable:(BOOL)scrollToTop
@@ -224,6 +224,7 @@
         
         // Set up the new cell:
         QWMessage *message = [self.listContent objectAtIndex:row];
+        cell.isNew = message.isNew;
         cell.nameLabel.stringValue = message.nick;
         if (message.head && ![message.head isEqualToString:@""])
             cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];

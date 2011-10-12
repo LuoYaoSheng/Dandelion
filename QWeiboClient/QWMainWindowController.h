@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "QWVerifyWindowController.h"
 #import "QWeiboAsyncApi.h"
+#import <Growl/Growl.h>
 
 typedef enum {
     QWShowTabTimeline = 1,
@@ -19,7 +20,7 @@ typedef enum {
     QWShowTabSearch
 } QWShowTab;
 
-@interface QWMainWindowController : NSWindowController
+@interface QWMainWindowController : NSWindowController<GrowlApplicationBridgeDelegate>
 {
     NSMutableDictionary *allControllers;
     NSViewController *currentViewController;

@@ -22,6 +22,7 @@
 @synthesize image = _image;
 @synthesize source = _source;
 @synthesize type = _type;
+@synthesize isNew = _isNew;
 
 - (NSString *)time
 {

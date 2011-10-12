@@ -206,7 +206,9 @@
             NSDictionary *userInfo = nil;
             if ([json valueForKeyPath:@"data"] != [NSNull null]) {
                 for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-                    [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+                    QWMessage *message = [[QWMessage alloc] initWithJSON:dict];
+                    [messages addObject:message];
+                    [message release];
                 }
                 userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
             } else {
@@ -224,7 +226,10 @@
             NSMutableArray *messages = [[NSMutableArray alloc] init];
             if ([json valueForKeyPath:@"data"] != [NSNull null]) {
                 for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
-                    [messages addObject:[[[QWMessage alloc] initWithJSON:dict] autorelease]];
+                    QWMessage *message = [[QWMessage alloc] initWithJSON:dict];
+                    message.isNew = YES;
+                    [messages addObject:message];
+                    [message release];
                 }
             }
             if ([self.delegate respondsToSelector:@selector(receivedNewTweets:)]) {

@@ -54,6 +54,8 @@
 		35B61E57143EE1780001741D /* messages_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E55143EE1780001741D /* messages_on.png */; };
 		35B61E67143EF13D0001741D /* QWPublishMessageWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */; };
 		35B61E69143EF1550001741D /* QWPublishMessageWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */; };
+		35C947571445397700E895DA /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C947561445397700E895DA /* Growl.framework */; };
+		35C9475814453A1300E895DA /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 35C947561445397700E895DA /* Growl.framework */; };
 		35D7C01A14397A4B000F82DD /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C00514397A4B000F82DD /* PXListViewCell.m */; };
 		35D7C01B14397A4B000F82DD /* MyListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C00914397A4B000F82DD /* MyListViewCell.m */; };
 		35D7C01C14397A4B000F82DD /* MyListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D7C00A14397A4B000F82DD /* MyListViewCell.xib */; };
@@ -92,6 +94,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */,
+				35C9475814453A1300E895DA /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +169,7 @@
 		35B61E65143EF13C0001741D /* QWPublishMessageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWPublishMessageWindowController.h; sourceTree = "<group>"; };
 		35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWPublishMessageWindowController.m; sourceTree = "<group>"; };
 		35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWPublishMessageWindowController.xib; sourceTree = "<group>"; };
+		35C947561445397700E895DA /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = QWeiboClient/Frameworks/Growl.framework; sourceTree = "<group>"; };
 		35D7C00314397A4B000F82DD /* PXListViewCell+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXListViewCell+Private.h"; sourceTree = "<group>"; };
 		35D7C00414397A4B000F82DD /* PXListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewCell.h; sourceTree = "<group>"; };
 		35D7C00514397A4B000F82DD /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				352A7D50140F39D400F3E6B3 /* libQWeiboSDK4iOS.a in Frameworks */,
 				35263AAC140F1F4800944D3E /* Cocoa.framework in Frameworks */,
 				359250521426E85500F164D0 /* YAJL.framework in Frameworks */,
+				35C947571445397700E895DA /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +270,7 @@
 		35263AAA140F1F4800944D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35C947561445397700E895DA /* Growl.framework */,
 				359250511426E85500F164D0 /* YAJL.framework */,
 				352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */,
 				35263AAB140F1F4800944D3E /* Cocoa.framework */,

@@ -35,3 +35,7 @@
 #define PUBLISH_IMAGE_URL                                   @"http://open.t.qq.com/api/t/add_pic"
 #define UPDATE_URL                                          @"http://open.t.qq.com/api/info/update"
 
+#define GROWL_NOTIFICATION_TIMELINE                         @"Timeline"
+#define GROWL_NOTIFICATION_MENTHIONS                        @"Mentions"
+#define GROWL_NOTIFICATION_MESSAGES                         @"Messages"
+#define GROWL_NOTIFICATION_FOLLOWERS                        @"Followers"

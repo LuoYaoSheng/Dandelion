@@ -32,6 +32,7 @@ typedef enum {
 @property (assign) double timestamp;
 @property (retain) QWMessage *source;
 @property (assign) QWMessageType type;
+@property (assign) BOOL isNew;
 
 - (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType;
 - (id)initWithJSON:(NSDictionary *)dict;

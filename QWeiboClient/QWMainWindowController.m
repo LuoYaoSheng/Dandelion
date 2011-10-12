@@ -36,6 +36,8 @@
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
+        [GrowlApplicationBridge setGrowlDelegate:self]; // add Growl support!
+        
         allControllers = [[NSMutableDictionary alloc] init];
         selectedIndex = 1;
         api = [[QWeiboAsyncApi alloc] init];
@@ -122,18 +124,21 @@
     switch (selectedIndex) {
         case QWShowTabTimeline:
         {
+            [self.timelineBadge setHidden:YES];
             NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
             [self activateViewController:viewController];
             break;
         }
         case QWShowTabMethions:
         {
+            [self.mentionsBadge setHidden:YES];
             NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions];
             [self activateViewController:viewController];
             break;
         }
         case QWShowTabMessages:
         {
+            [self.messagesBadge setHidden:YES];
             NSViewController *viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages];
             [self activateViewController:viewController];
             break;
@@ -161,7 +166,8 @@
     }
 }
 
-- (IBAction)publishMessage:(id)sender {
+- (IBAction)publishMessage:(id)sender 
+{
     QWPublishMessageWindowController *messageWindowController= [[QWPublishMessageWindowController alloc] initWithWindowNibName:@"QWPublishMessageWindowController"];
     [NSApp beginSheet:messageWindowController.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
 }
@@ -214,22 +220,37 @@
     int timelineCount = [[info objectForKey:@"home"] intValue];
     int mentionsCount = [[info objectForKey:@"mentions"] intValue];
     int messagesCount = [[info objectForKey:@"private"] intValue];
+
     if (timelineCount > 0) {
         [self.timelineBadge setHidden:NO];
         ((QWTweetViewController *)[allControllers objectForKey:@"QWTimelineViewController"]).newTweetCount = timelineCount;
+        NSString *timelineDescription = [NSString stringWithFormat:@"%d条新微博", timelineCount];
+        [GrowlApplicationBridge notifyWithTitle:timelineDescription description:@"" notificationName:GROWL_NOTIFICATION_TIMELINE iconData:nil priority:0 isSticky:YES clickContext:nil];
     }
     if (mentionsCount > 0) {
         [self.mentionsBadge setHidden:NO];
         ((QWTweetViewController *)[allControllers objectForKey:@"QWMentionsViewController"]).newTweetCount = mentionsCount;
+        NSString *mentionsDescription = [NSString stringWithFormat:@"%d条新引用", mentionsCount];
+        [GrowlApplicationBridge notifyWithTitle:mentionsDescription description:@"" notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:nil priority:0 isSticky:YES clickContext:nil];
     }
     if (messagesCount > 0) {
         [self.messagesBadge setHidden:NO];
         ((QWTweetViewController *)[allControllers objectForKey:@"QWMessagesViewController"]).newTweetCount = messagesCount;
+        NSString *messagesDescription = [NSString stringWithFormat:@"%d条新私信", messagesCount];
+        [GrowlApplicationBridge notifyWithTitle:messagesDescription description:@"" notificationName:GROWL_NOTIFICATION_MESSAGES iconData:nil priority:0 isSticky:YES clickContext:nil];
     }
     
     if ([currentViewController respondsToSelector:@selector(fetchNewTweets)]) {
         [currentViewController fetchNewTweets];
     }
+}
+
+#pragma mark - GrowlApplicationBridgeDelegate
+
+- (NSDictionary *)registrationDictionaryForGrowl
+{
+    NSArray *allNotes = [NSArray arrayWithObjects:GROWL_NOTIFICATION_TIMELINE, GROWL_NOTIFICATION_MENTHIONS, GROWL_NOTIFICATION_MESSAGES, nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:allNotes, GROWL_NOTIFICATIONS_ALL, allNotes, GROWL_NOTIFICATIONS_DEFAULT, nil];
 }
 
 @end

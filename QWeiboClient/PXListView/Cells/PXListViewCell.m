@@ -23,6 +23,7 @@
 @synthesize listView = _listView;
 @synthesize row = _row;
 @synthesize dropHighlight = _dropHighlight;
+@synthesize isNew = _isNew;
 
 + (id)cellLoadedFromNibNamed:(NSString*)nibName reusableIdentifier:(NSString*)identifier
 {

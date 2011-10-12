@@ -27,6 +27,7 @@
 @property (readonly) NSUInteger row;
 
 @property (readonly,getter=isSelected) BOOL selected;
+@property (assign) BOOL isNew;
 @property (assign) PXListViewDropHighlight dropHighlight;
 
 + (id)cellLoadedFromNibNamed:(NSString*)nibName reusableIdentifier:(NSString*)identifier;
