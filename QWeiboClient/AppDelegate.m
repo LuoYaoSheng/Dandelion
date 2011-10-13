@@ -10,7 +10,6 @@
 #import "QWVerifyWindowController.h"
 #import "NSURL+QAdditions.h"
 #import "QWMainWindowController.h"
-#import "QWeiboSyncApi.h"
 
 @interface AppDelegate (Private)
 
@@ -57,7 +56,7 @@
     if (accessToken && ![accessToken isEqualToString:@""] && accessTokenSecret && ![accessTokenSecret isEqualToString:@""]) {
         [self loginFinished:nil];
     } else {
-        QWeiboSyncApi *api = [[[QWeiboSyncApi alloc] init] autorelease];
+        QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
         NSString *retString = [api getRequestTokenWithConsumerKey:APP_KEY consumerSecret:APP_SECRET];
         NSLog(@"Get requestToken:%@", retString);
         

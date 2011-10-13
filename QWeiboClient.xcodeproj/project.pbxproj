@@ -30,7 +30,6 @@
 		35263ACD140F1F9800944D3E /* QWMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35263ACC140F1F9800944D3E /* QWMainWindowController.m */; };
 		35263ADC140F22A500944D3E /* QWMainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35263ADB140F22A500944D3E /* QWMainWindowController.xib */; };
 		352A7D27140F34F100F3E6B3 /* QWeiboAsyncApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 352A7D24140F34F100F3E6B3 /* QWeiboAsyncApi.m */; };
-		352A7D28140F34F100F3E6B3 /* QWeiboSyncApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 352A7D26140F34F100F3E6B3 /* QWeiboSyncApi.m */; };
 		352A7D50140F39D400F3E6B3 /* libQWeiboSDK4iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 352A7D4C140F39C500F3E6B3 /* libQWeiboSDK4iOS.a */; };
 		352A7D5D140F5C5B00F3E6B3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */; };
 		352EE05B1441314500AB7913 /* weibo.icns in Resources */ = {isa = PBXBuildFile; fileRef = 352EE05A1441314500AB7913 /* weibo.icns */; };
@@ -138,8 +137,6 @@
 		352A7D0D140F335100F3E6B3 /* QWeiboSDK4iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QWeiboSDK4iOS.xcodeproj; path = QWeiboClient/QWeiboSDK4iOS/QWeiboSDK4iOS.xcodeproj; sourceTree = "<group>"; };
 		352A7D23140F34F100F3E6B3 /* QWeiboAsyncApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWeiboAsyncApi.h; sourceTree = "<group>"; };
 		352A7D24140F34F100F3E6B3 /* QWeiboAsyncApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWeiboAsyncApi.m; sourceTree = "<group>"; };
-		352A7D25140F34F100F3E6B3 /* QWeiboSyncApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWeiboSyncApi.h; sourceTree = "<group>"; };
-		352A7D26140F34F100F3E6B3 /* QWeiboSyncApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWeiboSyncApi.m; sourceTree = "<group>"; };
 		352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		352EE05A1441314500AB7913 /* weibo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = weibo.icns; path = ../../weibo.icns; sourceTree = "<group>"; };
 		352EE05C14413F3D00AB7913 /* NSScrollView+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+Categories.h"; sourceTree = "<group>"; };
@@ -339,8 +336,6 @@
 				3592504A1426E60900F164D0 /* JSONURLConnection.m */,
 				352A7D23140F34F100F3E6B3 /* QWeiboAsyncApi.h */,
 				352A7D24140F34F100F3E6B3 /* QWeiboAsyncApi.m */,
-				352A7D25140F34F100F3E6B3 /* QWeiboSyncApi.h */,
-				352A7D26140F34F100F3E6B3 /* QWeiboSyncApi.m */,
 			);
 			name = WeiboEngine;
 			sourceTree = "<group>";
@@ -548,7 +543,6 @@
 				35263ABF140F1F4800944D3E /* AppDelegate.m in Sources */,
 				35263ACD140F1F9800944D3E /* QWMainWindowController.m in Sources */,
 				352A7D27140F34F100F3E6B3 /* QWeiboAsyncApi.m in Sources */,
-				352A7D28140F34F100F3E6B3 /* QWeiboSyncApi.m in Sources */,
 				352379B714107288007C5AB5 /* QWPerson.m in Sources */,
 				35B12EB1141FAF3000F963FC /* ToolboxView.m in Sources */,
 				35B12EB4141FB18F00F963FC /* QWVerifyWindowController.m in Sources */,

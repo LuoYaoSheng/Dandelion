@@ -415,6 +415,10 @@
 										<reference key="NSControlView" ref="240196020"/>
 										<int key="NSButtonFlags">-2030812929</int>
 										<int key="NSButtonFlags2">98</int>
+										<object class="NSCustomResource" key="NSNormalImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">NSUser</string>
+										</object>
 										<string key="NSAlternateContents"/>
 										<string key="NSKeyEquivalent"/>
 										<int key="NSPeriodicDelay">400</int>
@@ -1021,6 +1025,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>NSUser</string>
 				<string>blue_dot</string>
 				<string>favorite_off</string>
 				<string>favorite_on</string>
@@ -1037,6 +1042,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{32, 32}</string>
 				<string>{15, 16}</string>
 				<string>{65, 40}</string>
 				<string>{65, 40}</string>

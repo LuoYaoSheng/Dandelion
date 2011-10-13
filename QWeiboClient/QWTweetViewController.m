@@ -21,6 +21,9 @@
 
 - (void)measureData;
 - (void)reloadTable:(BOOL)scrollToTop;
+- (void)fetchOlderTweets;
+- (void)beginUpdating;
+- (void)stopUpdating;
 
 @end
 
@@ -47,10 +50,11 @@
         api.delegate = self;
         
         hasNext = YES;
-        pageFlag = 0;
-        pageSize = 20;
-        pageTime = 0;
+        oldestPageTime = 0;
+        newestPageTime = 0;
         isLoading = NO;
+        
+        [self getLastTweets];
     }
     
     return self;
@@ -86,7 +90,6 @@
     [self.listView setCellSpacing:0.0f];
 	[self.listView setAllowsEmptySelection:YES];
 	[self.listView setAllowsMultipleSelection:YES];
-    [self reloadTable:NO];
 }
 
 - (void)windowResized:(NSNotification *)notification
@@ -94,79 +97,100 @@
     [self reloadTable:NO];
 }
 
-- (void)reloadData:(BOOL)reset
+- (void)getLastTweets
 {
-    if (reset || !isLoading) {
-        isLoading = YES;
-        if (reset) {
-            pageFlag = 0;
-            pageTime = 0;
-        }
-        [api getTweetsWithTweetType:tweetType pageFlag:pageFlag pageSize:pageSize pageTime:pageTime new:NO];
-    }
+    isLoading = YES;
+    [api getLastTweetsWithTweetType:tweetType pageSize:20];
 }
 
-- (void)fetchNewTweets
+- (void)fetchOlderTweets
 {
-    if (self.newTweetCount > 0) {
-        [api getNewTweetsWithTweetType:tweetType newTweetsCount:self.newTweetCount];
-        self.newTweetCount = 0;
+    isLoading = YES;
+    [api getOlderTweetsWithTweetType:tweetType pageSize:20 pageTime:oldestPageTime];
+}
+
+- (void)fetchNewerTweets
+{
+    [api getNewerTweetsWithTweetType:tweetType pageSize:10 pageTime:newestPageTime];
+}
+
+- (void)beginUpdating
+{
+    NSTimeInterval interval;
+    switch (tweetType) {
+        case TweetTypeTimeline: {
+            interval = UPDATE_INTERVAL_TIMELINE;
+            break;
+        }
+        case TweetTypeMethions: {
+            interval = UPDATE_INTERVAL_MENTHIONS;
+            break;
+        }
+        case TweetTypeMessages: {
+            interval = UPDATE_INTERVAL_MESSAGES;
+            break;
+        }
+        case TweetTypeFavorites: {
+            interval = UPDATE_INTERVAL_FAVORITES;
+            break;
+        }
+        default:
+            break;
     }
+    timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(fetchNewerTweets) userInfo:nil repeats:YES];
+}
+
+- (void)stopUpdating
+{
+    [timer invalidate];
 }
 
 #pragma mark - QWeiboAsyncApiDelegate
 
-- (void)receivedTweets:(NSArray *)tweets info:(NSDictionary *)info
+- (void)receivedLastTweets:(NSArray *)tweets info:(NSDictionary *)info
 {
     isLoading = NO;
-    BOOL reset = NO; // reset mean set scollbar to top
-    if (pageTime == 0) {
-        [self.listContent removeAllObjects];
-        reset = YES;
-    }
+    [self.listContent removeAllObjects];
     [self.listContent addObjectsFromArray:tweets];
-    pageTime = ((QWMessage *)[tweets lastObject]).timestamp;
+    oldestPageTime = ((QWMessage *)[tweets lastObject]).timestamp;
+    if (tweets.count > 0)
+        newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
     hasNext = ![[info objectForKey:@"hasNext"] boolValue];
-    if (hasNext)
-        pageFlag = 1;
-    [self reloadTable:reset];
+    [self reloadTable:YES];
+    [self beginUpdating];
 }
 
-- (void)receivedNewTweets:(NSArray *)tweets
+- (void)receivedOlderTweets:(NSArray *)tweets info:(NSDictionary *)info
 {
-//    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tweets.count)];
-//    [self.listContent insertObjects:tweets atIndexes:indexSet];
-    if (tweets.count > 0) {
-        for (int i=(int)(tweets.count-1); i>-1; i--) {
-            QWMessage *message = [tweets objectAtIndex:i];
-            BOOL exists = NO;
-            for (QWMessage *existMessage in self.listContent) {
-                if ([existMessage.tweetId isEqualToString:message.tweetId]) {
-                    exists = YES;
-                    break;
-                }
-            }
-            if (!exists)
-                [self.listContent insertObject:message atIndex:0];
-        }
-    }
-    [self reloadTable:YES];
-//    switch (tweetType) {
-//        case TweetTypeTimeline: {
-//            [self.mainWindowController.timelineBadge setHidden:YES];
-//            break;
+    isLoading = NO;
+    [self.listContent addObjectsFromArray:tweets];
+    oldestPageTime = ((QWMessage *)[tweets lastObject]).timestamp;
+    hasNext = ![[info objectForKey:@"hasNext"] boolValue];
+    [self reloadTable:NO];
+}
+
+- (void)receivedNewerTweets:(NSArray *)tweets
+{
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tweets.count)];
+    [self.listContent insertObjects:tweets atIndexes:indexSet];
+//    if (tweets.count > 0) {
+//        for (int i=(int)(tweets.count-1); i>-1; i--) {
+//            QWMessage *message = [tweets objectAtIndex:i];
+//            BOOL exists = NO;
+//            for (QWMessage *existMessage in self.listContent) {
+//                if ([existMessage.tweetId isEqualToString:message.tweetId]) {
+//                    exists = YES;
+//                    break;
+//                }
+//            }
+//            if (!exists)
+//                [self.listContent insertObject:message atIndex:0];
 //        }
-//        case TweetTypeMethions: {
-//            [self.mainWindowController.mentionsBadge setHidden:YES];
-//            break;
-//        }
-//        case TweetTypeMessages: {
-//            [self.mainWindowController.messagesBadge setHidden:YES];
-//            break;
-//        }
-//        default:
-//            break;
 //    }
+    if (tweets.count > 0)
+        newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
+    [self reloadTable:YES];
+    
 }
 
 - (void)reloadTable:(BOOL)scrollToTop
@@ -209,8 +233,10 @@
         }
         self.reloadCell = [cell retain];
         if (hasNext) {
-            [self.reloadCell startAnimating];
-            [self performSelector:@selector(reloadData:) withObject:nil afterDelay:1];
+            if (!isLoading) {
+                [self.reloadCell startAnimating];
+                [self performSelector:@selector(fetchOlderTweets) withObject:nil afterDelay:1];
+            }
         } else {
             [self.reloadCell stopAnimating];
         }
@@ -257,6 +283,7 @@
 
 - (void)dealloc
 {
+    [self stopUpdating];
     [_listContent release];
     [_heightList release];
     [_reloadCell release];

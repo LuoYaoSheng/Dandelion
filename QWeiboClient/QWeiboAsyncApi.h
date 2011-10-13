@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "QWeiboSyncApi.h"
 #import "JSONURLConnection.h"
 
 enum {
-    JSONURLConnectionTagGetTweets = 0,
-    JSONURLConnectionTagGetNewTweets,
+    JSONURLConnectionTagGetLastTweets = 0,
+    JSONURLConnectionTagGetOlderTweets,
+    JSONURLConnectionTagGetNewerTweets,
 	JSONURLConnectionTagGetUserInfo,
 	JSONURLConnectionTagPublishMessage,
     JSONURLConnectionTagGetUpdateCount,
@@ -33,10 +33,17 @@ typedef enum {
     UpdateTypeMessages,
 } UpdateType;
 
+typedef enum {
+    PageFlagLast = 0,
+    PageFlagOlder,
+    PageFlagNewer,
+} PageFlag;
+
 @protocol QWeiboAsyncApiDelegate <NSObject>
 
-- (void)receivedTweets:(NSArray *)tweets info:(NSDictionary *)info;
-- (void)receivedNewTweets:(NSArray *)tweets;
+- (void)receivedLastTweets:(NSArray *)tweets info:(NSDictionary *)info;
+- (void)receivedOlderTweets:(NSArray *)tweets info:(NSDictionary *)info;
+- (void)receivedNewerTweets:(NSArray *)tweets;
 
 @end
 
@@ -47,8 +54,15 @@ typedef enum {
 
 @property(assign) id<QWeiboAsyncApiDelegate> delegate;
 
-- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime new:(BOOL)new;
-- (void)getNewTweetsWithTweetType:(TweetType)tweetType newTweetsCount:(int)count;
+- (NSString *)getRequestTokenWithConsumerKey:(NSString *)aConsumerKey consumerSecret:(NSString *)aConsumerSecret;
+- (NSString *)getAccessTokenWithConsumerKey:(NSString *)aConsumerKey 
+							 consumerSecret:(NSString *)aConsumerSecret 
+							requestTokenKey:(NSString *)aRequestTokenKey
+						 requestTokenSecret:(NSString *)aRequestTokenSecret 
+									 verify:(NSString *)aVerify;
+- (void)getLastTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize;
+- (void)getOlderTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime;
+- (void)getNewerTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime;
 - (void)getUserInfo;
 - (void)publishMessage:(NSString *)message;
 - (void)beginUpdating;

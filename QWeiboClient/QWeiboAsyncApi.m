@@ -13,13 +13,12 @@
 #import "QWMessage.h"
 #import "QWPerson.h"
 
-#define UPDATE_INTERVAL   30
-
 @interface QWeiboAsyncApi()
 
 - (void)getUpdateCount:(BOOL)reset udpateType:(UpdateType)updateType;
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
 - (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
+- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(PageFlag)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime tag:(JSONURLConnectionTag)tag;
 
 @end
 
@@ -35,7 +34,69 @@
     return self;
 }
 
-- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(int)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime new:(BOOL)new
+- (NSString *)getRequestTokenWithConsumerKey:(NSString *)aConsumerKey consumerSecret:(NSString *)aConsumerSecret 
+{
+	
+	NSString *url = @"https://open.t.qq.com/cgi-bin/request_token";//for example
+	
+	QOauthKey *oauthKey = [[QOauthKey alloc] init];
+	oauthKey.consumerKey = aConsumerKey;
+	oauthKey.consumerSecret = aConsumerSecret;
+	oauthKey.callbackUrl = @"http://www.qq.com";//for example
+	
+	QWeiboRequest *request = [[QWeiboRequest alloc] init];
+	NSString *retString = [request syncRequestWithUrl:url httpMethod:@"GET" oauthKey:oauthKey parameters:nil files:nil];
+	
+	[request release];
+	[oauthKey release];
+	return retString;
+}
+
+- (NSString *)getAccessTokenWithConsumerKey:(NSString *)aConsumerKey 
+							 consumerSecret:(NSString *)aConsumerSecret 
+							requestTokenKey:(NSString *)aRequestTokenKey
+						 requestTokenSecret:(NSString *)aRequestTokenSecret 
+									 verify:(NSString *)aVerify {
+	
+	NSString *url = @"https://open.t.qq.com/cgi-bin/access_token";
+	
+	QOauthKey *oauthKey = [[QOauthKey alloc] init];
+	oauthKey.consumerKey = aConsumerKey;
+	oauthKey.consumerSecret = aConsumerSecret;
+	oauthKey.tokenKey = aRequestTokenKey;
+	oauthKey.tokenSecret= aRequestTokenSecret;
+	oauthKey.verify = aVerify;
+	
+	QWeiboRequest *request = [[QWeiboRequest alloc] init];
+	NSString *retString = [request syncRequestWithUrl:url httpMethod:@"GET" oauthKey:oauthKey parameters:nil files:nil];
+	
+	[request release];
+	[oauthKey release];
+	return retString;
+}
+
+- (void)getLastTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize
+{
+    [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 tag:JSONURLConnectionTagGetLastTweets];
+}
+
+- (void)getOlderTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime
+{
+    if (pageTime == 0)
+        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 tag:JSONURLConnectionTagGetOlderTweets];
+    else
+        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagOlder pageSize:pageSize pageTime:pageTime tag:JSONURLConnectionTagGetOlderTweets];
+}
+
+- (void)getNewerTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime
+{
+    if (pageTime == 0)
+        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 tag:JSONURLConnectionTagGetNewerTweets];
+    else
+        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagNewer pageSize:pageSize pageTime:pageTime tag:JSONURLConnectionTagGetNewerTweets];
+}
+
+- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(PageFlag)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime tag:(JSONURLConnectionTag)tag
 {
     NSString *url;
     switch (tweetType) {
@@ -62,16 +123,7 @@
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
     [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
-    if (new)
-        [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetNewTweets];
-    else
-        [self getDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagGetTweets];
-}
-
-- (void)getNewTweetsWithTweetType:(TweetType)tweetType newTweetsCount:(int)count
-{
-    [self getUpdateCount:YES udpateType:(UpdateType)tweetType];
-    [self getTweetsWithTweetType:tweetType pageFlag:0 pageSize:count pageTime:0 new:YES];
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:tag];
 }
 
 - (void)getUserInfo
@@ -154,8 +206,7 @@
 						 accessTokenKey:(NSString *)aAccessTokenKey 
 					  accessTokenSecret:(NSString *)aAccessTokenSecret 
 								content:(NSString *)aContent 
-							  imageFile:(NSString *)aImageFile 
-							 resultType:(ResultType)aResultType 
+							  imageFile:(NSString *)aImageFile  
 							   delegate:(id)aDelegate {
 	
 	NSMutableDictionary *files = [NSMutableDictionary dictionary];
@@ -175,13 +226,7 @@
 	oauthKey.tokenSecret= aAccessTokenSecret;
 	
 	NSString *format = nil;
-	if (aResultType == RESULTTYPE_XML) {
-		format = @"xml";
-	} else if (aResultType == RESULTTYPE_JSON) {
-		format = @"json";
-	} else {
-		format = @"json";
-	}
+    format = @"json";
 	
 	NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 	[parameters setObject:aContent forKey:@"content"];
@@ -200,7 +245,7 @@
 - (void)dURLConnection:(JSONURLConnection *)connection didFinishLoadingJSONValue:(NSDictionary *)json
 {
     switch (connection.connectionTag) {
-        case JSONURLConnectionTagGetTweets:
+        case JSONURLConnectionTagGetLastTweets:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
             NSDictionary *userInfo = nil;
@@ -214,14 +259,35 @@
             } else {
                 userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
-            if ([self.delegate respondsToSelector:@selector(receivedTweets:info:)]) {
-                [self.delegate receivedTweets:messages info:userInfo];
+            if ([self.delegate respondsToSelector:@selector(receivedLastTweets:info:)]) {
+                [self.delegate receivedLastTweets:messages info:userInfo];
             }
             [messages release];
             [userInfo release];
             break;
         }
-        case JSONURLConnectionTagGetNewTweets:
+        case JSONURLConnectionTagGetOlderTweets:
+        {
+            NSMutableArray *messages = [[NSMutableArray alloc] init];
+            NSDictionary *userInfo = nil;
+            if ([json valueForKeyPath:@"data"] != [NSNull null]) {
+                for (NSDictionary *dict in [json valueForKeyPath:@"data.info"]) {
+                    QWMessage *message = [[QWMessage alloc] initWithJSON:dict];
+                    [messages addObject:message];
+                    [message release];
+                }
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+            } else {
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
+            }
+            if ([self.delegate respondsToSelector:@selector(receivedLastTweets:info:)]) {
+                [self.delegate receivedOlderTweets:messages info:userInfo];
+            }
+            [messages release];
+            [userInfo release];
+            break;        
+        } 
+        case JSONURLConnectionTagGetNewerTweets:
         {
             NSMutableArray *messages = [[NSMutableArray alloc] init];
             if ([json valueForKeyPath:@"data"] != [NSNull null]) {
@@ -233,7 +299,7 @@
                 }
             }
             if ([self.delegate respondsToSelector:@selector(receivedNewTweets:)]) {
-                [self.delegate receivedNewTweets:messages];
+                [self.delegate receivedNewerTweets:messages];
             }
             [messages release];
             break;
@@ -270,7 +336,7 @@
 
 - (void)beginUpdating
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self selector:@selector(timerMethod) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL_TIMELINE target:self selector:@selector(timerMethod) userInfo:nil repeats:YES];
     [timer fire];
 }
 

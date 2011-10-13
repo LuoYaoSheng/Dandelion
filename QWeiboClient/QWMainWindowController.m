@@ -58,8 +58,10 @@
 
     NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
     [self activateViewController:viewController];
-    
-    [api beginUpdating];
+    viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions];
+    [viewController loadView];
+    viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages];
+    [viewController loadView];
 }
 
 - (void)dealloc
@@ -108,10 +110,6 @@
     frame.size.height -= 21;
     frame.origin.x += 65;
     controller.view.frame = frame;
-    
-    if ([controller respondsToSelector:@selector(fetchNewTweets)]) {
-        [controller fetchNewTweets];
-    }
 }
 
 - (IBAction)toggleTab:(id)sender 
@@ -186,7 +184,7 @@
     NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
     [self activateViewController:viewController];
     QWTweetViewController *timelineController = (QWTweetViewController *)viewController;
-    [timelineController reloadData:YES];
+    [timelineController getLastTweets];
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
@@ -238,10 +236,6 @@
         ((QWTweetViewController *)[allControllers objectForKey:@"QWMessagesViewController"]).newTweetCount = messagesCount;
         NSString *messagesDescription = [NSString stringWithFormat:@"%d条新私信", messagesCount];
         [GrowlApplicationBridge notifyWithTitle:messagesDescription description:@"" notificationName:GROWL_NOTIFICATION_MESSAGES iconData:nil priority:0 isSticky:YES clickContext:nil];
-    }
-    
-    if ([currentViewController respondsToSelector:@selector(fetchNewTweets)]) {
-        [currentViewController fetchNewTweets];
     }
 }
 

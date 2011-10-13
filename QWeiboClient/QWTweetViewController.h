@@ -14,12 +14,17 @@
 
 @interface QWTweetViewController : NSViewController<PXListViewDelegate, QWeiboAsyncApiDelegate> {
     QWeiboAsyncApi *api;
+    
+    //for older
     BOOL hasNext;
-    int pageFlag;
-    int pageSize;
-    double pageTime;
+    double oldestPageTime;
+    
+    //for newer
+    double newestPageTime;
+    
     BOOL isLoading;
     TweetType tweetType;
+    NSTimer *timer;
 }
 
 
@@ -29,7 +34,7 @@
 @property (assign) int newTweetCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type;
-- (void)reloadData:(BOOL)reset;
-- (void)fetchNewTweets;
+- (void)getLastTweets;
+- (void)fetchNewerTweets;
 
 @end

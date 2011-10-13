@@ -50,9 +50,10 @@
 	if([self isSelected]) {
 		[RGBCOLOR(220, 220, 220) set];
 	}
-	else if (self.isNew) {
-		[RGBCOLOR(230,243,248) set];
-    } else {
+//	else if (self.isNew) {
+//		[RGBCOLOR(230,243,248) set];
+//    } 
+    else {
         [RGBCOLOR(240,240,240) set];
     }
 
