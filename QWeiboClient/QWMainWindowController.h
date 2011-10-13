@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "QWVerifyWindowController.h"
 #import "QWeiboAsyncApi.h"
-#import <Growl/Growl.h>
 
 typedef enum {
     QWShowTabTimeline = 1,
@@ -20,7 +19,7 @@ typedef enum {
     QWShowTabSearch
 } QWShowTab;
 
-@interface QWMainWindowController : NSWindowController<GrowlApplicationBridgeDelegate>
+@interface QWMainWindowController : NSWindowController
 {
     NSMutableDictionary *allControllers;
     NSViewController *currentViewController;
@@ -34,6 +33,7 @@ typedef enum {
 @property (assign) IBOutlet NSImageView *timelineBadge;
 @property (assign) IBOutlet NSImageView *mentionsBadge;
 @property (assign) IBOutlet NSImageView *messagesBadge;
+@property (assign) TweetType selectedTweetType;
 
 - (IBAction)toggleTab:(id)sender;
 - (IBAction)publishMessage:(id)sender;

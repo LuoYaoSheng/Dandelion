@@ -30,20 +30,20 @@
 @synthesize timelineBadge = _timelineBadge;
 @synthesize mentionsBadge = _mentionsBadge;
 @synthesize messagesBadge = _messagesBadge;
+@synthesize selectedTweetType;
 
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
-        [GrowlApplicationBridge setGrowlDelegate:self]; // add Growl support!
-        
         allControllers = [[NSMutableDictionary alloc] init];
         selectedIndex = 1;
         api = [[QWeiboAsyncApi alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hasSendMessage:) name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedUpdate:) name:GET_UPDATE_COUNT_NOTIFICATION object:nil];
+        self.selectedTweetType = TweetTypeTimeline;
     }
     
     return self;
@@ -125,6 +125,7 @@
             [self.timelineBadge setHidden:YES];
             NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
             [self activateViewController:viewController];
+            self.selectedTweetType = TweetTypeTimeline;
             break;
         }
         case QWShowTabMethions:
@@ -132,6 +133,7 @@
             [self.mentionsBadge setHidden:YES];
             NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions];
             [self activateViewController:viewController];
+            self.selectedTweetType = TweetTypeMethions;
             break;
         }
         case QWShowTabMessages:
@@ -139,6 +141,7 @@
             [self.messagesBadge setHidden:YES];
             NSViewController *viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages];
             [self activateViewController:viewController];
+            self.selectedTweetType = TweetTypeMessages;
             break;
         }
         case QWShowTabFavorites:
@@ -237,14 +240,6 @@
         NSString *messagesDescription = [NSString stringWithFormat:@"%d条新私信", messagesCount];
         [GrowlApplicationBridge notifyWithTitle:messagesDescription description:@"" notificationName:GROWL_NOTIFICATION_MESSAGES iconData:nil priority:0 isSticky:YES clickContext:nil];
     }
-}
-
-#pragma mark - GrowlApplicationBridgeDelegate
-
-- (NSDictionary *)registrationDictionaryForGrowl
-{
-    NSArray *allNotes = [NSArray arrayWithObjects:GROWL_NOTIFICATION_TIMELINE, GROWL_NOTIFICATION_MENTHIONS, GROWL_NOTIFICATION_MESSAGES, nil];
-    return [NSDictionary dictionaryWithObjectsAndKeys:allNotes, GROWL_NOTIFICATIONS_ALL, allNotes, GROWL_NOTIFICATIONS_DEFAULT, nil];
 }
 
 @end

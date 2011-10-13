@@ -298,7 +298,7 @@
                     [message release];
                 }
             }
-            if ([self.delegate respondsToSelector:@selector(receivedNewTweets:)]) {
+            if ([self.delegate respondsToSelector:@selector(receivedNewerTweets:)]) {
                 [self.delegate receivedNewerTweets:messages];
             }
             [messages release];

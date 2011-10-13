@@ -11,6 +11,7 @@
 #import "QWMessage.h"
 #import "MyListViewCell.h"
 #import "ListViewEndCell.h"
+#import <Growl/Growl.h>
 
 #define MIN_HEIGHT  70
 
@@ -187,8 +188,33 @@
 //                [self.listContent insertObject:message atIndex:0];
 //        }
 //    }
-    if (tweets.count > 0)
+    if (tweets.count > 0) {
         newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
+        for (QWMessage *message in tweets) {
+            switch (tweetType) {
+                case TweetTypeTimeline: {
+                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
+                    if (tweetType != self.mainWindowController.selectedTweetType)
+                        [self.mainWindowController.timelineBadge setHidden:NO];
+                    break;
+                }
+                case TweetTypeMethions: {
+                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
+                    if (tweetType != self.mainWindowController.selectedTweetType)
+                        [self.mainWindowController.timelineBadge setHidden:NO];
+                    break;
+                }
+                case TweetTypeMessages: {
+                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
+                    if (tweetType != self.mainWindowController.selectedTweetType)
+                        [self.mainWindowController.timelineBadge setHidden:NO];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
     [self reloadTable:YES];
     
 }
