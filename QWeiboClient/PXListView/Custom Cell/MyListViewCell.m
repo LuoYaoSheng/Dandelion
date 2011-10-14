@@ -9,26 +9,42 @@
 #import "MyListViewCell.h"
 #import <iso646.h>
 #import "PXListViewConstants.h"
-
+#import "PXListView+UserInteraction.h"
 
 @implementation MyListViewCell
-
 
 @synthesize headButton = _headButton;
 @synthesize nameLabel = _nameLabel;
 @synthesize timeLabel = _timeLabel;
 @synthesize textLabel = _textLabel;
 @synthesize imageView = _imageView;
+@synthesize toolbarView = _toolbarView;
 
 #pragma mark - Init/Dealloc
 
 - (id)initWithReusableIdentifier: (NSString*)identifier
 {
-	if((self = [super initWithReusableIdentifier:identifier]))
-	{
+	if((self = [super initWithReusableIdentifier:identifier])) {
+       
 	}
-	
 	return self;
+}
+
+- (void)awakeFromNib
+{
+    [self.toolbarView setAlphaValue:0];
+}
+
+- (void)setFrame:(NSRect)frameRect
+{
+    [super setFrame:frameRect];
+    if (self.trackingAreas.count > 0)
+        [self removeTrackingArea:[self.trackingAreas objectAtIndex:0]];
+    NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:[self bounds]
+                                                                options: (NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved | NSTrackingActiveInKeyWindow )
+                                                                  owner:self
+                                                               userInfo:nil];
+    [self addTrackingArea:trackingArea];
 }
 
 - (void)dealloc
@@ -61,6 +77,24 @@
     //Draw the border and background
 	NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRoundedRect:[self bounds] xRadius:0.0 yRadius:0.0];
 	[roundedRect fill];
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent
+{
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0.07f];
+    [[self.timeLabel animator] setAlphaValue:0];
+    [[self.toolbarView animator] setAlphaValue:1];
+    [NSAnimationContext endGrouping];
+}
+
+- (void)mouseExited:(NSEvent *)theEvent
+{
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0.07f];
+    [[self.timeLabel animator] setAlphaValue:1];
+    [[self.toolbarView animator] setAlphaValue:0];
+    [NSAnimationContext endGrouping];  
 }
 
 #pragma mark - Accessibility
@@ -111,4 +145,13 @@
     return [super accessibilityAttributeValue:attribute];
 }
 
+- (IBAction)retweetCicked:(id)sender 
+{
+    [[self listView] handleRetweetCickedInCell:self];
+}
+
+- (IBAction)addFavoriteClicked:(id)sender 
+{
+    [[self listView] handleAddFavoriteClickedInCell:self];
+}
 @end

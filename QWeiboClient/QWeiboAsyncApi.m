@@ -154,6 +154,16 @@
     [self postDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagPublishMessage];
 }
 
+- (void)retweet:(NSString *)message reid:(NSString *)reid
+{
+    NSString *url = RETWEET_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:message forKey:@"content"];
+    [parameters setObject:@"127.0.0.1" forKey:@"clientip"];
+    [parameters setObject:reid forKey:@"reid"];
+    [self postDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagPublishMessage];
+}
+
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
 {
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_KEY];

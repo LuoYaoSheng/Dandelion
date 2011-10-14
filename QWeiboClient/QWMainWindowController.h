@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "QWVerifyWindowController.h"
 #import "QWeiboAsyncApi.h"
+#import "QWMessage.h"
 
 typedef enum {
     QWShowTabTimeline = 1,
@@ -38,5 +39,6 @@ typedef enum {
 - (IBAction)toggleTab:(id)sender;
 - (IBAction)publishMessage:(id)sender;
 - (IBAction)logout:(id)sender;
+- (void)retweetMessage:(QWMessage *)message;
 
 @end

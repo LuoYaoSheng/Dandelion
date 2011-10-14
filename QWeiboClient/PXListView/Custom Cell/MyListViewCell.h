@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
 #import "PXListViewCell.h"
 
 @interface MyListViewCell : PXListViewCell
@@ -19,5 +18,8 @@
 @property (assign) IBOutlet NSTextField *timeLabel;
 @property (assign) IBOutlet NSTextField *textLabel;
 @property (assign) IBOutlet NSImageView *imageView;
+@property (assign) IBOutlet NSView *toolbarView;
 
+- (IBAction)retweetCicked:(id)sender;
+- (IBAction)addFavoriteClicked:(id)sender;
 @end

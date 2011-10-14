@@ -15,6 +15,9 @@
 - (void)handleMouseDown:(NSEvent*)theEvent inCell:(PXListViewCell*)theCell;
 - (void)handleMouseDownOutsideCells:(NSEvent*)theEvent;
 
+- (void)handleRetweetCickedInCell:(PXListViewCell*)theCell;
+- (void)handleAddFavoriteClickedInCell:(PXListViewCell*)theCell;
+
 - (BOOL)attemptDragWithMouseDown:(NSEvent*)theEvent inCell:(PXListViewCell*)theCell;
 - (NSImage*)dragImageForRowsWithIndexes:(NSIndexSet *)dragRows
                                   event:(NSEvent*)dragEvent clickedCell:(PXListViewCell*)clickedCell

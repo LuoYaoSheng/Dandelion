@@ -238,6 +238,20 @@ static PXIsDragStartResult PXIsDragStart( NSEvent *startEvent, NSTimeInterval th
 	}
 }
 
+- (void)handleRetweetCickedInCell:(PXListViewCell*)theCell
+{
+    if([[self delegate] respondsToSelector:@selector(listView:retweetForRow:)]) {
+        [[self delegate] listView:self retweetForRow:[theCell row]];
+    }
+}
+
+- (void)handleAddFavoriteClickedInCell:(PXListViewCell*)theCell
+{
+    if([[self delegate] respondsToSelector:@selector(listView:addFavoriteForRow:)]) {
+        [[self delegate] listView:self addFavoriteForRow:[theCell row]];
+    }
+}
+
 #pragma mark -
 #pragma mark Drag and Drop
 

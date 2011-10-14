@@ -11,6 +11,8 @@
 @implementation QWPublishMessageWindowController
 
 @synthesize messageTextView = _messageTextView;
+@synthesize orgMessage = _orgMessage;
+@synthesize atLabel = _atLabel;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -29,16 +31,22 @@
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     self.messageTextView.font = [NSFont systemFontOfSize:13];
+    if (self.orgMessage)
+        self.atLabel.stringValue = [NSString stringWithFormat:@"@%@", self.orgMessage.nick];
 }
 
 - (void)dealloc
 {
     [api release];
+    [_orgMessage release];
     [super dealloc];
 }
 
 - (IBAction)publishClicked:(id)sender {
-    [api publishMessage:self.messageTextView.string];
+    if (self.orgMessage)
+        [api retweet:self.messageTextView.string reid:self.orgMessage.tweetId];
+    else
+        [api publishMessage:self.messageTextView.string];
     [NSApp endSheet:self.window];
 }
 

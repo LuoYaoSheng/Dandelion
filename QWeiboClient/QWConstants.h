@@ -33,6 +33,7 @@
 #define GET_USER_INFO_URL                                   @"http://open.t.qq.com/api/user/info"
 #define PUBLISH_MESSAGE_URL                                 @"http://open.t.qq.com/api/t/add"
 #define PUBLISH_IMAGE_URL                                   @"http://open.t.qq.com/api/t/add_pic"
+#define RETWEET_URL                                         @"http://open.t.qq.com/api/t/re_add"
 #define UPDATE_URL                                          @"http://open.t.qq.com/api/info/update"
 
 #define GROWL_NOTIFICATION_TIMELINE                         @"Timeline"

@@ -24,6 +24,9 @@ extern NSString * const PXListViewSelectionDidChange;
 - (void)listViewSelectionDidChange:(NSNotification*)aNotification;
 - (void)listView:(PXListView*)aListView rowDoubleClicked:(NSUInteger)rowIndex;
 
+- (void)listView:(PXListView *)aListView retweetForRow:(NSUInteger)rowIndex;
+- (void)listView:(PXListView *)aListView addFavoriteForRow:(NSUInteger)rowIndex;
+
 - (BOOL)listView:(PXListView*)aListView writeRowsWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard *)pboard;
 - (NSDragOperation)listView:(PXListView*)aListView
                validateDrop:(id <NSDraggingInfo>)info

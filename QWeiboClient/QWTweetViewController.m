@@ -305,6 +305,16 @@
     NSLog(@"Selection changed");
 }
 
+- (void)listView:(PXListView *)aListView retweetForRow:(NSUInteger)rowIndex
+{
+    [self.mainWindowController retweetMessage:[self.listContent objectAtIndex:rowIndex]];
+}
+
+- (void)listView:(PXListView *)aListView addFavoriteForRow:(NSUInteger)rowIndex
+{
+    
+}
+
 - (void)listViewResize:(PXListView *)aListView
 {
     [self reloadTable:NO];
