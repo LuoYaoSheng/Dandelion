@@ -60,10 +60,18 @@
         head = [head stringByAppendingPathComponent:@"50"];
     NSString *text = [[dict objectForKey:@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     double timestamp = [[dict objectForKey:@"timestamp"] doubleValue];
-    NSString *image = [dict objectForKey:@"image"];
+    NSString *image = @"";
+    if ([dict objectForKey:@"image"] && [dict objectForKey:@"image"] != [NSNull null])
+        image = [[[dict objectForKey:@"image"] objectAtIndex:0] stringByAppendingPathComponent:@"160"];
     QWMessage *source = nil;
     if ([dict objectForKey:@"source"] && [dict objectForKey:@"source"] != [NSNull null]) {
         source = [[[QWMessage alloc] initWithJSON:[dict objectForKey:@"source"]] autorelease];
+        if ([text isEqualToString:@""])
+            text = [NSString stringWithFormat:@"-------------------\n@%@:%@", source.nick, source.text];
+        else 
+            text = [NSString stringWithFormat:@"%@\n-------------------\n@%@:%@", text, source.nick, source.text];
+        if (![source.image isEqualToString:@""])
+            image = source.image;
     }
     QWMessageType type = (QWMessageType)[dict objectForKey:@"type"];
     return [self initWithTweetId:tweetId Nick:nick head:head text:text timestamp:timestamp image:image source:source type:type];

@@ -158,7 +158,7 @@
         newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
     hasNext = ![[info objectForKey:@"hasNext"] boolValue];
     [self reloadTable:YES];
-    [self beginUpdating];
+    //[self beginUpdating];
 }
 
 - (void)receivedOlderTweets:(NSArray *)tweets info:(NSDictionary *)info
@@ -174,20 +174,6 @@
 {
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tweets.count)];
     [self.listContent insertObjects:tweets atIndexes:indexSet];
-//    if (tweets.count > 0) {
-//        for (int i=(int)(tweets.count-1); i>-1; i--) {
-//            QWMessage *message = [tweets objectAtIndex:i];
-//            BOOL exists = NO;
-//            for (QWMessage *existMessage in self.listContent) {
-//                if ([existMessage.tweetId isEqualToString:message.tweetId]) {
-//                    exists = YES;
-//                    break;
-//                }
-//            }
-//            if (!exists)
-//                [self.listContent insertObject:message atIndex:0];
-//        }
-//    }
     if (tweets.count > 0) {
         newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
         for (QWMessage *message in tweets) {
@@ -214,9 +200,9 @@
                     break;
             }
         }
+        [self reloadTable:YES];
+//        [NSApp setApplicationIconImage:[NSImage imageNamed:@"weibo_badge.icns"]];
     }
-    [self reloadTable:YES];
-    
 }
 
 - (void)reloadTable:(BOOL)scrollToTop
@@ -237,8 +223,7 @@
         textField.stringValue = message.text;
         NSSize size = [textField.cell cellSizeForBounds:textField.frame];
         [textField release];
-        float height = (size.height+24)<MIN_HEIGHT ? MIN_HEIGHT : (size.height+24);
-        [self.heightList addObject:[NSNumber numberWithFloat:height]];
+        [self.heightList addObject:[NSNumber numberWithFloat:size.height]];
     }
 }
 
@@ -275,6 +260,16 @@
         }
         
         // Set up the new cell:
+        CGRect textLabelFrame = cell.textLabel.frame;
+        float diffHeight = [[self.heightList objectAtIndex:row] floatValue] - textLabelFrame.size.height;
+        textLabelFrame.size.height += diffHeight;
+        textLabelFrame.origin.y -= diffHeight;
+        cell.textLabel.frame = textLabelFrame;
+        
+//        CGRect imageViewFrame = cell.imageView.frame;
+//        imageViewFrame.origin.y = CGRectGetMinY(cell.textLabel.frame);
+//        cell.imageView.frame = imageViewFrame;
+        
         QWMessage *message = [self.listContent objectAtIndex:row];
         cell.isNew = message.isNew;
         cell.nameLabel.stringValue = message.nick;
@@ -284,6 +279,7 @@
             cell.headButton.image = [NSImage imageNamed:@"NSUser"];
         cell.textLabel.stringValue = message.text;
         cell.timeLabel.stringValue = message.time;
+        cell.imageView.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.image]] autorelease];
         
         return cell;
 	}
@@ -293,8 +289,15 @@
 {
     if (row == [self.listContent count]) 
         return 40;
-    else
-        return [[self.heightList objectAtIndex:row] floatValue];
+    else {
+        float height = [[self.heightList objectAtIndex:row] floatValue] + 24;
+        QWMessage *message = [self.listContent objectAtIndex:row];
+        if (![message.image isEqualToString:@""])
+            height += 145;
+        if (height < MIN_HEIGHT)
+            height = MIN_HEIGHT;
+        return height;
+    }
 }
 
 - (void)listViewSelectionDidChange:(NSNotification*)aNotification

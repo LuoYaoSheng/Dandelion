@@ -18,6 +18,7 @@
 @synthesize nameLabel = _nameLabel;
 @synthesize timeLabel = _timeLabel;
 @synthesize textLabel = _textLabel;
+@synthesize imageView = _imageView;
 
 #pragma mark - Init/Dealloc
 

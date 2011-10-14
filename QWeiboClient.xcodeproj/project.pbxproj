@@ -64,6 +64,7 @@
 		35D7C02014397A4B000F82DD /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C01514397A4B000F82DD /* PXListView+UserInteraction.m */; };
 		35D7C02114397A4B000F82DD /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C01714397A4B000F82DD /* PXListView.m */; };
 		35D7C02414397B51000F82DD /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C02314397B51000F82DD /* MyView.m */; };
+		35E6366D1448022A00619046 /* weibo_badge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 35E6366C1448022A00619046 /* weibo_badge.icns */; };
 		35E98D2D142872FA005B9A15 /* json.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35E98D2C142872FA005B9A15 /* json.txt */; };
 		35E98D3B14287ECF005B9A15 /* NSDate+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */; };
 /* End PBXBuildFile section */
@@ -189,6 +190,7 @@
 		35D7C01914397A4B000F82DD /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewDelegate.h; sourceTree = "<group>"; };
 		35D7C02214397B51000F82DD /* MyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
 		35D7C02314397B51000F82DD /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
+		35E6366C1448022A00619046 /* weibo_badge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = weibo_badge.icns; sourceTree = SOURCE_ROOT; };
 		35E98D2C142872FA005B9A15 /* json.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json.txt; sourceTree = "<group>"; };
 		35E98D3914287ECF005B9A15 /* NSDate+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Categories.h"; sourceTree = "<group>"; };
 		35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Categories.m"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				35809B6C1444229F00CB02C2 /* status_on.png */,
 				35809B6D1444229F00CB02C2 /* status_off.png */,
 				352EE05A1441314500AB7913 /* weibo.icns */,
+				35E6366C1448022A00619046 /* weibo_badge.icns */,
 				35B61E54143EE1780001741D /* messages_off.png */,
 				35B61E55143EE1780001741D /* messages_on.png */,
 				3509E845143CACA00053EF3F /* favorite_off.png */,
@@ -463,6 +466,9 @@
 /* Begin PBXProject section */
 		35263A9E140F1F4800944D3E /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 35263AA1140F1F4800944D3E /* Build configuration list for PBXProject "QWeiboClient" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -529,6 +535,7 @@
 				35809B6E1444229F00CB02C2 /* status_on.png in Resources */,
 				35809B6F1444229F00CB02C2 /* status_off.png in Resources */,
 				35809B711444441000CB02C2 /* blue_dot.png in Resources */,
+				35E6366D1448022A00619046 /* weibo_badge.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

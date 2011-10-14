@@ -18,5 +18,6 @@
 @property (assign) IBOutlet NSTextField *nameLabel;
 @property (assign) IBOutlet NSTextField *timeLabel;
 @property (assign) IBOutlet NSTextField *textLabel;
+@property (assign) IBOutlet NSImageView *imageView;
 
 @end
