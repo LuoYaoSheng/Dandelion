@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350713FF14497D100080D041 /* FlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 350713FE14497D100080D041 /* FlippedView.m */; };
 		35099AD1142246A000638CC4 /* QWMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 35099AD0142246A000638CC4 /* QWMessage.m */; };
 		3509E84F143CACA00053EF3F /* favorite_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 3509E845143CACA00053EF3F /* favorite_off.png */; };
 		3509E850143CACA00053EF3F /* favorite_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 3509E846143CACA00053EF3F /* favorite_on.png */; };
@@ -67,6 +68,8 @@
 		35E6366D1448022A00619046 /* weibo_badge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 35E6366C1448022A00619046 /* weibo_badge.icns */; };
 		35E636701448437400619046 /* toolbar-reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 35E6366E1448437400619046 /* toolbar-reply.png */; };
 		35E636711448437400619046 /* toolbar-addfavor.png in Resources */ = {isa = PBXBuildFile; fileRef = 35E6366F1448437400619046 /* toolbar-addfavor.png */; };
+		35E6368614494A2300619046 /* QWViewImageWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E6368514494A2300619046 /* QWViewImageWindowController.m */; };
+		35E6368814494A4900619046 /* QWViewImageWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E6368714494A4900619046 /* QWViewImageWindowController.xib */; };
 		35E98D2D142872FA005B9A15 /* json.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35E98D2C142872FA005B9A15 /* json.txt */; };
 		35E98D3B14287ECF005B9A15 /* NSDate+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */; };
 /* End PBXBuildFile section */
@@ -103,6 +106,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		350713FD14497D100080D041 /* FlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlippedView.h; sourceTree = "<group>"; };
+		350713FE14497D100080D041 /* FlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlippedView.m; sourceTree = "<group>"; };
 		35099ACF142246A000638CC4 /* QWMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMessage.h; sourceTree = "<group>"; };
 		35099AD0142246A000638CC4 /* QWMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMessage.m; sourceTree = "<group>"; };
 		3509E845143CACA00053EF3F /* favorite_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_off.png; sourceTree = "<group>"; };
@@ -195,6 +200,9 @@
 		35E6366C1448022A00619046 /* weibo_badge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = weibo_badge.icns; sourceTree = SOURCE_ROOT; };
 		35E6366E1448437400619046 /* toolbar-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-reply.png"; sourceTree = "<group>"; };
 		35E6366F1448437400619046 /* toolbar-addfavor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-addfavor.png"; sourceTree = "<group>"; };
+		35E6368414494A2200619046 /* QWViewImageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWViewImageWindowController.h; sourceTree = "<group>"; };
+		35E6368514494A2300619046 /* QWViewImageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWViewImageWindowController.m; sourceTree = "<group>"; };
+		35E6368714494A4900619046 /* QWViewImageWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWViewImageWindowController.xib; sourceTree = "<group>"; };
 		35E98D2C142872FA005B9A15 /* json.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json.txt; sourceTree = "<group>"; };
 		35E98D3914287ECF005B9A15 /* NSDate+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Categories.h"; sourceTree = "<group>"; };
 		35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Categories.m"; sourceTree = "<group>"; };
@@ -320,6 +328,11 @@
 				35B61E65143EF13C0001741D /* QWPublishMessageWindowController.h */,
 				35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */,
 				35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */,
+				35E6368414494A2200619046 /* QWViewImageWindowController.h */,
+				35E6368514494A2300619046 /* QWViewImageWindowController.m */,
+				35E6368714494A4900619046 /* QWViewImageWindowController.xib */,
+				350713FD14497D100080D041 /* FlippedView.h */,
+				350713FE14497D100080D041 /* FlippedView.m */,
 				35263AB2140F1F4800944D3E /* Supporting Files */,
 			);
 			path = QWeiboClient;
@@ -544,6 +557,7 @@
 				35E6366D1448022A00619046 /* weibo_badge.icns in Resources */,
 				35E636701448437400619046 /* toolbar-reply.png in Resources */,
 				35E636711448437400619046 /* toolbar-addfavor.png in Resources */,
+				35E6368814494A4900619046 /* QWViewImageWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +592,8 @@
 				352EE05E14413F3D00AB7913 /* NSScrollView+Categories.m in Sources */,
 				352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */,
 				35809B411443D1FC00CB02C2 /* QWTweetViewController.m in Sources */,
+				35E6368614494A2300619046 /* QWViewImageWindowController.m in Sources */,
+				350713FF14497D100080D041 /* FlippedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,7 @@
 @synthesize nameLabel = _nameLabel;
 @synthesize timeLabel = _timeLabel;
 @synthesize textLabel = _textLabel;
-@synthesize imageView = _imageView;
+@synthesize imageButton = _imageButton;
 @synthesize toolbarView = _toolbarView;
 
 #pragma mark - Init/Dealloc
@@ -154,4 +154,10 @@
 {
     [[self listView] handleAddFavoriteClickedInCell:self];
 }
+
+- (IBAction)imageClicked:(id)sender 
+{
+    [[self listView] handleImageClickedInCell:self];
+}
+
 @end

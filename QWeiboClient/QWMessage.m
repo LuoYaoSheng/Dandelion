@@ -62,7 +62,7 @@
     double timestamp = [[dict objectForKey:@"timestamp"] doubleValue];
     NSString *image = @"";
     if ([dict objectForKey:@"image"] && [dict objectForKey:@"image"] != [NSNull null])
-        image = [[[dict objectForKey:@"image"] objectAtIndex:0] stringByAppendingPathComponent:@"160"];
+        image = [[dict objectForKey:@"image"] objectAtIndex:0];
     QWMessage *source = nil;
     if ([dict objectForKey:@"source"] && [dict objectForKey:@"source"] != [NSNull null]) {
         source = [[[QWMessage alloc] initWithJSON:[dict objectForKey:@"source"]] autorelease];

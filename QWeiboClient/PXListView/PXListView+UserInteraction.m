@@ -252,6 +252,13 @@ static PXIsDragStartResult PXIsDragStart( NSEvent *startEvent, NSTimeInterval th
     }
 }
 
+- (void)handleImageClickedInCell:(PXListViewCell*)theCell
+{
+    if([[self delegate] respondsToSelector:@selector(listView:imageClickedForRow:)]) {
+        [[self delegate] listView:self imageClickedForRow:[theCell row]];
+    }
+}
+
 #pragma mark -
 #pragma mark Drag and Drop
 

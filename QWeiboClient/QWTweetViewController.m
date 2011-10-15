@@ -12,6 +12,7 @@
 #import "MyListViewCell.h"
 #import "ListViewEndCell.h"
 #import <Growl/Growl.h>
+#import "QWViewImageWindowController.h"
 
 #define MIN_HEIGHT  70
 
@@ -279,7 +280,12 @@
             cell.headButton.image = [NSImage imageNamed:@"NSUser"];
         cell.textLabel.stringValue = message.text;
         cell.timeLabel.stringValue = message.time;
-        cell.imageView.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.image]] autorelease];
+        if (message.image && ![message.image isEqualToString:@""]) {
+            [cell.imageButton setHidden:NO];
+            cell.imageButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:[message.image stringByAppendingPathComponent:@"160"]]] autorelease];
+        }
+        else 
+            [cell.imageButton setHidden:YES];
         
         return cell;
 	}
@@ -315,6 +321,15 @@
     
 }
 
+- (void)listView:(PXListView *)aListView imageClickedForRow:(NSUInteger)rowIndex
+{
+    if (!_viewImageController)
+        _viewImageController = [[QWViewImageWindowController alloc] initWithWindowNibName:@"QWViewImageWindowController"];
+    QWMessage *message = [self.listContent objectAtIndex:rowIndex];
+    [_viewImageController showWindow:nil];
+    [_viewImageController loadImage:[message.image stringByAppendingPathComponent:@"2000"]];
+}
+
 - (void)listViewResize:(PXListView *)aListView
 {
     [self reloadTable:NO];
@@ -322,6 +337,7 @@
 
 - (void)dealloc
 {
+    [_viewImageController release];
     [self stopUpdating];
     [_listContent release];
     [_heightList release];

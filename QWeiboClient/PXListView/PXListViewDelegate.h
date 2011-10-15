@@ -26,6 +26,7 @@ extern NSString * const PXListViewSelectionDidChange;
 
 - (void)listView:(PXListView *)aListView retweetForRow:(NSUInteger)rowIndex;
 - (void)listView:(PXListView *)aListView addFavoriteForRow:(NSUInteger)rowIndex;
+- (void)listView:(PXListView *)aListView imageClickedForRow:(NSUInteger)rowIndex;
 
 - (BOOL)listView:(PXListView*)aListView writeRowsWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard *)pboard;
 - (NSDragOperation)listView:(PXListView*)aListView

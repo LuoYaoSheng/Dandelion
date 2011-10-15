@@ -17,9 +17,11 @@
 @property (assign) IBOutlet NSTextField *nameLabel;
 @property (assign) IBOutlet NSTextField *timeLabel;
 @property (assign) IBOutlet NSTextField *textLabel;
-@property (assign) IBOutlet NSImageView *imageView;
+@property (assign) IBOutlet NSButton *imageButton;
 @property (assign) IBOutlet NSView *toolbarView;
 
 - (IBAction)retweetCicked:(id)sender;
 - (IBAction)addFavoriteClicked:(id)sender;
+- (IBAction)imageClicked:(id)sender;
+
 @end
