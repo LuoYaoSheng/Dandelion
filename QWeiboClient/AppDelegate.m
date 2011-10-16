@@ -52,7 +52,7 @@
 		return NO;
 	} else {
 		[self.windowController showWindow:nil];
-		return YES;
+		return NO;
 	}
 }
 

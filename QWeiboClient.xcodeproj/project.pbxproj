@@ -43,6 +43,7 @@
 		35809B6E1444229F00CB02C2 /* status_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B6C1444229F00CB02C2 /* status_on.png */; };
 		35809B6F1444229F00CB02C2 /* status_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B6D1444229F00CB02C2 /* status_off.png */; };
 		35809B711444441000CB02C2 /* blue_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B701444441000CB02C2 /* blue_dot.png */; };
+		3583177E144AB9AD0057A1FE /* DragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3583177D144AB9AD0057A1FE /* DragDropImageView.m */; };
 		3592504B1426E60900F164D0 /* JSONURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3592504A1426E60900F164D0 /* JSONURLConnection.m */; };
 		359250521426E85500F164D0 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
@@ -159,6 +160,8 @@
 		35809B6C1444229F00CB02C2 /* status_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_on.png; sourceTree = "<group>"; };
 		35809B6D1444229F00CB02C2 /* status_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_off.png; sourceTree = "<group>"; };
 		35809B701444441000CB02C2 /* blue_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_dot.png; sourceTree = "<group>"; };
+		3583177C144AB9AC0057A1FE /* DragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragDropImageView.h; sourceTree = "<group>"; };
+		3583177D144AB9AD0057A1FE /* DragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragDropImageView.m; sourceTree = "<group>"; };
 		359250491426E60900F164D0 /* JSONURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONURLConnection.h; sourceTree = "<group>"; };
 		3592504A1426E60900F164D0 /* JSONURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONURLConnection.m; sourceTree = "<group>"; };
 		359250511426E85500F164D0 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = QWeiboClient/Frameworks/YAJL.framework; sourceTree = "<group>"; };
@@ -331,8 +334,6 @@
 				35E6368414494A2200619046 /* QWViewImageWindowController.h */,
 				35E6368514494A2300619046 /* QWViewImageWindowController.m */,
 				35E6368714494A4900619046 /* QWViewImageWindowController.xib */,
-				350713FD14497D100080D041 /* FlippedView.h */,
-				350713FE14497D100080D041 /* FlippedView.m */,
 				35263AB2140F1F4800944D3E /* Supporting Files */,
 			);
 			path = QWeiboClient;
@@ -379,6 +380,10 @@
 				35D7C02314397B51000F82DD /* MyView.m */,
 				3517188E143B035E00DB2726 /* RoundedButtonCell.h */,
 				3517188F143B035E00DB2726 /* RoundedButtonCell.m */,
+				350713FD14497D100080D041 /* FlippedView.h */,
+				350713FE14497D100080D041 /* FlippedView.m */,
+				3583177C144AB9AC0057A1FE /* DragDropImageView.h */,
+				3583177D144AB9AD0057A1FE /* DragDropImageView.m */,
 			);
 			name = CustomControl;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				35809B411443D1FC00CB02C2 /* QWTweetViewController.m in Sources */,
 				35E6368614494A2300619046 /* QWViewImageWindowController.m in Sources */,
 				350713FF14497D100080D041 /* FlippedView.m in Sources */,
+				3583177E144AB9AD0057A1FE /* DragDropImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

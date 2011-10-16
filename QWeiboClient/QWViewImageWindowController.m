@@ -7,6 +7,7 @@
 //
 
 #import "QWViewImageWindowController.h"
+#import "DragDropImageView.h"
 
 @implementation QWViewImageWindowController
 
@@ -27,6 +28,8 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    ((DragDropImageView *)self.imageView).allowDrag = YES;
+    ((DragDropImageView *)self.imageView).allowDrop = NO;
 }
 
 - (void)loadImage:(NSString *)imageURL
