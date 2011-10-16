@@ -38,6 +38,13 @@
     [_statusItem setImage:[NSImage imageNamed:@"status_on.png"]];
     [_statusItem setAlternateImage:[NSImage imageNamed:@"status_off.png"]];
     [_statusItem setHighlightMode:YES];
+    NSMenu *menu = [[NSMenu alloc] initWithTitle:@""];
+    [menu setAutoenablesItems:NO];
+    _logoutMenuItem = [[NSMenuItem alloc] initWithTitle:@"注销" action:@selector(logout:) keyEquivalent:@""];
+    [menu addItem:_logoutMenuItem];
+    [_logoutMenuItem release];
+    [_statusItem setMenu:menu];
+    [menu release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForLogin:) name:LOGOUT_NOTIFICATION object:nil];
 //    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:AppTokenKey];
@@ -56,6 +63,13 @@
 	}
 }
 
+- (IBAction)logout:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:ACCESS_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:ACCESS_TOKEN_SECRET_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self checkForLogin:nil];
+}
+
 - (void)checkForLogin:(NSNotification *)notification
 {    
     [self.windowController.window close];
@@ -65,6 +79,7 @@
     if (accessToken && ![accessToken isEqualToString:@""] && accessTokenSecret && ![accessTokenSecret isEqualToString:@""]) {
         [self loginFinished:nil];
     } else {
+        [_logoutMenuItem setEnabled:NO];
         QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
         NSString *retString = [api getRequestTokenWithConsumerKey:APP_KEY consumerSecret:APP_SECRET];
         NSLog(@"Get requestToken:%@", retString);
@@ -92,6 +107,7 @@
 
 - (void)loginFinished:(QWVerifyWindowController *)verifyWindowController
 {
+    [_logoutMenuItem setEnabled:YES];
     [verifyWindowController.window close];
     [verifyWindowController release];
     QWMainWindowController *controller = [[QWMainWindowController alloc] initWithWindowNibName:@"QWMainWindowController"];

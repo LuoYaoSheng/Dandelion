@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11B26</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">1617</string>
@@ -71,16 +71,16 @@
 								<object class="NSButton" id="236305632">
 									<reference key="NSNextResponder" ref="391322067"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{0, 18}, {65, 25}}</string>
+									<string key="NSFrame">{{1, 0}, {34, 26}}</string>
 									<reference key="NSSuperview" ref="391322067"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="101908090"/>
+									<reference key="NSNextKeyView" ref="809242775"/>
 									<string key="NSReuseIdentifierKey">_NS:3196</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSButtonCell" key="NSCell" id="546840001">
 										<int key="NSCellFlags">-2080244224</int>
 										<int key="NSCellFlags2">134217728</int>
-										<string key="NSContents">发布</string>
+										<string key="NSContents"/>
 										<object class="NSFont" key="NSSupport" id="644653155">
 											<string key="NSName">LucidaGrande</string>
 											<double key="NSSize">13</double>
@@ -88,41 +88,53 @@
 										</object>
 										<string key="NSCellIdentifier">_NS:3196</string>
 										<reference key="NSControlView" ref="236305632"/>
-										<int key="NSButtonFlags">-2038152961</int>
-										<int key="NSButtonFlags2">163</int>
+										<int key="NSButtonFlags">139215103</int>
+										<int key="NSButtonFlags2">162</int>
+										<object class="NSCustomResource" key="NSNormalImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">sidebar-compose</string>
+										</object>
 										<string key="NSAlternateContents"/>
 										<string key="NSKeyEquivalent"/>
 										<int key="NSPeriodicDelay">400</int>
 										<int key="NSPeriodicInterval">75</int>
 									</object>
 								</object>
-								<object class="NSButton" id="101908090">
+								<object class="NSImageView" id="92567135">
 									<reference key="NSNextResponder" ref="391322067"/>
-									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{0, -2}, {65, 25}}</string>
+									<int key="NSvFlags">268</int>
+									<object class="NSMutableSet" key="NSDragTypes">
+										<bool key="EncodedWithXMLCoder">YES</bool>
+										<object class="NSArray" key="set.sortedObjects">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+											<string>Apple PDF pasteboard type</string>
+											<string>Apple PICT pasteboard type</string>
+											<string>Apple PNG pasteboard type</string>
+											<string>NSFilenamesPboardType</string>
+											<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
+											<string>NeXT TIFF v4.0 pasteboard type</string>
+										</object>
+									</object>
+									<string key="NSFrameSize">{68, 24}</string>
 									<reference key="NSSuperview" ref="391322067"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="809242775"/>
-									<string key="NSReuseIdentifierKey">_NS:3196</string>
+									<reference key="NSNextKeyView" ref="236305632"/>
+									<string key="NSReuseIdentifierKey">_NS:1658</string>
 									<bool key="NSEnabled">YES</bool>
-									<object class="NSButtonCell" key="NSCell" id="371602373">
-										<int key="NSCellFlags">-2080244224</int>
-										<int key="NSCellFlags2">134217728</int>
-										<string key="NSContents">注销</string>
-										<object class="NSFont" key="NSSupport">
-											<string key="NSName">STHeitiSC-Light</string>
-											<double key="NSSize">13</double>
-											<int key="NSfFlags">16</int>
+									<object class="NSImageCell" key="NSCell" id="574862019">
+										<int key="NSCellFlags">130560</int>
+										<int key="NSCellFlags2">33554432</int>
+										<object class="NSCustomResource" key="NSContents">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">sidebar-bottom</string>
 										</object>
-										<string key="NSCellIdentifier">_NS:3196</string>
-										<reference key="NSControlView" ref="101908090"/>
-										<int key="NSButtonFlags">-2038152961</int>
-										<int key="NSButtonFlags2">163</int>
-										<string key="NSAlternateContents"/>
-										<string key="NSKeyEquivalent"/>
-										<int key="NSPeriodicDelay">400</int>
-										<int key="NSPeriodicInterval">75</int>
+										<string key="NSCellIdentifier">_NS:1658</string>
+										<int key="NSAlign">0</int>
+										<int key="NSScale">0</int>
+										<int key="NSStyle">0</int>
+										<bool key="NSAnimates">NO</bool>
 									</object>
+									<bool key="NSEditable">YES</bool>
 								</object>
 								<object class="NSImageView" id="886654057">
 									<reference key="NSNextResponder" ref="391322067"/>
@@ -142,7 +154,7 @@
 									<string key="NSFrame">{{42, 428}, {15, 16}}</string>
 									<reference key="NSSuperview" ref="391322067"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="236305632"/>
+									<reference key="NSNextKeyView" ref="92567135"/>
 									<string key="NSReuseIdentifierKey">_NS:1658</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSImageCell" key="NSCell" id="660170389">
@@ -551,14 +563,6 @@
 					<int key="connectionID">73</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">logout:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="101908090"/>
-					</object>
-					<int key="connectionID">74</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">timelineBadge</string>
 						<reference key="source" ref="1001"/>
@@ -638,11 +642,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="240196020"/>
 							<reference ref="453587227"/>
-							<reference ref="101908090"/>
-							<reference ref="236305632"/>
 							<reference ref="569309630"/>
 							<reference ref="1051771371"/>
 							<reference ref="886654057"/>
+							<reference ref="92567135"/>
+							<reference ref="236305632"/>
 						</object>
 						<reference key="parent" ref="1006"/>
 					</object>
@@ -731,20 +735,6 @@
 						<reference key="parent" ref="453587227"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">56</int>
-						<reference key="object" ref="101908090"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="371602373"/>
-						</object>
-						<reference key="parent" ref="391322067"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">57</int>
-						<reference key="object" ref="371602373"/>
-						<reference key="parent" ref="101908090"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">71</int>
 						<reference key="object" ref="236305632"/>
 						<object class="NSMutableArray" key="children">
@@ -803,6 +793,20 @@
 						<reference key="object" ref="660170389"/>
 						<reference key="parent" ref="886654057"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">91</int>
+						<reference key="object" ref="92567135"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="574862019"/>
+						</object>
+						<reference key="parent" ref="391322067"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">92</int>
+						<reference key="object" ref="574862019"/>
+						<reference key="parent" ref="92567135"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -830,8 +834,6 @@
 					<string>48.IBPluginDependency</string>
 					<string>49.IBPluginDependency</string>
 					<string>53.IBPluginDependency</string>
-					<string>56.IBPluginDependency</string>
-					<string>57.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>71.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
@@ -841,6 +843,8 @@
 					<string>78.IBPluginDependency</string>
 					<string>81.IBPluginDependency</string>
 					<string>82.IBPluginDependency</string>
+					<string>91.IBPluginDependency</string>
+					<string>92.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -890,7 +894,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">90</int>
+			<int key="maxID">92</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1037,6 +1041,8 @@
 				<string>people_on</string>
 				<string>search_off</string>
 				<string>search_on</string>
+				<string>sidebar-bottom</string>
+				<string>sidebar-compose</string>
 				<string>timeline_off</string>
 				<string>timeline_on</string>
 			</object>
@@ -1054,6 +1060,8 @@
 				<string>{65, 40}</string>
 				<string>{65, 40}</string>
 				<string>{65, 40}</string>
+				<string>{68, 24}</string>
+				<string>{16, 14}</string>
 				<string>{65, 40}</string>
 				<string>{65, 40}</string>
 			</object>

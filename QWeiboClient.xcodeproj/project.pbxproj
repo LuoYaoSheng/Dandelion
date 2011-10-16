@@ -57,6 +57,8 @@
 		35B61E69143EF1550001741D /* QWPublishMessageWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */; };
 		35C947571445397700E895DA /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C947561445397700E895DA /* Growl.framework */; };
 		35C9475814453A1300E895DA /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 35C947561445397700E895DA /* Growl.framework */; };
+		35D57F0B144AC71A00D071F2 /* sidebar-compose.png in Resources */ = {isa = PBXBuildFile; fileRef = 35D57F0A144AC71A00D071F2 /* sidebar-compose.png */; };
+		35D57F19144ACC4200D071F2 /* sidebar-bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 35D57F18144ACC4200D071F2 /* sidebar-bottom.png */; };
 		35D7C01A14397A4B000F82DD /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C00514397A4B000F82DD /* PXListViewCell.m */; };
 		35D7C01B14397A4B000F82DD /* MyListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C00914397A4B000F82DD /* MyListViewCell.m */; };
 		35D7C01C14397A4B000F82DD /* MyListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35D7C00A14397A4B000F82DD /* MyListViewCell.xib */; };
@@ -178,6 +180,8 @@
 		35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWPublishMessageWindowController.m; sourceTree = "<group>"; };
 		35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWPublishMessageWindowController.xib; sourceTree = "<group>"; };
 		35C947561445397700E895DA /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = QWeiboClient/Frameworks/Growl.framework; sourceTree = "<group>"; };
+		35D57F0A144AC71A00D071F2 /* sidebar-compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sidebar-compose.png"; sourceTree = "<group>"; };
+		35D57F18144ACC4200D071F2 /* sidebar-bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sidebar-bottom.png"; sourceTree = "<group>"; };
 		35D7C00314397A4B000F82DD /* PXListViewCell+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXListViewCell+Private.h"; sourceTree = "<group>"; };
 		35D7C00414397A4B000F82DD /* PXListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewCell.h; sourceTree = "<group>"; };
 		35D7C00514397A4B000F82DD /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXListViewCell.m; sourceTree = "<group>"; };
@@ -251,6 +255,8 @@
 				35171896143B0CFB00DB2726 /* logo.png */,
 				352EE0771441916700AB7913 /* end.png */,
 				35809B701444441000CB02C2 /* blue_dot.png */,
+				35D57F0A144AC71A00D071F2 /* sidebar-compose.png */,
+				35D57F18144ACC4200D071F2 /* sidebar-bottom.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -563,6 +569,8 @@
 				35E636701448437400619046 /* toolbar-reply.png in Resources */,
 				35E636711448437400619046 /* toolbar-addfavor.png in Resources */,
 				35E6368814494A4900619046 /* QWViewImageWindowController.xib in Resources */,
+				35D57F0B144AC71A00D071F2 /* sidebar-compose.png in Resources */,
+				35D57F19144ACC4200D071F2 /* sidebar-bottom.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

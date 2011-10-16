@@ -12,6 +12,7 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, QWVerifyDelegate, GrowlApplicationBridgeDelegate> {
     NSStatusItem *_statusItem;
+    NSMenuItem *_logoutMenuItem;
 }
 
 @property (nonatomic, retain) NSWindowController *windowController;
