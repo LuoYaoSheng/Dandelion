@@ -17,7 +17,7 @@
 
 - (void)getUpdateCount:(BOOL)reset udpateType:(UpdateType)updateType;
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
-- (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
+- (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters Files:(NSDictionary *)files delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
 - (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(PageFlag)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime tag:(JSONURLConnectionTag)tag;
 
 @end
@@ -151,7 +151,15 @@
     NSString *url = PUBLISH_MESSAGE_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:message forKey:@"content"];
-    [self postDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagPublishMessage];
+    [self postDataWithURL:url Parameters:parameters Files:nil delegate:self tag:JSONURLConnectionTagPublishMessage];
+}
+
+- (void)publishMessage:(NSString *)message withPicture:(NSString *)filePath
+{
+    NSString *url = PUBLISH_IMAGE_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:message forKey:@"content"];
+    [self postDataWithURL:url Parameters:parameters Files:[NSDictionary dictionaryWithObjectsAndKeys:filePath, [[filePath lastPathComponent] stringByDeletingPathExtension], nil] delegate:self tag:JSONURLConnectionTagPublishMessage];
 }
 
 - (void)retweet:(NSString *)message reid:(NSString *)reid
@@ -161,7 +169,7 @@
     [parameters setObject:message forKey:@"content"];
     [parameters setObject:@"127.0.0.1" forKey:@"clientip"];
     [parameters setObject:reid forKey:@"reid"];
-    [self postDataWithURL:url Parameters:parameters delegate:self tag:JSONURLConnectionTagPublishMessage];
+    [self postDataWithURL:url Parameters:parameters Files:nil delegate:self tag:JSONURLConnectionTagPublishMessage];
 }
 
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
@@ -186,10 +194,8 @@
 	[oauthKey release];
 }
 
-- (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
-{
-    NSMutableDictionary *files = [NSMutableDictionary dictionary];
-	
+- (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters Files:(NSDictionary *)files delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
+{	
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_KEY];
     NSString *accessTokenSecret = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_SECRET_KEY];
 	QOauthKey *oauthKey = [[QOauthKey alloc] init];

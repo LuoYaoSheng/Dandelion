@@ -41,6 +41,7 @@
 		353C6C5E144BCAC500E67DE4 /* ScrollViewPassive.m in Sources */ = {isa = PBXBuildFile; fileRef = 353C6C5D144BCAC400E67DE4 /* ScrollViewPassive.m */; };
 		353C6C73144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m in Sources */ = {isa = PBXBuildFile; fileRef = 353C6C72144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m */; };
 		353C6C9E144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 353C6C9D144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m */; };
+		353C6CC5144C537200E67DE4 /* blackx.png in Resources */ = {isa = PBXBuildFile; fileRef = 353C6CC4144C537200E67DE4 /* blackx.png */; };
 		35809B411443D1FC00CB02C2 /* QWTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35809B3F1443D1FC00CB02C2 /* QWTweetViewController.m */; };
 		35809B421443D1FC00CB02C2 /* QWTweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */; };
 		35809B6E1444229F00CB02C2 /* status_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B6C1444229F00CB02C2 /* status_on.png */; };
@@ -165,6 +166,7 @@
 		353C6C72144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NS(Attributed)String+Geometrics.m"; sourceTree = "<group>"; };
 		353C6C9C144C0B7000E67DE4 /* NSAttributedString+Hyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Hyperlink.h"; sourceTree = "<group>"; };
 		353C6C9D144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Hyperlink.m"; sourceTree = "<group>"; };
+		353C6CC4144C537200E67DE4 /* blackx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackx.png; sourceTree = "<group>"; };
 		35809B3E1443D1FC00CB02C2 /* QWTweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWTweetViewController.h; sourceTree = "<group>"; };
 		35809B3F1443D1FC00CB02C2 /* QWTweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWTweetViewController.m; sourceTree = "<group>"; };
 		35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWTweetViewController.xib; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				35809B701444441000CB02C2 /* blue_dot.png */,
 				35D57F0A144AC71A00D071F2 /* sidebar-compose.png */,
 				35D57F18144ACC4200D071F2 /* sidebar-bottom.png */,
+				353C6CC4144C537200E67DE4 /* blackx.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				35E6368814494A4900619046 /* QWViewImageWindowController.xib in Resources */,
 				35D57F0B144AC71A00D071F2 /* sidebar-compose.png in Resources */,
 				35D57F19144ACC4200D071F2 /* sidebar-bottom.png in Resources */,
+				353C6CC5144C537200E67DE4 /* blackx.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

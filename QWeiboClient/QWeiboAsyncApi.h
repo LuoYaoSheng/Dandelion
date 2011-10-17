@@ -65,6 +65,7 @@ typedef enum {
 - (void)getNewerTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime;
 - (void)getUserInfo;
 - (void)publishMessage:(NSString *)message;
+- (void)publishMessage:(NSString *)message withPicture:(NSString *)filePath;
 - (void)retweet:(NSString *)message reid:(NSString *)reid;
 - (void)beginUpdating;
 - (void)stopUpdating;

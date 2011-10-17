@@ -78,7 +78,7 @@
 		
 		NSString *filePath = [files objectForKey:key];
 		NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-		NSString *header = [NSString stringWithFormat:headerTemplate, key, [[filePath componentsSeparatedByString:@"/"] lastObject]];
+		NSString *header = [NSString stringWithFormat:headerTemplate, @"pic", [[filePath componentsSeparatedByString:@"/"] lastObject]];
 		[bodyData appendData:[header dataUsingEncoding:NSUTF8StringEncoding]];
 		[bodyData appendData:fileData];
 		[bodyData appendData:boundaryBytes];

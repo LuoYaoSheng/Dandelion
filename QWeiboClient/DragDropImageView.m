@@ -13,6 +13,7 @@
 
 @synthesize allowDrag;
 @synthesize allowDrop;
+@synthesize delegate;
 
 NSString *kPrivateDragUTI = @"com.yourcompany.cocoadraganddrop";
 
@@ -129,24 +130,27 @@ NSString *kPrivateDragUTI = @"com.yourcompany.cocoadraganddrop";
     /*------------------------------------------------------
         method that should handle the drop data
     --------------------------------------------------------*/
-    if ( [sender draggingSource] != self ) {
+    if ([sender draggingSource] != self ) {
         NSURL* fileURL;
 
             //set the image using the best representation we can get from the pasteboard
         if([NSImage canInitWithPasteboard: [sender draggingPasteboard]]) {
             NSImage *newImage = [[NSImage alloc] initWithPasteboard: [sender draggingPasteboard]];
             [self setImage:newImage];
-            NSRect selfFrame = self.frame;
-            selfFrame.size = newImage.size;
-            selfFrame.origin = CGPointMake(0, 0);
-            self.frame = selfFrame;
-            self.superview.frame = self.frame;
-            [newImage release];
+//            NSRect selfFrame = self.frame;
+//            selfFrame.size = newImage.size;
+//            selfFrame.origin = CGPointMake(0, 0);
+//            self.frame = selfFrame;
+//            self.superview.frame = self.frame;
+//            [newImage release];
         }
         
             //if the drag comes from a file, set the window title to the filename
         fileURL=[NSURL URLFromPasteboard: [sender draggingPasteboard]];
-        [[self window] setTitle: fileURL!=NULL ? [fileURL absoluteString] : @"(no name)"];
+//        [[self window] setTitle: fileURL!=NULL ? [fileURL absoluteString] : @"(no name)"];
+        if ([self.delegate respondsToSelector:@selector(dropComplete:)]) {
+            [self.delegate dropComplete:[fileURL path]];
+        }
     }
     
     return YES;
