@@ -19,6 +19,8 @@ typedef enum {
     QWMessageTypeReply
 } QWMessageType;
 
+#define ATEntityPropertyNamedFullImage @"fullImage"
+
 #import <Foundation/Foundation.h>
 
 @interface QWMessage : NSObject
@@ -28,12 +30,16 @@ typedef enum {
 @property (copy) NSString *head;
 @property (copy) NSString *text;
 @property (copy, readonly) NSString *time;
-@property (copy) NSString *image;
+@property (copy) NSString *imageURL;
+@property (readonly) NSString *thumbnailImageURL;
+@property (readonly) NSString *fullImageURL;
 @property (assign) double timestamp;
 @property (retain) QWMessage *source;
 @property (assign) QWMessageType type;
 @property (assign) BOOL isNew;
 @property (retain) NSMutableAttributedString *richText;
+@property (retain) NSImage *fullImage;
+@property (assign) BOOL imageLoading;
 
 - (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType;
 - (id)initWithJSON:(NSDictionary *)dict;

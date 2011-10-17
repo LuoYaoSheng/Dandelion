@@ -11,7 +11,19 @@
 
 @interface QWMessage ()
 
+- (void)loadFullImage;
+
 @end
+
+static NSOperationQueue *ATSharedOperationQueue() {
+    static NSOperationQueue *_ATSharedOperationQueue = nil;
+    if (_ATSharedOperationQueue == nil) {
+        _ATSharedOperationQueue = [[NSOperationQueue alloc] init];
+        // We limit the concurrency to see things easier for demo purposes. The default value NSOperationQueueDefaultMaxConcurrentOperationCount will yield better results, as it will create more threads, as appropriate for your processor
+        [_ATSharedOperationQueue setMaxConcurrentOperationCount:2];
+    }
+    return _ATSharedOperationQueue;    
+}
 
 @implementation QWMessage
 
@@ -20,11 +32,13 @@
 @synthesize head = _head;
 @synthesize text = _text;
 @synthesize timestamp = _timestamp;
-@synthesize image = _image;
+@synthesize imageURL = _imageURL;
 @synthesize source = _source;
 @synthesize type = _type;
 @synthesize isNew = _isNew;
 @synthesize richText = _richText;
+@synthesize fullImage = _fullImage;
+@synthesize imageLoading;
 
 - (NSString *)time
 {
@@ -66,6 +80,36 @@
     [attrString release];
 }
 
+- (NSString *)thumbnailImageURL
+{
+    if (self.imageURL && ![self.imageURL isEqualToString:@""]) {
+        return [self.imageURL stringByAppendingPathComponent:@"160"];
+    }
+    return @"";
+}
+
+- (NSString *)fullImageURL
+{
+    if (self.imageURL && ![self.imageURL isEqualToString:@""]) {
+        return [self.imageURL stringByAppendingPathComponent:@"2000"];
+    }
+    return @"";
+}
+
+- (NSImage *)fullImage {
+    if (_fullImage == nil && !self.imageLoading) {
+        // Load the image lazily
+        [self loadFullImage];
+    }        
+    return _fullImage;
+}
+
+- (void)setFullImage:(NSImage *)fullImage
+{
+    [_fullImage autorelease];
+    _fullImage = [fullImage retain];
+}
+
 - (id)init
 {
     if ((self = [super init])) {
@@ -81,7 +125,7 @@
         self.head = aHead;
         self.text = aText;
         self.timestamp = aTimestamp;
-        self.image = aImage;
+        self.imageURL = aImage;
         self.source = aSource;
         self.type = aType;
     }
@@ -107,11 +151,31 @@
             text = [NSString stringWithFormat:@"-------------------\n@%@:%@", source.nick, source.text];
         else 
             text = [NSString stringWithFormat:@"%@\n-------------------\n@%@:%@", text, source.nick, source.text];
-        if (![source.image isEqualToString:@""])
-            image = source.image;
+        if (![source.imageURL isEqualToString:@""])
+            image = source.imageURL;
     }
     QWMessageType type = (QWMessageType)[dict objectForKey:@"type"];
     return [self initWithTweetId:tweetId Nick:nick head:head text:text timestamp:timestamp image:image source:source type:type];
+}
+
+- (void)loadFullImage
+{
+    @synchronized (self) {
+        if (!self.imageLoading) {
+            self.imageLoading = YES;
+            // We would have to keep track of the block with an NSBlockOperation, if we wanted to later support cancelling operations that have scrolled offscreen and are no longer needed. That will be left as an exercise to the user.
+            [ATSharedOperationQueue() addOperationWithBlock:^(void) {
+                NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:self.fullImageURL]];
+                if (image != nil) {
+                    @synchronized (self) {
+                        self.imageLoading = NO;
+                        self.fullImage = image;
+                    }
+                    [image release];
+                }
+            }];
+        }
+    }
 }
 
 - (void)dealloc
@@ -120,9 +184,10 @@
     [_nick release];
     [_head release];
     [_text release];
-    [_image release];
+    [_imageURL release];
     [_source release];
     [_richText release];
+    [_fullImage release];
     
     [super dealloc];
 }

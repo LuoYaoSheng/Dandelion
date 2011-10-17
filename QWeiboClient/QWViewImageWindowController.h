@@ -7,11 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "QWMessage.h"
 
-@interface QWViewImageWindowController : NSWindowController
+@interface QWViewImageWindowController : NSWindowController {
+
+}
 
 @property (assign) IBOutlet NSImageView *imageView;
+@property (assign) IBOutlet NSProgressIndicator *progessIndicator;
+@property (retain) QWMessage *message;
 
-- (void)loadImage:(NSString *)imageURL;
+- (void)loadImageForMessage:(QWMessage *)message;
 
 @end

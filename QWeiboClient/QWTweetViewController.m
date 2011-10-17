@@ -277,9 +277,9 @@
         [cell.textLabel setLinkTextAttributes:nil];
         [cell.textLabel.textStorage setAttributedString:message.richText];
         cell.timeLabel.stringValue = message.time;
-        if (message.image && ![message.image isEqualToString:@""]) {
+        if (message.thumbnailImageURL && ![message.thumbnailImageURL isEqualToString:@""]) {
             [cell.imageButton setHidden:NO];
-            cell.imageButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:[message.image stringByAppendingPathComponent:@"160"]]] autorelease];
+            cell.imageButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.thumbnailImageURL]] autorelease];
         }
         else 
             [cell.imageButton setHidden:YES];
@@ -295,7 +295,7 @@
     else {
         float height = [[self.heightList objectAtIndex:row] floatValue] + 35;
         QWMessage *message = [self.listContent objectAtIndex:row];
-        if (![message.image isEqualToString:@""])
+        if (![message.thumbnailImageURL isEqualToString:@""])
             height += 145;
         if (height < MIN_HEIGHT)
             height = MIN_HEIGHT;
@@ -324,7 +324,7 @@
         _viewImageController = [[QWViewImageWindowController alloc] initWithWindowNibName:@"QWViewImageWindowController"];
     QWMessage *message = [self.listContent objectAtIndex:rowIndex];
     [_viewImageController showWindow:nil];
-    [_viewImageController loadImage:[message.image stringByAppendingPathComponent:@"2000"]];
+    [_viewImageController loadImageForMessage:message];
 }
 
 - (void)listViewResize:(PXListView *)aListView
