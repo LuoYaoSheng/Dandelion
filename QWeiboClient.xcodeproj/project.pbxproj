@@ -38,6 +38,9 @@
 		352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE06A1441457300AB7913 /* ListViewEndCell.m */; };
 		352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE06C1441458200AB7913 /* ListViewEndCell.xib */; };
 		352EE0781441916700AB7913 /* end.png in Resources */ = {isa = PBXBuildFile; fileRef = 352EE0771441916700AB7913 /* end.png */; };
+		353C6C5E144BCAC500E67DE4 /* ScrollViewPassive.m in Sources */ = {isa = PBXBuildFile; fileRef = 353C6C5D144BCAC400E67DE4 /* ScrollViewPassive.m */; };
+		353C6C73144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m in Sources */ = {isa = PBXBuildFile; fileRef = 353C6C72144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m */; };
+		353C6C9E144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = 353C6C9D144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m */; };
 		35809B411443D1FC00CB02C2 /* QWTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35809B3F1443D1FC00CB02C2 /* QWTweetViewController.m */; };
 		35809B421443D1FC00CB02C2 /* QWTweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */; };
 		35809B6E1444229F00CB02C2 /* status_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B6C1444229F00CB02C2 /* status_on.png */; };
@@ -156,6 +159,12 @@
 		352EE06A1441457300AB7913 /* ListViewEndCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewEndCell.m; sourceTree = "<group>"; };
 		352EE06C1441458200AB7913 /* ListViewEndCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewEndCell.xib; sourceTree = "<group>"; };
 		352EE0771441916700AB7913 /* end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = end.png; sourceTree = "<group>"; };
+		353C6C5C144BCAC400E67DE4 /* ScrollViewPassive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewPassive.h; sourceTree = "<group>"; };
+		353C6C5D144BCAC400E67DE4 /* ScrollViewPassive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewPassive.m; sourceTree = "<group>"; };
+		353C6C71144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NS(Attributed)String+Geometrics.h"; sourceTree = "<group>"; };
+		353C6C72144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NS(Attributed)String+Geometrics.m"; sourceTree = "<group>"; };
+		353C6C9C144C0B7000E67DE4 /* NSAttributedString+Hyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Hyperlink.h"; sourceTree = "<group>"; };
+		353C6C9D144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Hyperlink.m"; sourceTree = "<group>"; };
 		35809B3E1443D1FC00CB02C2 /* QWTweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWTweetViewController.h; sourceTree = "<group>"; };
 		35809B3F1443D1FC00CB02C2 /* QWTweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWTweetViewController.m; sourceTree = "<group>"; };
 		35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWTweetViewController.xib; sourceTree = "<group>"; };
@@ -390,6 +399,8 @@
 				350713FE14497D100080D041 /* FlippedView.m */,
 				3583177C144AB9AC0057A1FE /* DragDropImageView.h */,
 				3583177D144AB9AD0057A1FE /* DragDropImageView.m */,
+				353C6C5C144BCAC400E67DE4 /* ScrollViewPassive.h */,
+				353C6C5D144BCAC400E67DE4 /* ScrollViewPassive.m */,
 			);
 			name = CustomControl;
 			sourceTree = "<group>";
@@ -459,6 +470,10 @@
 		35E98D2E14287EA0005B9A15 /* Catogories */ = {
 			isa = PBXGroup;
 			children = (
+				353C6C9C144C0B7000E67DE4 /* NSAttributedString+Hyperlink.h */,
+				353C6C9D144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m */,
+				353C6C71144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.h */,
+				353C6C72144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m */,
 				35B61E48143E85630001741D /* NSObject+Universal.h */,
 				35B61E49143E85630001741D /* NSObject+Universal.m */,
 				35E98D3914287ECF005B9A15 /* NSDate+Categories.h */,
@@ -608,6 +623,9 @@
 				35E6368614494A2300619046 /* QWViewImageWindowController.m in Sources */,
 				350713FF14497D100080D041 /* FlippedView.m in Sources */,
 				3583177E144AB9AD0057A1FE /* DragDropImageView.m in Sources */,
+				353C6C5E144BCAC500E67DE4 /* ScrollViewPassive.m in Sources */,
+				353C6C73144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m in Sources */,
+				353C6C9E144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

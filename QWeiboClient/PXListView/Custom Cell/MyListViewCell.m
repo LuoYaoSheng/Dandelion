@@ -19,6 +19,7 @@
 @synthesize textLabel = _textLabel;
 @synthesize imageButton = _imageButton;
 @synthesize toolbarView = _toolbarView;
+@synthesize scrollView = _scrollView;
 
 #pragma mark - Init/Dealloc
 
@@ -57,7 +58,7 @@
 - (void)prepareForReuse
 {
     self.headButton.image = nil;
-	self.textLabel.stringValue = @"";
+	self.textLabel.string = @"";
 }
 
 #pragma mark - Drawing
@@ -134,7 +135,7 @@
     if([attribute isEqualToString:NSAccessibilityDescriptionAttribute]
 			or [attribute isEqualToString:NSAccessibilityTitleAttribute])
 	{
-		return [self.textLabel stringValue];
+		return [self.textLabel string];
 	}
     
 	if([attribute isEqualToString:NSAccessibilityEnabledAttribute])

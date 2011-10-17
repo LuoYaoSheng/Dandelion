@@ -6,6 +6,9 @@
 //  Copyright 2011年 __MyCompanyName__. All rights reserved.
 //
 
+#define RGBCOLOR(R,G,B)                                     [NSColor colorWithDeviceRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
+#define LINK_COLOR                                          RGBCOLOR(0,64,128)
+
 #define APP_KEY                                             @"c3fc7da94f594e219f92ee68c1eaf06b"
 #define APP_SECRET                                          @"658fb582a1c44f2ae47ce7a27c3a7aed"
 #define REQUEST_TOKEN_KEY                                   @"REQUEST_TOKEN_KEY"
@@ -14,8 +17,6 @@
 #define ACCESS_TOKEN_SECRET_KEY                             @"ACCESS_TOKEN_SECRET_KEY"
 
 #define LISTVIEW_RESIZED_NOTIFICATION                       @"LISTVIEW_RESIZED_NOTIFICATION"
-#define RGBCOLOR(R,G,B)                                     [NSColor colorWithDeviceRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:1.0f]
-
 #define GET_TIMELINE_NOTIFICATION                           @"GET_TIMELINE_NOTIFICATION"
 #define GET_METHIONS_NOTIFICATION                           @"GET_METHIONS_NOTIFICATION"
 #define GET_MESSAGES_NOTIFICATION                           @"GET_MESSAGES_NOTIFICATION"

@@ -17,6 +17,7 @@
 
 - (void)handleRetweetCickedInCell:(PXListViewCell*)theCell;
 - (void)handleAddFavoriteClickedInCell:(PXListViewCell*)theCell;
+- (void)handleImageClickedInCell:(PXListViewCell*)theCell;
 
 - (BOOL)attemptDragWithMouseDown:(NSEvent*)theEvent inCell:(PXListViewCell*)theCell;
 - (NSImage*)dragImageForRowsWithIndexes:(NSIndexSet *)dragRows

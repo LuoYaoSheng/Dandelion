@@ -11,14 +11,16 @@
 
 @interface MyListViewCell : PXListViewCell
 {
+    NSScrollView *_scrollView;
 }
 
 @property (assign) IBOutlet NSButton *headButton;
 @property (assign) IBOutlet NSTextField *nameLabel;
 @property (assign) IBOutlet NSTextField *timeLabel;
-@property (assign) IBOutlet NSTextField *textLabel;
+@property (assign) IBOutlet NSTextView *textLabel;
 @property (assign) IBOutlet NSButton *imageButton;
 @property (assign) IBOutlet NSView *toolbarView;
+@property (assign) IBOutlet NSScrollView *scrollView;
 
 - (IBAction)retweetCicked:(id)sender;
 - (IBAction)addFavoriteClicked:(id)sender;

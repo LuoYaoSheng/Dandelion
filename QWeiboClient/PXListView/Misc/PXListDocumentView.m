@@ -60,6 +60,11 @@
 	}
 }
 
+- (PXListViewDropHighlight)dropHighlight
+{
+    return _dropHighlight;
+}
+
 -(void)	setDropHighlight: (PXListViewDropHighlight)inState
 {
 	_dropHighlight = inState;

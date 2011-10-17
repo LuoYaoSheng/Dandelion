@@ -13,6 +13,7 @@
 #import "ListViewEndCell.h"
 #import <Growl/Growl.h>
 #import "QWViewImageWindowController.h"
+#import "NS(Attributed)String+Geometrics.h"
 
 #define MIN_HEIGHT  70
 
@@ -219,12 +220,7 @@
     [self.heightList removeAllObjects];
     for (QWMessage *message in self.listContent) {
         CGFloat width = self.listView.contentView.frame.size.width;
-        NSTextField *textField = [[NSTextField alloc] initWithFrame:CGRectMake(0, 0, width-60-15, 1000)];
-        textField.font = [NSFont systemFontOfSize:12];
-        textField.stringValue = message.text;
-        NSSize size = [textField.cell cellSizeForBounds:textField.frame];
-        [textField release];
-        [self.heightList addObject:[NSNumber numberWithFloat:size.height]];
+        [self.heightList addObject:[NSNumber numberWithFloat:[message.richText heightForWidth:width-61-15]]];
     }
 }
 
@@ -261,11 +257,11 @@
         }
         
         // Set up the new cell:
-        CGRect textLabelFrame = cell.textLabel.frame;
+        CGRect textLabelFrame = cell.scrollView.frame;
         float diffHeight = [[self.heightList objectAtIndex:row] floatValue] - textLabelFrame.size.height;
         textLabelFrame.size.height += diffHeight;
         textLabelFrame.origin.y -= diffHeight;
-        cell.textLabel.frame = textLabelFrame;
+        cell.scrollView.frame = textLabelFrame;
         
 //        CGRect imageViewFrame = cell.imageView.frame;
 //        imageViewFrame.origin.y = CGRectGetMinY(cell.textLabel.frame);
@@ -278,7 +274,8 @@
             cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
         else
             cell.headButton.image = [NSImage imageNamed:@"NSUser"];
-        cell.textLabel.stringValue = message.text;
+        [cell.textLabel setLinkTextAttributes:nil];
+        [cell.textLabel.textStorage setAttributedString:message.richText];
         cell.timeLabel.stringValue = message.time;
         if (message.image && ![message.image isEqualToString:@""]) {
             [cell.imageButton setHidden:NO];
@@ -296,7 +293,7 @@
     if (row == [self.listContent count]) 
         return 40;
     else {
-        float height = [[self.heightList objectAtIndex:row] floatValue] + 24;
+        float height = [[self.heightList objectAtIndex:row] floatValue] + 35;
         QWMessage *message = [self.listContent objectAtIndex:row];
         if (![message.image isEqualToString:@""])
             height += 145;

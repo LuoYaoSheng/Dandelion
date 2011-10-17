@@ -7,6 +7,7 @@
 //
 
 #import "QWMessage.h"
+#import "NSAttributedString+Hyperlink.h"
 
 @interface QWMessage ()
 
@@ -23,10 +24,46 @@
 @synthesize source = _source;
 @synthesize type = _type;
 @synthesize isNew = _isNew;
+@synthesize richText = _richText;
 
 - (NSString *)time
 {
     return [[NSDate dateWithTimeIntervalSince1970:self.timestamp] normalizeDateString];
+}
+
+- (NSString *)text
+{
+    return _text;
+}
+
+- (void)setText:(NSString *)text
+{
+    [_text autorelease];
+    _text = [text copy];
+    
+    NSString *regexString = @"<a href=\"(.*)\" target=\"_blank\">(.*)</a>";   
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:NULL];
+    NSArray *results = [regex matchesInString:text options:0 range:NSMakeRange(0, [text length])];
+    NSMutableArray *links = [NSMutableArray array];
+    for(id result in results)
+    {
+        NSString *url = [text substringWithRange:[result rangeAtIndex:1]];
+        NSString *linkString = [text substringWithRange:[result rangeAtIndex:2]];
+        [links addObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithRange:[result range]], @"range", url, @"url", linkString, @"linkString", nil]];
+    }
+   
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
+    NSRange range = NSMakeRange(0, attrString.length);
+    [attrString addAttribute:NSCursorAttributeName value:[NSCursor arrowCursor] range:range];
+    [attrString addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:12.0] range:range];
+    
+    for (NSDictionary *dict in links) {
+        [attrString replaceCharactersInRange:[[dict objectForKey:@"range"] rangeValue] withAttributedString:[NSAttributedString hyperlinkFromString:[dict objectForKey:@"linkString"] withURL:[dict objectForKey:@"url"]]];
+    }
+    self.richText = attrString;
+    [attrString release];
 }
 
 - (id)init
@@ -85,6 +122,7 @@
     [_text release];
     [_image release];
     [_source release];
+    [_richText release];
     
     [super dealloc];
 }
