@@ -102,7 +102,7 @@
 								</object>
 								<object class="NSImageView" id="92567135">
 									<reference key="NSNextResponder" ref="391322067"/>
-									<int key="NSvFlags">268</int>
+									<int key="NSvFlags">292</int>
 									<object class="NSMutableSet" key="NSDragTypes">
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<object class="NSArray" key="set.sortedObjects">
@@ -483,7 +483,6 @@
 							<string key="NSFrame">{{65, 576}, {331, 5}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:1459</string>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
