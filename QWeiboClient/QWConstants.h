@@ -39,6 +39,8 @@
 #define GET_MY_BROADCAST_URL                                @"http://open.t.qq.com/api/statuses/broadcast_timeline"
 #define GET_USER_BROADCAST_URL                              @"http://open.t.qq.com/api/statuses/user_timeline"
 #define GET_PUBLIC_TIMELINE_URL                             @"http://open.t.qq.com/api/statuses/public_timeline"
+#define ADD_FAVORITE_URL                                    @"http://open.t.qq.com/api/fav/addt"
+#define DELETE_FAVORITE_URL                                 @"http://open.t.qq.com/api/fav/delt"
 
 #define GROWL_NOTIFICATION_TIMELINE                         @"Timeline"
 #define GROWL_NOTIFICATION_MENTHIONS                        @"Mentions"

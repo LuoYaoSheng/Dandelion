@@ -52,6 +52,7 @@
 		359250521426E85500F164D0 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359E5EBC144D6E14009E5ADC /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 359E5EBB144D6E14009E5ADC /* head.jpg */; };
+		359E5EBE144D7C80009E5ADC /* badge-favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 359E5EBD144D7C80009E5ADC /* badge-favorite.png */; };
 		35B12EB1141FAF3000F963FC /* ToolboxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB0141FAF3000F963FC /* ToolboxView.m */; };
 		35B12EB4141FB18F00F963FC /* QWVerifyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB3141FB18F00F963FC /* QWVerifyWindowController.m */; };
 		35B12EB6141FB1A300F963FC /* QWVerifyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */; };
@@ -179,6 +180,7 @@
 		3592504A1426E60900F164D0 /* JSONURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONURLConnection.m; sourceTree = "<group>"; };
 		359250511426E85500F164D0 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = QWeiboClient/Frameworks/YAJL.framework; sourceTree = "<group>"; };
 		359E5EBB144D6E14009E5ADC /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head.jpg; sourceTree = "<group>"; };
+		359E5EBD144D7C80009E5ADC /* badge-favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-favorite.png"; sourceTree = "<group>"; };
 		35B12EAF141FAF3000F963FC /* ToolboxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolboxView.h; sourceTree = "<group>"; };
 		35B12EB0141FAF3000F963FC /* ToolboxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolboxView.m; sourceTree = "<group>"; };
 		35B12EB2141FB18F00F963FC /* QWVerifyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWVerifyWindowController.h; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				35D57F18144ACC4200D071F2 /* sidebar-bottom.png */,
 				353C6CC4144C537200E67DE4 /* blackx.png */,
 				359E5EBB144D6E14009E5ADC /* head.jpg */,
+				359E5EBD144D7C80009E5ADC /* badge-favorite.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				35D57F19144ACC4200D071F2 /* sidebar-bottom.png in Resources */,
 				353C6CC5144C537200E67DE4 /* blackx.png in Resources */,
 				359E5EBC144D6E14009E5ADC /* head.jpg in Resources */,
+				359E5EBE144D7C80009E5ADC /* badge-favorite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

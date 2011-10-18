@@ -196,6 +196,22 @@
     [self postDataWithURL:url Parameters:parameters Files:nil delegate:self tag:JSONURLConnectionTagPublishMessage];
 }
 
+- (void)addFavorite:(NSString *)tweetId
+{
+    NSString *url = ADD_FAVORITE_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:tweetId forKey:@"id"];
+    [self postDataWithURL:url Parameters:parameters Files:nil delegate:self tag:JSONURLConnectionTagAddFavorite];
+}
+
+- (void)deleteFavorite:(NSString *)tweetId
+{
+    NSString *url = DELETE_FAVORITE_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:tweetId forKey:@"id"];
+    [self postDataWithURL:url Parameters:parameters Files:nil delegate:self tag:JSONURLConnectionTagDeleteFavorite];
+}
+
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag
 {
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_KEY];
@@ -359,6 +375,20 @@
         case JSONURLConnectionTagGetUpdateCount:
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:GET_UPDATE_COUNT_NOTIFICATION object:[json objectForKey:@"data"]];
+            break;            
+        }
+        case JSONURLConnectionTagAddFavorite:
+        {
+            if ([self.delegate respondsToSelector:@selector(addFavorite)]) {
+                [self.delegate addedFavorite];
+            }
+            break;            
+        }
+        case JSONURLConnectionTagDeleteFavorite:
+        {
+            if ([self.delegate respondsToSelector:@selector(deleteFavorite)]) {
+                [self.delegate deletedFavorite];
+            }
             break;            
         }
         default:

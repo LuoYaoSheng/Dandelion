@@ -16,7 +16,9 @@ enum {
 	JSONURLConnectionTagGetUserInfo,
 	JSONURLConnectionTagPublishMessage,
     JSONURLConnectionTagGetUpdateCount,
+    JSONURLConnectionTagAddFavorite,
     JSONURLConnectionTagGetPublicTimeline,
+    JSONURLConnectionTagDeleteFavorite,
 };
 
 typedef enum {
@@ -48,6 +50,8 @@ typedef enum {
 - (void)receivedLastTweets:(NSArray *)tweets info:(NSDictionary *)info;
 - (void)receivedOlderTweets:(NSArray *)tweets info:(NSDictionary *)info;
 - (void)receivedNewerTweets:(NSArray *)tweets;
+- (void)addedFavorite;
+- (void)deletedFavorite;
 
 @end
 
@@ -74,5 +78,7 @@ typedef enum {
 - (void)retweet:(NSString *)message reid:(NSString *)reid;
 - (void)beginUpdating;
 - (void)stopUpdating;
+- (void)addFavorite:(NSString *)tweetId;
+- (void)deleteFavorite:(NSString *)tweetId;
 
 @end

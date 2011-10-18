@@ -219,6 +219,8 @@
     [self activateViewController:viewController];
     QWTweetViewController *timelineController = (QWTweetViewController *)viewController;
     [timelineController getLastTweets];
+    
+    [api getUserInfo];
 }
 
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo

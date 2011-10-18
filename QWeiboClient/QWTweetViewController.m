@@ -252,6 +252,16 @@
     }
 }
 
+- (void)addedFavorite
+{
+    
+}
+
+- (void)deletedFavorite
+{
+    
+}
+
 - (void)reloadTable:(BOOL)scrollToTop
 {
     [self measureData];
@@ -360,7 +370,8 @@
 
 - (void)listView:(PXListView *)aListView addFavoriteForRow:(NSUInteger)rowIndex
 {
-    
+    QWMessage *message = [self.listContent objectAtIndex:rowIndex];
+    [api addFavorite:message.tweetId];
 }
 
 - (void)listView:(PXListView *)aListView imageClickedForRow:(NSUInteger)rowIndex

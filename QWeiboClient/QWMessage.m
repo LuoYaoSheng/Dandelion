@@ -169,7 +169,6 @@ static NSOperationQueue *ATSharedOperationQueue() {
             // We would have to keep track of the block with an NSBlockOperation, if we wanted to later support cancelling operations that have scrolled offscreen and are no longer needed. That will be left as an exercise to the user.
             [ATSharedOperationQueue() addOperationWithBlock:^(void) {
                 NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:self.fullImageURL]];
-                NSLog(self.fullImageURL);
                 if (image != nil) {
                     @synchronized (self) {
                         self.imageLoading = NO;
