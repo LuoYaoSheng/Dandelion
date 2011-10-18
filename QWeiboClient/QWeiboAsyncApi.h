@@ -24,6 +24,9 @@ typedef enum {
     TweetTypeMethions,
     TweetTypeMessages,
     TweetTypeFavorites,
+    TweetTypeMyBroadcast,
+    TweetTypeUserBroadcast,
+    TweetTypeSearch,
 } TweetType;
 
 typedef enum {
@@ -60,9 +63,9 @@ typedef enum {
 							requestTokenKey:(NSString *)aRequestTokenKey
 						 requestTokenSecret:(NSString *)aRequestTokenSecret 
 									 verify:(NSString *)aVerify;
-- (void)getLastTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize;
-- (void)getOlderTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime;
-- (void)getNewerTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime;
+- (void)getLastTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize userName:(NSString *)userName;
+- (void)getOlderTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName;
+- (void)getNewerTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName;
 - (void)getUserInfo;
 - (void)publishMessage:(NSString *)message;
 - (void)publishMessage:(NSString *)message withPicture:(NSString *)filePath;

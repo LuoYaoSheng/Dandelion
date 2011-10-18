@@ -38,20 +38,37 @@
 @synthesize reloadCell = _reloadCell;
 @synthesize mainWindowController = _mainWindowController;
 @synthesize newTweetCount = _newTweetCount;
+@synthesize userName = _userName;
+@synthesize tweetType = _tweetType;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type
+- (NSString *)userName
+{
+    return _userName;
+}
+
+- (void)setUserName:(NSString *)userName
+{
+    if (!((!userName && !_userName) || (userName && _userName && [userName isEqualToString:_userName]))) { 
+        [_userName release];
+        _userName = [userName copy];
+        [self getLastTweets];
+    }
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type userName:(NSString *)userName
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
         self.newTweetCount = 0;
-        tweetType = type;
+        self.tweetType = type;
         self.listContent = [[[NSMutableArray alloc] init] autorelease];
         self.heightList = [[[NSMutableArray alloc] init] autorelease];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
         api = [[QWeiboAsyncApi alloc] init];
         api.delegate = self;
-        
+        _userName = [userName copy];
+
         hasNext = YES;
         oldestPageTime = 0;
         newestPageTime = 0;
@@ -70,7 +87,20 @@
 
 - (void)awakeFromNib
 {
-    switch (tweetType) {
+   
+    [self.listView setCellSpacing:0.0f];
+	[self.listView setAllowsEmptySelection:YES];
+	[self.listView setAllowsMultipleSelection:YES];
+}
+
+- (void)windowResized:(NSNotification *)notification
+{
+    [self reloadTable:NO];
+}
+
+- (void)getLastTweets
+{
+    switch (self.tweetType) {
         case TweetTypeTimeline: {
             self.title = @"Timeline";
             break;
@@ -87,40 +117,37 @@
             self.title = @"Favorites";
             break;
         }
+        case TweetTypeMyBroadcast: {
+            self.title = @"我";
+            break;
+        }
+        case TweetTypeUserBroadcast: {
+            self.title = self.userName;
+            break;
+        }
         default:
             break;
     }
-    [self.listView setCellSpacing:0.0f];
-	[self.listView setAllowsEmptySelection:YES];
-	[self.listView setAllowsMultipleSelection:YES];
-}
-
-- (void)windowResized:(NSNotification *)notification
-{
-    [self reloadTable:NO];
-}
-
-- (void)getLastTweets
-{
+    
     isLoading = YES;
-    [api getLastTweetsWithTweetType:tweetType pageSize:20];
+    [api getLastTweetsWithTweetType:self.tweetType pageSize:20 userName:self.userName];
 }
 
 - (void)fetchOlderTweets
 {
     isLoading = YES;
-    [api getOlderTweetsWithTweetType:tweetType pageSize:20 pageTime:oldestPageTime];
+    [api getOlderTweetsWithTweetType:self.tweetType pageSize:20 pageTime:oldestPageTime userName:self.userName];
 }
 
 - (void)fetchNewerTweets
 {
-    [api getNewerTweetsWithTweetType:tweetType pageSize:10 pageTime:newestPageTime];
+    [api getNewerTweetsWithTweetType:self.tweetType pageSize:10 pageTime:newestPageTime userName:self.userName];
 }
 
 - (void)beginUpdating
 {
     NSTimeInterval interval;
-    switch (tweetType) {
+    switch (self.tweetType) {
         case TweetTypeTimeline: {
             interval = UPDATE_INTERVAL_TIMELINE;
             break;
@@ -179,22 +206,22 @@
     if (tweets.count > 0) {
         newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
         for (QWMessage *message in tweets) {
-            switch (tweetType) {
+            switch (self.tweetType) {
                 case TweetTypeTimeline: {
                     [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
-                    if (tweetType != self.mainWindowController.selectedTweetType)
+                    if (self.tweetType != self.mainWindowController.selectedTweetType)
                         [self.mainWindowController.timelineBadge setHidden:NO];
                     break;
                 }
                 case TweetTypeMethions: {
                     [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
-                    if (tweetType != self.mainWindowController.selectedTweetType)
+                    if (self.tweetType != self.mainWindowController.selectedTweetType)
                         [self.mainWindowController.timelineBadge setHidden:NO];
                     break;
                 }
                 case TweetTypeMessages: {
                     [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
-                    if (tweetType != self.mainWindowController.selectedTweetType)
+                    if (self.tweetType != self.mainWindowController.selectedTweetType)
                         [self.mainWindowController.timelineBadge setHidden:NO];
                     break;
                 }
@@ -327,6 +354,12 @@
     [_viewImageController loadImageForMessage:message];
 }
 
+- (void)listView:(PXListView *)aListView headClickedForRow:(NSUInteger)rowIndex
+{
+    QWMessage *message = [self.listContent objectAtIndex:rowIndex];
+    [self.mainWindowController toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:message.name, @"userName", nil]];
+}
+
 - (void)listViewResize:(PXListView *)aListView
 {
     [self reloadTable:NO];
@@ -340,6 +373,7 @@
     [_heightList release];
     [_reloadCell release];
     [api release];
+    [_userName release];
     [super dealloc];  
 }
 

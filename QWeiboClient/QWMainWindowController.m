@@ -15,7 +15,7 @@
 @interface QWMainWindowController ()
 
 - (void)activateViewController:(NSViewController*)controller;
-- (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type;
+- (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type userName:(NSString *)userName;
 - (void)switchImageForButton:(NSButton *)button;
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 - (void)updateBadge:(NSDictionary *)info;
@@ -31,6 +31,7 @@
 @synthesize mentionsBadge = _mentionsBadge;
 @synthesize messagesBadge = _messagesBadge;
 @synthesize selectedTweetType;
+@synthesize matrix = _matrix;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -38,7 +39,7 @@
     if (self) {
         // Initialization code here.
         allControllers = [[NSMutableDictionary alloc] init];
-        selectedIndex = 1;
+        selectedTab = 1;
         api = [[QWeiboAsyncApi alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hasSendMessage:) name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
@@ -56,11 +57,11 @@
 
     [api getUserInfo];
 
-    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
+    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline userName:nil];
     [self activateViewController:viewController];
-    viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions];
+    viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions userName:nil];
     [viewController loadView];
-    viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages];
+    viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages userName:nil];
     [viewController loadView];
 }
 
@@ -75,16 +76,18 @@
     [super dealloc];
 }
 
-- (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type
+- (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type userName:(NSString *)userName
 {
     NSViewController* controller = [allControllers objectForKey:name];
-    if ( controller ) return controller;
+    if (controller) {
+        return controller;
+    }
     
     if (type == TweetTypeNone) {
         Class controllerClass = NSClassFromString( name );
         controller = [[controllerClass alloc] initWithNibName:name bundle:nil];
     } else {
-        controller = [[QWTweetViewController alloc] initWithNibName:@"QWTweetViewController" bundle:nil tweetType:type];
+        controller = [[QWTweetViewController alloc] initWithNibName:@"QWTweetViewController" bundle:nil tweetType:type userName:userName];
         ((QWTweetViewController *)controller).mainWindowController = self;
     }
     [allControllers setObject:controller forKey:name];
@@ -112,59 +115,74 @@
     controller.view.frame = frame;
 }
 
-- (IBAction)toggleTab:(id)sender 
+- (IBAction)switchButtonClicked:(id)sender
 {
-    NSMatrix *matrix = (NSMatrix *)sender;
-    NSButton *button = (NSButton *)matrix.selectedCell;
-    [self switchImageForButton:button];
-    [self switchImageForButton:[matrix cellWithTag:selectedIndex]];
-    selectedIndex = button.tag;
-    switch (selectedIndex) {
+    [self toggleTab:(QWShowTab)[self.matrix.selectedCell tag] withInfo:nil];
+}
+
+- (void)toggleTab:(QWShowTab)tab withInfo:(NSDictionary *)info
+{
+    [self switchImageForButton:[self.matrix cellWithTag:selectedTab]];
+    [self switchImageForButton:[self.matrix cellWithTag:tab]];
+    
+    NSViewController *viewController;
+    switch (tab) {
         case QWShowTabTimeline:
         {
             [self.timelineBadge setHidden:YES];
-            NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
-            [self activateViewController:viewController];
+            viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline userName:nil];
             self.selectedTweetType = TweetTypeTimeline;
             break;
         }
         case QWShowTabMethions:
         {
             [self.mentionsBadge setHidden:YES];
-            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions];
-            [self activateViewController:viewController];
+            viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions userName:nil];
             self.selectedTweetType = TweetTypeMethions;
             break;
         }
         case QWShowTabMessages:
         {
             [self.messagesBadge setHidden:YES];
-            NSViewController *viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages];
-            [self activateViewController:viewController];
+            viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages userName:nil];
             self.selectedTweetType = TweetTypeMessages;
             break;
         }
         case QWShowTabFavorites:
         {
-            NSViewController *viewController = [self viewControllerForName:@"QWFavoritesViewController" tweetType:TweetTypeFavorites];
-            [self activateViewController:viewController];
+            viewController = [self viewControllerForName:@"QWFavoritesViewController" tweetType:TweetTypeFavorites userName:nil];
+            self.selectedTweetType = TweetTypeMessages;
             break;
         }
         case QWShowTabPeople:
         {
-//            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
-//            [self activateViewController:viewController];
+            if (info && [info objectForKey:@"userName"]) {
+                 viewController = [self viewControllerForName:@"QWPeopleViewController" tweetType:TweetTypeUserBroadcast userName:[info objectForKey:@"userName"]];
+                ((QWTweetViewController *)viewController).tweetType = TweetTypeUserBroadcast;
+                ((QWTweetViewController *)viewController).userName = [info objectForKey:@"userName"];
+            } else {
+                viewController = [self viewControllerForName:@"QWPeopleViewController" tweetType:TweetTypeMyBroadcast userName:nil];
+            }
             break;
         }
         case QWShowTabSearch:
         {
-//            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
-//            [self activateViewController:viewController];
+            //            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
+            //            [self activateViewController:viewController];
+            viewController = nil;
             break;
         }
         default:
             break;
     }
+    if (viewController)
+        [self activateViewController:viewController];
+    if (selectedTab == tab) {
+        if ([viewController isMemberOfClass:[QWTweetViewController class]]) {
+            [(QWTweetViewController *)viewController getLastTweets];
+        }
+    }
+    selectedTab = tab;
 }
 
 - (IBAction)publishMessage:(id)sender 
@@ -180,6 +198,11 @@
     [NSApp beginSheet:messageWindowController.window modalForWindow:self.window modalDelegate:self didEndSelector:@selector(didEndSheet:returnCode:contextInfo:) contextInfo:nil];
 }
 
+- (IBAction)headButtonClicked:(id)sender 
+{
+    [self toggleTab:QWShowTabTimeline withInfo:nil];   
+}
+
 - (IBAction)logout:(id)sender {
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:ACCESS_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:ACCESS_TOKEN_SECRET_KEY];
@@ -191,7 +214,7 @@
 {
     NSString *result = notification.object;
     NSLog(@"%@", result);
-    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline];
+    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline userName:nil];
     [self activateViewController:viewController];
     QWTweetViewController *timelineController = (QWTweetViewController *)viewController;
     [timelineController getLastTweets];

@@ -27,6 +27,7 @@ typedef enum {
 
 @property (copy) NSString *tweetId;
 @property (copy) NSString *nick;
+@property (copy) NSString *name;
 @property (copy) NSString *head;
 @property (copy) NSString *text;
 @property (copy, readonly) NSString *time;
@@ -41,7 +42,7 @@ typedef enum {
 @property (retain) NSImage *fullImage;
 @property (assign) BOOL imageLoading;
 
-- (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType;
+- (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick Name:(NSString *)aName head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType;
 - (id)initWithJSON:(NSDictionary *)dict;
 
 @end

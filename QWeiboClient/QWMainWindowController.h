@@ -24,7 +24,7 @@ typedef enum {
 {
     NSMutableDictionary *allControllers;
     NSViewController *currentViewController;
-    NSInteger selectedIndex;
+    QWShowTab selectedTab;
     QWeiboAsyncApi *api;
 }
 
@@ -35,10 +35,13 @@ typedef enum {
 @property (assign) IBOutlet NSImageView *mentionsBadge;
 @property (assign) IBOutlet NSImageView *messagesBadge;
 @property (assign) TweetType selectedTweetType;
+@property (assign) IBOutlet NSMatrix *matrix;
 
-- (IBAction)toggleTab:(id)sender;
+- (IBAction)switchButtonClicked:(id)sender;
+- (void)toggleTab:(QWShowTab)tab withInfo:(NSDictionary *)info;
 - (IBAction)publishMessage:(id)sender;
 - (IBAction)logout:(id)sender;
 - (void)retweetMessage:(QWMessage *)message;
+- (IBAction)headButtonClicked:(id)sender;
 
 @end

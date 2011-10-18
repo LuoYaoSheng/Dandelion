@@ -24,7 +24,6 @@
     double newestPageTime;
     
     BOOL isLoading;
-    TweetType tweetType;
     NSTimer *timer;
     QWViewImageWindowController *_viewImageController;
 }
@@ -34,8 +33,10 @@
 @property (assign) IBOutlet PXListView *listView;
 @property (assign) QWMainWindowController *mainWindowController;
 @property (assign) int newTweetCount;
+@property (copy) NSString *userName;
+@property (assign) TweetType tweetType;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type userName:(NSString *)userName;
 - (void)getLastTweets;
 - (void)fetchNewerTweets;
 

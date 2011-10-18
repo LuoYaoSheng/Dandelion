@@ -25,5 +25,6 @@
 - (IBAction)retweetCicked:(id)sender;
 - (IBAction)addFavoriteClicked:(id)sender;
 - (IBAction)imageClicked:(id)sender;
+- (IBAction)headClicked:(id)sender;
 
 @end

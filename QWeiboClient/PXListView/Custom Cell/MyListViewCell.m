@@ -161,4 +161,9 @@
     [[self listView] handleImageClickedInCell:self];
 }
 
+- (IBAction)headClicked:(id)sender 
+{
+    [[self listView] handleHeadClickedInCell:self];
+}
+
 @end

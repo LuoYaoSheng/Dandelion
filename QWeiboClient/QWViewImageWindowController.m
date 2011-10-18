@@ -74,7 +74,8 @@
     [NSAnimationContext endGrouping];
     
     NSRect imageViewFrame = self.imageView.frame;
-    imageViewFrame.size = self.imageView.image.size;
+    NSImageRep *imageRep = [[self.imageView.image representations] lastObject];
+    imageViewFrame.size = NSMakeSize(imageRep.pixelsWide, imageRep.pixelsHigh);
     self.imageView.frame = imageViewFrame;
     self.imageView.superview.frame = self.imageView.frame;
 }

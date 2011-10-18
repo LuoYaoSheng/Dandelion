@@ -18,7 +18,7 @@
 - (void)getUpdateCount:(BOOL)reset udpateType:(UpdateType)updateType;
 - (void)getDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
 - (void)postDataWithURL:(NSString *)url Parameters:(NSMutableDictionary *)parameters Files:(NSDictionary *)files delegate:(id)aDelegate tag:(JSONURLConnectionTag)tag;
-- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(PageFlag)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime tag:(JSONURLConnectionTag)tag;
+- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(PageFlag)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName tag:(JSONURLConnectionTag)tag;
 
 @end
 
@@ -75,28 +75,28 @@
 	return retString;
 }
 
-- (void)getLastTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize
+- (void)getLastTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize userName:(NSString *)userName
 {
-    [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 tag:JSONURLConnectionTagGetLastTweets];
+    [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 userName:userName tag:JSONURLConnectionTagGetLastTweets];
 }
 
-- (void)getOlderTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime
-{
-    if (pageTime == 0)
-        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 tag:JSONURLConnectionTagGetOlderTweets];
-    else
-        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagOlder pageSize:pageSize pageTime:pageTime tag:JSONURLConnectionTagGetOlderTweets];
-}
-
-- (void)getNewerTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime
+- (void)getOlderTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName
 {
     if (pageTime == 0)
-        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 tag:JSONURLConnectionTagGetNewerTweets];
+        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 userName:userName tag:JSONURLConnectionTagGetOlderTweets];
     else
-        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagNewer pageSize:pageSize pageTime:pageTime tag:JSONURLConnectionTagGetNewerTweets];
+        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagOlder pageSize:pageSize pageTime:pageTime userName:userName tag:JSONURLConnectionTagGetOlderTweets];
 }
 
-- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(PageFlag)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime tag:(JSONURLConnectionTag)tag
+- (void)getNewerTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName
+{
+    if (pageTime == 0)
+        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagLast pageSize:pageSize pageTime:0 userName:userName tag:JSONURLConnectionTagGetNewerTweets];
+    else
+        [self getTweetsWithTweetType:tweetType pageFlag:PageFlagNewer pageSize:pageSize pageTime:pageTime userName:userName tag:JSONURLConnectionTagGetNewerTweets];
+}
+
+- (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(PageFlag)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName tag:(JSONURLConnectionTag)tag
 {
     NSString *url;
     switch (tweetType) {
@@ -116,6 +116,14 @@
             url = GET_FAVORITES_URL;
             break;
         }
+        case TweetTypeMyBroadcast: {
+            url = GET_MY_BROADCAST_URL;
+            break;
+        }
+        case TweetTypeUserBroadcast: {
+            url = GET_USER_BROADCAST_URL;
+            break;
+        }
         default:
             break;
     }
@@ -123,6 +131,8 @@
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageFlag] forKey:@"pageflag"];
 	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
     [parameters setObject:[NSString stringWithFormat:@"%.f", pageTime] forKey:@"pagetime"];
+    if (userName && ![userName isEqualToString:@""])
+        [parameters setObject:userName forKey:@"name"];
     [self getDataWithURL:url Parameters:parameters delegate:self tag:tag];
 }
 
@@ -135,7 +145,7 @@
 
 - (void)getUpdateCount:(BOOL)reset udpateType:(UpdateType)updateType
 {
-    NSString *url = UPDATE_URL;
+    NSString *url = GET_UPDATE_COUNT_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     int op = 0;
     if (reset) {
