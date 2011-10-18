@@ -103,19 +103,19 @@
 {
     switch (self.tweetType) {
         case TweetTypeTimeline: {
-            self.title = @"Timeline";
+            self.title = @"主页";
             break;
         }
         case TweetTypeMethions: {
-            self.title = @"Methions";
+            self.title = @"提到我的";
             break;
         }
         case TweetTypeMessages: {
-            self.title = @"Messages";
+            self.title = @"私信";
             break;
         }
         case TweetTypeFavorites: {
-            self.title = @"Favorites";
+            self.title = @"收藏";
             break;
         }
         case TweetTypeMyBroadcast: {

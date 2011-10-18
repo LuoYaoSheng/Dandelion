@@ -22,7 +22,7 @@
 	NSString *retString = [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] autorelease];
 	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
 	
-	NSLog(@"response code:%d string:%@", httpResponse.statusCode, retString);
+	NSLog(@"response code:%ld string:%@", httpResponse.statusCode, retString);
 	
 	return retString;
 }

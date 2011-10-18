@@ -45,7 +45,7 @@ typedef enum {
 @property (retain) NSImage *fullImage;
 @property (assign) BOOL imageLoading;
 
-- (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick Name:(NSString *)aName head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType;
+- (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick Name:(NSString *)aName head:(NSString *)aHead text:(NSString *)aText origText:(NSString *)aOrigText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType;
 - (id)initWithJSON:(NSDictionary *)dict;
 
 @end
