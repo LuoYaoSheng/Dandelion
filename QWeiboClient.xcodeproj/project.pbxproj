@@ -51,6 +51,7 @@
 		3592504B1426E60900F164D0 /* JSONURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3592504A1426E60900F164D0 /* JSONURLConnection.m */; };
 		359250521426E85500F164D0 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
 		359A7EA814283F2800BD461E /* YAJL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 359250511426E85500F164D0 /* YAJL.framework */; };
+		359E5EBC144D6E14009E5ADC /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 359E5EBB144D6E14009E5ADC /* head.jpg */; };
 		35B12EB1141FAF3000F963FC /* ToolboxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB0141FAF3000F963FC /* ToolboxView.m */; };
 		35B12EB4141FB18F00F963FC /* QWVerifyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB3141FB18F00F963FC /* QWVerifyWindowController.m */; };
 		35B12EB6141FB1A300F963FC /* QWVerifyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */; };
@@ -77,7 +78,6 @@
 		35E636711448437400619046 /* toolbar-addfavor.png in Resources */ = {isa = PBXBuildFile; fileRef = 35E6366F1448437400619046 /* toolbar-addfavor.png */; };
 		35E6368614494A2300619046 /* QWViewImageWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E6368514494A2300619046 /* QWViewImageWindowController.m */; };
 		35E6368814494A4900619046 /* QWViewImageWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E6368714494A4900619046 /* QWViewImageWindowController.xib */; };
-		35E98D2D142872FA005B9A15 /* json.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35E98D2C142872FA005B9A15 /* json.txt */; };
 		35E98D3B14287ECF005B9A15 /* NSDate+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +178,7 @@
 		359250491426E60900F164D0 /* JSONURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONURLConnection.h; sourceTree = "<group>"; };
 		3592504A1426E60900F164D0 /* JSONURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONURLConnection.m; sourceTree = "<group>"; };
 		359250511426E85500F164D0 /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = QWeiboClient/Frameworks/YAJL.framework; sourceTree = "<group>"; };
+		359E5EBB144D6E14009E5ADC /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head.jpg; sourceTree = "<group>"; };
 		35B12EAF141FAF3000F963FC /* ToolboxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolboxView.h; sourceTree = "<group>"; };
 		35B12EB0141FAF3000F963FC /* ToolboxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolboxView.m; sourceTree = "<group>"; };
 		35B12EB2141FB18F00F963FC /* QWVerifyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWVerifyWindowController.h; sourceTree = "<group>"; };
@@ -221,7 +222,6 @@
 		35E6368414494A2200619046 /* QWViewImageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWViewImageWindowController.h; sourceTree = "<group>"; };
 		35E6368514494A2300619046 /* QWViewImageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWViewImageWindowController.m; sourceTree = "<group>"; };
 		35E6368714494A4900619046 /* QWViewImageWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWViewImageWindowController.xib; sourceTree = "<group>"; };
-		35E98D2C142872FA005B9A15 /* json.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json.txt; sourceTree = "<group>"; };
 		35E98D3914287ECF005B9A15 /* NSDate+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Categories.h"; sourceTree = "<group>"; };
 		35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Categories.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -269,6 +269,7 @@
 				35D57F0A144AC71A00D071F2 /* sidebar-compose.png */,
 				35D57F18144ACC4200D071F2 /* sidebar-bottom.png */,
 				353C6CC4144C537200E67DE4 /* blackx.png */,
+				359E5EBB144D6E14009E5ADC /* head.jpg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -360,7 +361,6 @@
 		35263AB2140F1F4800944D3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				35E98D2C142872FA005B9A15 /* json.txt */,
 				35263AB3140F1F4800944D3E /* QWeiboClient-Info.plist */,
 				35263AB4140F1F4800944D3E /* InfoPlist.strings */,
 				35263AB7140F1F4800944D3E /* main.m */,
@@ -560,7 +560,6 @@
 				35263AC2140F1F4800944D3E /* MainMenu.xib in Resources */,
 				35263ADC140F22A500944D3E /* QWMainWindowController.xib in Resources */,
 				35B12EB6141FB1A300F963FC /* QWVerifyWindowController.xib in Resources */,
-				35E98D2D142872FA005B9A15 /* json.txt in Resources */,
 				35D7C01C14397A4B000F82DD /* MyListViewCell.xib in Resources */,
 				35171897143B0CFB00DB2726 /* logo.png in Resources */,
 				3509E84F143CACA00053EF3F /* favorite_off.png in Resources */,
@@ -590,6 +589,7 @@
 				35D57F0B144AC71A00D071F2 /* sidebar-compose.png in Resources */,
 				35D57F19144ACC4200D071F2 /* sidebar-bottom.png in Resources */,
 				353C6CC5144C537200E67DE4 /* blackx.png in Resources */,
+				359E5EBC144D6E14009E5ADC /* head.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

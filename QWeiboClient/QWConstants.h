@@ -35,9 +35,10 @@
 #define PUBLISH_MESSAGE_URL                                 @"http://open.t.qq.com/api/t/add"
 #define PUBLISH_IMAGE_URL                                   @"http://open.t.qq.com/api/t/add_pic"
 #define RETWEET_URL                                         @"http://open.t.qq.com/api/t/re_add"
-#define GET_UPDATE_COUNT_URL                                    @"http://open.t.qq.com/api/info/update"
+#define GET_UPDATE_COUNT_URL                                @"http://open.t.qq.com/api/info/update"
 #define GET_MY_BROADCAST_URL                                @"http://open.t.qq.com/api/statuses/broadcast_timeline"
 #define GET_USER_BROADCAST_URL                              @"http://open.t.qq.com/api/statuses/user_timeline"
+#define GET_PUBLIC_TIMELINE_URL                             @"http://open.t.qq.com/api/statuses/public_timeline"
 
 #define GROWL_NOTIFICATION_TIMELINE                         @"Timeline"
 #define GROWL_NOTIFICATION_MENTHIONS                        @"Mentions"

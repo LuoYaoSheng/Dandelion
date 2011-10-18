@@ -422,7 +422,7 @@
 										<int key="NSButtonFlags2">98</int>
 										<object class="NSCustomResource" key="NSNormalImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">NSUser</string>
+											<string key="NSResourceName">head</string>
 										</object>
 										<string key="NSAlternateContents"/>
 										<string key="NSKeyEquivalent"/>
@@ -473,6 +473,7 @@
 							<int key="NSvFlags">10</int>
 							<string key="NSFrame">{{65, 576}, {331, 5}}</string>
 							<reference key="NSSuperview" ref="1006"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:1459</string>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
@@ -913,10 +914,10 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>NSUser</string>
 				<string>blue_dot</string>
 				<string>favorite_off</string>
 				<string>favorite_on</string>
+				<string>head</string>
 				<string>mentions_off</string>
 				<string>mentions_on</string>
 				<string>messages_off</string>
@@ -932,10 +933,10 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{32, 32}</string>
 				<string>{15, 16}</string>
 				<string>{65, 40}</string>
 				<string>{65, 40}</string>
+				<string>{50, 50}</string>
 				<string>{65, 40}</string>
 				<string>{65, 40}</string>
 				<string>{65, 40}</string>

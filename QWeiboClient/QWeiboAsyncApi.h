@@ -16,6 +16,7 @@ enum {
 	JSONURLConnectionTagGetUserInfo,
 	JSONURLConnectionTagPublishMessage,
     JSONURLConnectionTagGetUpdateCount,
+    JSONURLConnectionTagGetPublicTimeline,
 };
 
 typedef enum {
@@ -66,6 +67,7 @@ typedef enum {
 - (void)getLastTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize userName:(NSString *)userName;
 - (void)getOlderTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName;
 - (void)getNewerTweetsWithTweetType:(TweetType)tweetType pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName;
+- (void)getPublicTimelineWithPos:(int)pos pageSize:(int)pageSize;
 - (void)getUserInfo;
 - (void)publishMessage:(NSString *)message;
 - (void)publishMessage:(NSString *)message withPicture:(NSString *)filePath;

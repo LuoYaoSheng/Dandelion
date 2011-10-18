@@ -73,6 +73,7 @@
         oldestPageTime = 0;
         newestPageTime = 0;
         isLoading = NO;
+        pos = 0;
         
         [self getLastTweets];
     }
@@ -125,18 +126,31 @@
             self.title = self.userName;
             break;
         }
+        case TweetTypeSearch: {
+            self.title = @"广播大厅";
+            break;
+        }
         default:
+            self.title = @"";
             break;
     }
     
     isLoading = YES;
-    [api getLastTweetsWithTweetType:self.tweetType pageSize:20 userName:self.userName];
+    if (self.tweetType == TweetTypeSearch) {
+        pos = 0;
+        [api getPublicTimelineWithPos:pos pageSize:20];
+    }
+    else
+        [api getLastTweetsWithTweetType:self.tweetType pageSize:20 userName:self.userName];
 }
 
 - (void)fetchOlderTweets
 {
     isLoading = YES;
-    [api getOlderTweetsWithTweetType:self.tweetType pageSize:20 pageTime:oldestPageTime userName:self.userName];
+    if (self.tweetType == TweetTypeSearch)
+        [api getPublicTimelineWithPos:pos pageSize:20];
+    else
+        [api getOlderTweetsWithTweetType:self.tweetType pageSize:20 pageTime:oldestPageTime userName:self.userName];
 }
 
 - (void)fetchNewerTweets
@@ -186,6 +200,8 @@
     if (tweets.count > 0)
         newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
     hasNext = ![[info objectForKey:@"hasNext"] boolValue];
+//    pos = [[info objectForKey:@"pos"] intValue];
+    pos += 20;
     [self reloadTable:YES];
     //[self beginUpdating];
 }
@@ -196,6 +212,8 @@
     [self.listContent addObjectsFromArray:tweets];
     oldestPageTime = ((QWMessage *)[tweets lastObject]).timestamp;
     hasNext = ![[info objectForKey:@"hasNext"] boolValue];
+//    pos = [[info objectForKey:@"pos"] intValue];
+    pos += 20;
     [self reloadTable:NO];
 }
 
@@ -300,7 +318,7 @@
         if (message.head && ![message.head isEqualToString:@""])
             cell.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.head]] autorelease];
         else
-            cell.headButton.image = [NSImage imageNamed:@"NSUser"];
+            cell.headButton.image = [NSImage imageNamed:@"head.jpg"];
         [cell.textLabel setLinkTextAttributes:nil];
         [cell.textLabel.textStorage setAttributedString:message.richText];
         cell.timeLabel.stringValue = message.time;

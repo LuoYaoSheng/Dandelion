@@ -162,14 +162,15 @@
                 ((QWTweetViewController *)viewController).userName = [info objectForKey:@"userName"];
             } else {
                 viewController = [self viewControllerForName:@"QWPeopleViewController" tweetType:TweetTypeMyBroadcast userName:nil];
+                ((QWTweetViewController *)viewController).tweetType = TweetTypeMyBroadcast;
+                ((QWTweetViewController *)viewController).userName = [info objectForKey:@"userName"];
             }
             break;
         }
         case QWShowTabSearch:
         {
-            //            NSViewController *viewController = [self viewControllerForName:@"QWMentionsViewController"];
-            //            [self activateViewController:viewController];
-            viewController = nil;
+            viewController = [self viewControllerForName:@"QWSearchViewController" tweetType:TweetTypeSearch userName:nil];
+            self.selectedTweetType = TweetTypeMessages;
             break;
         }
         default:
@@ -200,7 +201,7 @@
 
 - (IBAction)headButtonClicked:(id)sender 
 {
-    [self toggleTab:QWShowTabTimeline withInfo:nil];   
+    [self toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:nil, @"userName", nil]];   
 }
 
 - (IBAction)logout:(id)sender {

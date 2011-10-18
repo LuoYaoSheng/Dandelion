@@ -19,6 +19,7 @@
     //for older
     BOOL hasNext;
     double oldestPageTime;
+    int pos;
     
     //for newer
     double newestPageTime;

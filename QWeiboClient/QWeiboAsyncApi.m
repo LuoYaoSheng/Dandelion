@@ -96,6 +96,20 @@
         [self getTweetsWithTweetType:tweetType pageFlag:PageFlagNewer pageSize:pageSize pageTime:pageTime userName:userName tag:JSONURLConnectionTagGetNewerTweets];
 }
 
+- (void)getPublicTimelineWithPos:(int)pos pageSize:(int)pageSize
+{
+    NSString *url = GET_PUBLIC_TIMELINE_URL;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pos] forKey:@"pos"];
+	[parameters setObject:[NSString stringWithFormat:@"%d", pageSize] forKey:@"reqnum"];
+    JSONURLConnectionTag tag;
+    if (pos == 0)
+        tag = JSONURLConnectionTagGetLastTweets;
+    else
+        tag = JSONURLConnectionTagGetOlderTweets;
+    [self getDataWithURL:url Parameters:parameters delegate:self tag:tag];
+}
+
 - (void)getTweetsWithTweetType:(TweetType)tweetType pageFlag:(PageFlag)pageFlag pageSize:(int)pageSize pageTime:(double)pageTime userName:(NSString *)userName tag:(JSONURLConnectionTag)tag
 {
     NSString *url;
@@ -281,7 +295,7 @@
                     [messages addObject:message];
                     [message release];
                 }
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", [json valueForKeyPath:@"data.pos"], @"pos", nil];
             } else {
                 userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
@@ -302,7 +316,7 @@
                     [messages addObject:message];
                     [message release];
                 }
-                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", nil];
+                userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[json valueForKeyPath:@"data.hasnext"], @"hasNext", [json valueForKeyPath:@"data.pos"], @"pos", nil];
             } else {
                 userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"hasNext", nil];
             }
