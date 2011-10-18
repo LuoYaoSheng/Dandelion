@@ -32,6 +32,15 @@
 @synthesize messagesBadge = _messagesBadge;
 @synthesize selectedTweetType;
 @synthesize matrix = _matrix;
+@synthesize viewImageController = _viewImageController;
+
+- (QWViewImageWindowController *)viewImageController
+{
+    if (!_viewImageController) {
+        _viewImageController = [[QWViewImageWindowController alloc] initWithWindowNibName:@"QWViewImageWindowController"];
+    }
+    return _viewImageController;
+}
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -73,6 +82,7 @@
 
     [allControllers release];
     [api release];
+    [_viewImageController release];
     [super dealloc];
 }
 

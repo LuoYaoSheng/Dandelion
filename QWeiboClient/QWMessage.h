@@ -19,7 +19,8 @@ typedef enum {
     QWMessageTypeReply
 } QWMessageType;
 
-#define ATEntityPropertyNamedFullImage @"fullImage"
+#define ATEntityPropertyNamedFullImage          @"fullImage"
+#define ATEntityPropertyNamedThumbnailImage     @"thumbnailImage"
 
 #import <Foundation/Foundation.h>
 
@@ -39,6 +40,7 @@ typedef enum {
 @property (assign) QWMessageType type;
 @property (assign) BOOL isNew;
 @property (retain) NSMutableAttributedString *richText;
+@property (retain) NSImage *thumbnailImage;
 @property (retain) NSImage *fullImage;
 @property (assign) BOOL imageLoading;
 

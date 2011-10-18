@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PXListViewCell.h"
+#import "QWMessage.h"
 
 @interface MyListViewCell : PXListViewCell
 {
@@ -21,10 +22,13 @@
 @property (assign) IBOutlet NSButton *imageButton;
 @property (assign) IBOutlet NSView *toolbarView;
 @property (assign) IBOutlet NSScrollView *scrollView;
+@property (assign) IBOutlet NSProgressIndicator *progessIndicator;
+@property (retain) QWMessage *message;
 
 - (IBAction)retweetCicked:(id)sender;
 - (IBAction)addFavoriteClicked:(id)sender;
 - (IBAction)imageClicked:(id)sender;
 - (IBAction)headClicked:(id)sender;
+- (void)loadImageForMessage:(QWMessage *)message;
 
 @end

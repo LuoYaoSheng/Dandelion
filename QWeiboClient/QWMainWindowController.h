@@ -10,6 +10,7 @@
 #import "QWVerifyWindowController.h"
 #import "QWeiboAsyncApi.h"
 #import "QWMessage.h"
+#import "QWViewImageWindowController.h"
 
 typedef enum {
     QWShowTabTimeline = 1,
@@ -36,6 +37,7 @@ typedef enum {
 @property (assign) IBOutlet NSImageView *messagesBadge;
 @property (assign) TweetType selectedTweetType;
 @property (assign) IBOutlet NSMatrix *matrix;
+@property (readonly, retain) QWViewImageWindowController *viewImageController;
 
 - (IBAction)switchButtonClicked:(id)sender;
 - (void)toggleTab:(QWShowTab)tab withInfo:(NSDictionary *)info;

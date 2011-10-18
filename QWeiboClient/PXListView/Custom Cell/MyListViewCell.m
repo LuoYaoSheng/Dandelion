@@ -11,6 +11,12 @@
 #import "PXListViewConstants.h"
 #import "PXListView+UserInteraction.h"
 
+@interface MyListViewCell()
+
+- (void)_reloadImage:(id)object;
+
+@end
+
 @implementation MyListViewCell
 
 @synthesize headButton = _headButton;
@@ -20,6 +26,8 @@
 @synthesize imageButton = _imageButton;
 @synthesize toolbarView = _toolbarView;
 @synthesize scrollView = _scrollView;
+@synthesize progessIndicator = _progessIndicator;
+@synthesize message = _message;
 
 #pragma mark - Init/Dealloc
 
@@ -50,6 +58,8 @@
 
 - (void)dealloc
 {
+    [_message removeObserver:self forKeyPath:ATEntityPropertyNamedThumbnailImage];
+    [_message release];
 	[super dealloc];
 }
 
@@ -164,6 +174,42 @@
 - (IBAction)headClicked:(id)sender 
 {
     [[self listView] handleHeadClickedInCell:self];
+}
+
+- (void)loadImageForMessage:(QWMessage *)message
+{
+    [self.message removeObserver:self forKeyPath:ATEntityPropertyNamedThumbnailImage];
+    self.message = message;
+    [message addObserver:self forKeyPath:ATEntityPropertyNamedThumbnailImage options:0 context:NULL];
+    
+    [self.progessIndicator setHidden:NO];
+    [self.progessIndicator startAnimation:nil];
+    [self.imageButton setHidden:YES];
+    if (message.thumbnailImage) {
+        self.imageButton.image = message.thumbnailImage;
+        [self.imageButton setHidden:NO];
+        [self.progessIndicator setHidden:YES];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:ATEntityPropertyNamedThumbnailImage]) {
+        [self performSelectorOnMainThread:@selector(_reloadImage:) withObject:object waitUntilDone:NO modes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+    }
+}
+
+- (void)_reloadImage:(id)object 
+{
+    QWMessage *message = (QWMessage *)object;
+    // Fade the imageView in, and fade the progress indicator out
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0.8];
+    [self.imageButton setAlphaValue:0];
+    self.imageButton.image = message.thumbnailImage;
+    [self.imageButton setHidden:NO];
+    [[self.imageButton animator] setAlphaValue:1.0];
+    [self.progessIndicator setHidden:YES];
+    [NSAnimationContext endGrouping];
 }
 
 @end

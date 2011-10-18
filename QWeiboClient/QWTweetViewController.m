@@ -317,6 +317,7 @@
         textLabelFrame.size.height += diffHeight;
         textLabelFrame.origin.y -= diffHeight;
         cell.scrollView.frame = textLabelFrame;
+//        cell.progessIndicator.frame = NSMakeRect(CGRectGetMidX(cell.imageButton.frame), CGRectGetMidY(cell.imageButton.frame), 16, 16);
         
 //        CGRect imageViewFrame = cell.imageView.frame;
 //        imageViewFrame.origin.y = CGRectGetMinY(cell.textLabel.frame);
@@ -334,7 +335,8 @@
         cell.timeLabel.stringValue = message.time;
         if (message.thumbnailImageURL && ![message.thumbnailImageURL isEqualToString:@""]) {
             [cell.imageButton setHidden:NO];
-            cell.imageButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.thumbnailImageURL]] autorelease];
+//            cell.imageButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:message.thumbnailImageURL]] autorelease];
+            [cell loadImageForMessage:message];
         }
         else 
             [cell.imageButton setHidden:YES];
@@ -376,11 +378,9 @@
 
 - (void)listView:(PXListView *)aListView imageClickedForRow:(NSUInteger)rowIndex
 {
-    if (!_viewImageController)
-        _viewImageController = [[QWViewImageWindowController alloc] initWithWindowNibName:@"QWViewImageWindowController"];
     QWMessage *message = [self.listContent objectAtIndex:rowIndex];
-    [_viewImageController showWindow:nil];
-    [_viewImageController loadImageForMessage:message];
+    [self.mainWindowController.viewImageController showWindow:nil];
+    [self.mainWindowController.viewImageController loadImageForMessage:message];
 }
 
 - (void)listView:(PXListView *)aListView headClickedForRow:(NSUInteger)rowIndex
@@ -396,7 +396,6 @@
 
 - (void)dealloc
 {
-    [_viewImageController release];
     [self stopUpdating];
     [_listContent release];
     [_heightList release];

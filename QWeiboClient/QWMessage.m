@@ -8,10 +8,12 @@
 
 #import "QWMessage.h"
 #import "NSAttributedString+Hyperlink.h"
+#import "NSImage+Categories.h"
 
 @interface QWMessage ()
 
 - (void)loadFullImage;
+- (void)loadThumbnailImage;
 
 @end
 
@@ -39,6 +41,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
 @synthesize isNew = _isNew;
 @synthesize richText = _richText;
 @synthesize fullImage = _fullImage;
+@synthesize thumbnailImage = _thumbnailImage;
 @synthesize imageLoading;
 
 - (NSString *)time
@@ -111,6 +114,20 @@ static NSOperationQueue *ATSharedOperationQueue() {
     _fullImage = [fullImage retain];
 }
 
+- (NSImage *)thumbnailImage {
+    if (_thumbnailImage == nil) {
+        // Load the image lazily
+        [self loadThumbnailImage];
+    }        
+    return _thumbnailImage;
+}
+
+- (void)setThumbnailImage:(NSImage *)thumbnailImage
+{
+    [_thumbnailImage autorelease];
+    _thumbnailImage = [thumbnailImage retain];
+}
+
 - (id)init
 {
     if ((self = [super init])) {
@@ -168,11 +185,36 @@ static NSOperationQueue *ATSharedOperationQueue() {
             self.imageLoading = YES;
             // We would have to keep track of the block with an NSBlockOperation, if we wanted to later support cancelling operations that have scrolled offscreen and are no longer needed. That will be left as an exercise to the user.
             [ATSharedOperationQueue() addOperationWithBlock:^(void) {
+                NSLog(@"%@", self.fullImageURL);
                 NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:self.fullImageURL]];
                 if (image != nil) {
                     @synchronized (self) {
+                        [image fixSize];
                         self.imageLoading = NO;
                         self.fullImage = image;
+                    }
+                    [image release];
+                }
+            }];
+        }
+    }
+}
+
+- (void)loadThumbnailImage
+{
+    @synchronized (self) {
+        if (!self.imageLoading) {
+            self.imageLoading = YES;
+            // We would have to keep track of the block with an NSBlockOperation, if we wanted to later support cancelling operations that have scrolled offscreen and are no longer needed. That will be left as an exercise to the user.
+            [ATSharedOperationQueue() addOperationWithBlock:^(void) {
+//                usleep(25000000);
+                NSLog(@"%@", self.thumbnailImageURL);
+                NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:self.thumbnailImageURL]];
+                if (image != nil) {
+                    @synchronized (self) {
+                        [image fixSize];
+                        self.imageLoading = NO;
+                        self.thumbnailImage = image;
                     }
                     [image release];
                 }
@@ -192,6 +234,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
     [_source release];
     [_richText release];
     [_fullImage release];
+    [_thumbnailImage release];
     
     [super dealloc];
 }

@@ -50,7 +50,14 @@
     [self.progessIndicator startAnimation:nil];
     [self.imageView setHidden:YES];
     if (message.fullImage) {
-        [self _reloadImage:message];
+        self.imageView.image = message.fullImage;
+        [self.imageView setHidden:NO];
+        [self.progessIndicator setHidden:YES];
+        NSRect imageViewFrame = self.imageView.frame;
+        NSImageRep *imageRep = [[self.imageView.image representations] lastObject];
+        imageViewFrame.size = NSMakeSize(imageRep.pixelsWide, imageRep.pixelsHigh);
+        self.imageView.frame = imageViewFrame;
+        self.imageView.superview.frame = self.imageView.frame;
     }
 }
 
@@ -74,8 +81,7 @@
     [NSAnimationContext endGrouping];
     
     NSRect imageViewFrame = self.imageView.frame;
-    NSImageRep *imageRep = [[self.imageView.image representations] lastObject];
-    imageViewFrame.size = NSMakeSize(imageRep.pixelsWide, imageRep.pixelsHigh);
+    imageViewFrame.size = self.imageView.image.size;
     self.imageView.frame = imageViewFrame;
     self.imageView.superview.frame = self.imageView.frame;
 }

@@ -11,7 +11,6 @@
 #import "QWeiboAsyncApi.h"
 #import "ListViewEndCell.h"
 #import "QWMainWindowController.h"
-#import "QWViewImageWindowController.h"
 
 @interface QWTweetViewController : NSViewController<PXListViewDelegate, QWeiboAsyncApiDelegate> {
     QWeiboAsyncApi *api;
@@ -26,7 +25,6 @@
     
     BOOL isLoading;
     NSTimer *timer;
-    QWViewImageWindowController *_viewImageController;
 }
 
 
