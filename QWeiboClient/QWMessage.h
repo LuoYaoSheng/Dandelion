@@ -31,6 +31,7 @@ typedef enum {
 @property (copy) NSString *name;
 @property (copy) NSString *head;
 @property (copy) NSString *text;
+@property (copy) NSString *origText;
 @property (copy, readonly) NSString *time;
 @property (copy) NSString *imageURL;
 @property (readonly) NSString *thumbnailImageURL;

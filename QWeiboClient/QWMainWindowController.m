@@ -127,7 +127,7 @@
 
 - (IBAction)switchButtonClicked:(id)sender
 {
-    [self toggleTab:(QWShowTab)[self.matrix.selectedCell tag] withInfo:nil];
+    [self toggleTab:(QWShowTab)(((NSButtonCell *)self.matrix.selectedCell).tag) withInfo:nil];
 }
 
 - (void)toggleTab:(QWShowTab)tab withInfo:(NSDictionary *)info

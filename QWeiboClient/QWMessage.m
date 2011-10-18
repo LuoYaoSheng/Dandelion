@@ -34,6 +34,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
 @synthesize name = _name;
 @synthesize head = _head;
 @synthesize text = _text;
+@synthesize origText = _origText;
 @synthesize timestamp = _timestamp;
 @synthesize imageURL = _imageURL;
 @synthesize source = _source;
@@ -135,7 +136,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
     return self;
 }
 
-- (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick Name:(NSString *)aName head:(NSString *)aHead text:(NSString *)aText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType
+- (id)initWithTweetId:(NSString *)tweetId Nick:(NSString *)aNick Name:(NSString *)aName head:(NSString *)aHead text:(NSString *)aText origText:(NSString *)aOrigText timestamp:(double)aTimestamp image:(NSString *)aImage source:(QWMessage *)aSource type:(QWMessageType)aType
 {
     if ((self = [super init])) {
         self.tweetId = tweetId;
@@ -143,6 +144,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
         self.name = aName;
         self.head = aHead;
         self.text = aText;
+        self.origText = aOrigText;
         self.timestamp = aTimestamp;
         self.imageURL = aImage;
         self.source = aSource;
@@ -160,6 +162,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
     if (head && ![head isEqualToString:@""])
         head = [head stringByAppendingPathComponent:@"50"];
     NSString *text = [[dict objectForKey:@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *origText = [text copy];
     double timestamp = [[dict objectForKey:@"timestamp"] doubleValue];
     NSString *image = @"";
     if ([dict objectForKey:@"image"] && [dict objectForKey:@"image"] != [NSNull null])
@@ -175,7 +178,8 @@ static NSOperationQueue *ATSharedOperationQueue() {
             image = source.imageURL;
     }
     QWMessageType type = (QWMessageType)[dict objectForKey:@"type"];
-    return [self initWithTweetId:tweetId Nick:nick Name:name head:head text:text timestamp:timestamp image:image source:source type:type];
+    return [self initWithTweetId:tweetId Nick:nick Name:name head:head text:text origText:origText timestamp:timestamp image:image source:source type:type];
+    [origText release];
 }
 
 - (void)loadFullImage
@@ -185,7 +189,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
             self.imageLoading = YES;
             // We would have to keep track of the block with an NSBlockOperation, if we wanted to later support cancelling operations that have scrolled offscreen and are no longer needed. That will be left as an exercise to the user.
             [ATSharedOperationQueue() addOperationWithBlock:^(void) {
-                NSLog(@"%@", self.fullImageURL);
+//                NSLog(@"%@", self.fullImageURL);
                 NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:self.fullImageURL]];
                 if (image != nil) {
                     @synchronized (self) {
@@ -208,7 +212,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
             // We would have to keep track of the block with an NSBlockOperation, if we wanted to later support cancelling operations that have scrolled offscreen and are no longer needed. That will be left as an exercise to the user.
             [ATSharedOperationQueue() addOperationWithBlock:^(void) {
 //                usleep(25000000);
-                NSLog(@"%@", self.thumbnailImageURL);
+//                NSLog(@"%@", self.thumbnailImageURL);
                 NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:self.thumbnailImageURL]];
                 if (image != nil) {
                     @synchronized (self) {
@@ -230,6 +234,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
     [_name release];
     [_head release];
     [_text release];
+    [_origText release];
     [_imageURL release];
     [_source release];
     [_richText release];

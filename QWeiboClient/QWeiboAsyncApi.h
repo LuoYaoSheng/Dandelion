@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JSONURLConnection.h"
+#import "QWMessage.h"
 
 enum {
     JSONURLConnectionTagGetLastTweets = 0,
@@ -75,7 +76,7 @@ typedef enum {
 - (void)getUserInfo;
 - (void)publishMessage:(NSString *)message;
 - (void)publishMessage:(NSString *)message withPicture:(NSString *)filePath;
-- (void)retweet:(NSString *)message reid:(NSString *)reid;
+- (void)retweet:(QWMessage *)tweet content:(NSString *)message;
 - (void)beginUpdating;
 - (void)stopUpdating;
 - (void)addFavorite:(NSString *)tweetId;

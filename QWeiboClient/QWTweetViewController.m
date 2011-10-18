@@ -373,7 +373,13 @@
 - (void)listView:(PXListView *)aListView addFavoriteForRow:(NSUInteger)rowIndex
 {
     QWMessage *message = [self.listContent objectAtIndex:rowIndex];
-    [api addFavorite:message.tweetId];
+    if (self.tweetType == TweetTypeFavorites) {
+        [self.listContent removeObject:message];
+        [self reloadTable:NO];
+        [api deleteFavorite:message.tweetId];
+    } else {
+        [api addFavorite:message.tweetId];
+    }
 }
 
 - (void)listView:(PXListView *)aListView imageClickedForRow:(NSUInteger)rowIndex

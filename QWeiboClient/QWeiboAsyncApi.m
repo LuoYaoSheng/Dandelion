@@ -10,7 +10,6 @@
 #import "QOauthKey.h"
 #import "QweiboRequest.h"
 #import "AppDelegate.h"
-#import "QWMessage.h"
 #import "QWPerson.h"
 
 @interface QWeiboAsyncApi()
@@ -186,13 +185,19 @@
     [self postDataWithURL:url Parameters:parameters Files:[NSDictionary dictionaryWithObjectsAndKeys:filePath, [[filePath lastPathComponent] stringByDeletingPathExtension], nil] delegate:self tag:JSONURLConnectionTagPublishMessage];
 }
 
-- (void)retweet:(NSString *)message reid:(NSString *)reid
+- (void)retweet:(QWMessage *)tweet content:(NSString *)message
 {
+    NSString *content;
+    if (tweet.source) {
+        content = [NSString stringWithFormat:@"%@ || @%@: %@", message, tweet.name, tweet.origText];
+    } else {
+        content = message;
+    }
     NSString *url = RETWEET_URL;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:message forKey:@"content"];
+    [parameters setObject:content forKey:@"content"];
     [parameters setObject:@"127.0.0.1" forKey:@"clientip"];
-    [parameters setObject:reid forKey:@"reid"];
+    [parameters setObject:tweet.tweetId forKey:@"reid"];
     [self postDataWithURL:url Parameters:parameters Files:nil delegate:self tag:JSONURLConnectionTagPublishMessage];
 }
 

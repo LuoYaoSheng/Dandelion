@@ -59,7 +59,7 @@
 
 - (IBAction)publishClicked:(id)sender {
     if (self.orgMessage)
-        [api retweet:self.messageTextView.string reid:self.orgMessage.tweetId];
+        [api retweet:self.orgMessage content:self.messageTextView.string];
     else {
         if (self.filePath && ![self.filePath isEqualToString:@""])
             [api publishMessage:self.messageTextView.string withPicture:self.filePath];
