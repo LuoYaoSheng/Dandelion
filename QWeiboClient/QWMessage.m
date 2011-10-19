@@ -78,7 +78,8 @@ static NSOperationQueue *ATSharedOperationQueue() {
     [attrString addAttribute:NSCursorAttributeName value:[NSCursor arrowCursor] range:range];
     [attrString addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:12.0] range:range];
     
-    for (NSDictionary *dict in links) {
+    for (NSInteger i=(links.count-1); i>-1; i--) {
+        NSDictionary *dict = [links objectAtIndex:i];
         [attrString replaceCharactersInRange:[[dict objectForKey:@"range"] rangeValue] withAttributedString:[NSAttributedString hyperlinkFromString:[dict objectForKey:@"linkString"] withURL:[dict objectForKey:@"url"]]];
     }
     self.richText = attrString;
@@ -162,7 +163,7 @@ static NSOperationQueue *ATSharedOperationQueue() {
     if (head && ![head isEqualToString:@""])
         head = [head stringByAppendingPathComponent:@"50"];
     NSString *text = [[dict objectForKey:@"text"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSString *origText = [text copy];
+    NSString *origText = [[text copy] autorelease];
     double timestamp = [[dict objectForKey:@"timestamp"] doubleValue];
     NSString *image = @"";
     if ([dict objectForKey:@"image"] && [dict objectForKey:@"image"] != [NSNull null])
@@ -179,7 +180,6 @@ static NSOperationQueue *ATSharedOperationQueue() {
     }
     QWMessageType type = (QWMessageType)[dict objectForKey:@"type"];
     return [self initWithTweetId:tweetId Nick:nick Name:name head:head text:text origText:origText timestamp:timestamp image:image source:source type:type];
-    [origText release];
 }
 
 - (void)loadFullImage
