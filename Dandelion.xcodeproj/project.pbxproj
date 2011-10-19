@@ -80,6 +80,8 @@
 		35E6368614494A2300619046 /* QWViewImageWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E6368514494A2300619046 /* QWViewImageWindowController.m */; };
 		35E6368814494A4900619046 /* QWViewImageWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E6368714494A4900619046 /* QWViewImageWindowController.xib */; };
 		35E98D3B14287ECF005B9A15 /* NSDate+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */; };
+		35F0E128144E8268002A9191 /* TextViewPassive.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F0E127144E8268002A9191 /* TextViewPassive.m */; };
+		35F0E12B144E877B002A9191 /* ButtonPassive.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F0E12A144E877B002A9191 /* ButtonPassive.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -227,6 +229,10 @@
 		35E6368714494A4900619046 /* QWViewImageWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWViewImageWindowController.xib; sourceTree = "<group>"; };
 		35E98D3914287ECF005B9A15 /* NSDate+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Categories.h"; sourceTree = "<group>"; };
 		35E98D3A14287ECF005B9A15 /* NSDate+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Categories.m"; sourceTree = "<group>"; };
+		35F0E126144E8268002A9191 /* TextViewPassive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewPassive.h; sourceTree = "<group>"; };
+		35F0E127144E8268002A9191 /* TextViewPassive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewPassive.m; sourceTree = "<group>"; };
+		35F0E129144E877B002A9191 /* ButtonPassive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPassive.h; sourceTree = "<group>"; };
+		35F0E12A144E877B002A9191 /* ButtonPassive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonPassive.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,6 +414,10 @@
 				3583177D144AB9AD0057A1FE /* DragDropImageView.m */,
 				353C6C5C144BCAC400E67DE4 /* ScrollViewPassive.h */,
 				353C6C5D144BCAC400E67DE4 /* ScrollViewPassive.m */,
+				35F0E126144E8268002A9191 /* TextViewPassive.h */,
+				35F0E127144E8268002A9191 /* TextViewPassive.m */,
+				35F0E129144E877B002A9191 /* ButtonPassive.h */,
+				35F0E12A144E877B002A9191 /* ButtonPassive.m */,
 			);
 			name = CustomControl;
 			sourceTree = "<group>";
@@ -637,6 +647,8 @@
 				353C6C73144BD3A900E67DE4 /* NS(Attributed)String+Geometrics.m in Sources */,
 				353C6C9E144C0B7000E67DE4 /* NSAttributedString+Hyperlink.m in Sources */,
 				354A8E8F144DC4290012D2BD /* NSImage+Categories.m in Sources */,
+				35F0E128144E8268002A9191 /* TextViewPassive.m in Sources */,
+				35F0E12B144E877B002A9191 /* ButtonPassive.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
