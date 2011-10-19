@@ -162,26 +162,25 @@
 {
     NSTimeInterval interval;
     switch (self.tweetType) {
-        case TweetTypeTimeline: {
+        case TweetTypeTimeline:
+        {
             interval = UPDATE_INTERVAL_TIMELINE;
+            timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(fetchNewerTweets) userInfo:nil repeats:YES];
             break;
         }
         case TweetTypeMethions: {
             interval = UPDATE_INTERVAL_MENTHIONS;
+            timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(fetchNewerTweets) userInfo:nil repeats:YES];
             break;
         }
         case TweetTypeMessages: {
             interval = UPDATE_INTERVAL_MESSAGES;
-            break;
-        }
-        case TweetTypeFavorites: {
-            interval = UPDATE_INTERVAL_FAVORITES;
+            timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(fetchNewerTweets) userInfo:nil repeats:YES];
             break;
         }
         default:
             break;
     }
-    timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(fetchNewerTweets) userInfo:nil repeats:YES];
 }
 
 - (void)stopUpdating
@@ -203,7 +202,7 @@
 //    pos = [[info objectForKey:@"pos"] intValue];
     pos += 20;
     [self reloadTable:YES];
-    //[self beginUpdating];
+    [self beginUpdating];
 }
 
 - (void)receivedOlderTweets:(NSArray *)tweets info:(NSDictionary *)info
@@ -226,19 +225,19 @@
         for (QWMessage *message in tweets) {
             switch (self.tweetType) {
                 case TweetTypeTimeline: {
-                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
+                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
                     if (self.tweetType != self.mainWindowController.selectedTweetType)
                         [self.mainWindowController.timelineBadge setHidden:NO];
                     break;
                 }
                 case TweetTypeMethions: {
-                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
+                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
                     if (self.tweetType != self.mainWindowController.selectedTweetType)
                         [self.mainWindowController.timelineBadge setHidden:NO];
                     break;
                 }
                 case TweetTypeMessages: {
-                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:nil];
+                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
                     if (self.tweetType != self.mainWindowController.selectedTweetType)
                         [self.mainWindowController.timelineBadge setHidden:NO];
                     break;
@@ -385,9 +384,9 @@
 {
     QWMessage *message = [self.listContent objectAtIndex:rowIndex];
     if (self.tweetType == TweetTypeFavorites) {
+        [api deleteFavorite:message.tweetId];
         [self.listContent removeObject:message];
         [self reloadTable:NO];
-        [api deleteFavorite:message.tweetId];
     } else {
         [api addFavorite:message.tweetId];
     }

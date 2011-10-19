@@ -23,17 +23,8 @@
 
 @synthesize windowController = _windowController;
 
-#pragma mark - GrowlApplicationBridgeDelegate
-
-- (NSDictionary *)registrationDictionaryForGrowl
-{
-    NSArray *allNotes = [NSArray arrayWithObjects:GROWL_NOTIFICATION_TIMELINE, GROWL_NOTIFICATION_MENTHIONS, GROWL_NOTIFICATION_MESSAGES, nil];
-    return [NSDictionary dictionaryWithObjectsAndKeys:allNotes, GROWL_NOTIFICATIONS_ALL, allNotes, GROWL_NOTIFICATIONS_DEFAULT, nil];
-}
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [GrowlApplicationBridge setGrowlDelegate:self]; // add Growl support!
     _statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
     [_statusItem setImage:[NSImage imageNamed:@"status_on.png"]];
     [_statusItem setAlternateImage:[NSImage imageNamed:@"status_off.png"]];

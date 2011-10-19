@@ -712,7 +712,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "/Users/leon/Desktop/Cocoa/QWeiboClient/QWeiboClient/QWeiboSDK4iOS/**";
 				LD_RUNPATH_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PRELINK_FLAGS = "";
@@ -736,7 +736,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "/Users/leon/Desktop/Cocoa/QWeiboClient/QWeiboClient/QWeiboSDK4iOS/**";
 				LD_RUNPATH_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "-all_load";
 				PRELINK_FLAGS = "";
 				SDKROOT = macosx;
@@ -755,7 +755,7 @@
 				HEADER_SEARCH_PATHS = "/Users/leon/Desktop/Workspace/QWeiboClient/QWeiboClient/QWeiboSDK4iOS/**";
 				INFOPLIST_FILE = "QWeiboClient/QWeiboClient-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks/";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -773,7 +773,7 @@
 				HEADER_SEARCH_PATHS = "/Users/leon/Desktop/Workspace/QWeiboClient/QWeiboClient/QWeiboSDK4iOS/**";
 				INFOPLIST_FILE = "QWeiboClient/QWeiboClient-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks/";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

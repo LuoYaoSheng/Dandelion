@@ -62,6 +62,7 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    [GrowlApplicationBridge setGrowlDelegate:self]; // add Growl support!
     [self updateBadge:nil];
 
     [api getUserInfo];
@@ -84,6 +85,37 @@
     [api release];
     [_viewImageController release];
     [super dealloc];
+}
+
+#pragma mark - GrowlApplicationBridgeDelegate
+
+- (NSDictionary *)registrationDictionaryForGrowl
+{
+    NSArray *allNotes = [NSArray arrayWithObjects:GROWL_NOTIFICATION_TIMELINE, GROWL_NOTIFICATION_MENTHIONS, GROWL_NOTIFICATION_MESSAGES, nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:allNotes, GROWL_NOTIFICATIONS_ALL, allNotes, GROWL_NOTIFICATIONS_DEFAULT, nil];
+}
+
+- (void)growlNotificationWasClicked:(id)clickContext
+{
+    [NSApp activateIgnoringOtherApps:YES]; 
+    [self showWindow:nil];
+    TweetType tweetType = (TweetType)[clickContext intValue];
+    switch (tweetType) {
+        case TweetTypeTimeline: {
+            [self toggleTab:QWShowTabTimeline withInfo:nil];
+            break;
+        }
+        case TweetTypeMethions: {
+            [self toggleTab:QWShowTabMethions withInfo:nil];
+            break;
+        }
+        case TweetTypeMessages: {
+            [self toggleTab:QWShowTabMessages withInfo:nil];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 - (IBAction)retweet:(id)sender

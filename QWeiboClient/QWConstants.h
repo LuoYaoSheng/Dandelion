@@ -47,8 +47,7 @@
 #define GROWL_NOTIFICATION_MESSAGES                         @"Messages"
 #define GROWL_NOTIFICATION_FOLLOWERS                        @"Followers"
 
-#define UPDATE_INTERVAL_TIMELINE                            10
-#define UPDATE_INTERVAL_MENTHIONS                           30000000
-#define UPDATE_INTERVAL_MESSAGES                            60000000
-#define UPDATE_INTERVAL_FAVORITES                           36000000
+#define UPDATE_INTERVAL_TIMELINE                            30
+#define UPDATE_INTERVAL_MENTHIONS                           60
+#define UPDATE_INTERVAL_MESSAGES                            300
 

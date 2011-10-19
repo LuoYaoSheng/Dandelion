@@ -8,9 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "QWVerifyWindowController.h"
-#import <Growl/Growl.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, QWVerifyDelegate, GrowlApplicationBridgeDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, QWVerifyDelegate> {
     NSStatusItem *_statusItem;
     NSMenuItem *_logoutMenuItem;
 }
