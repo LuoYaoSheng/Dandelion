@@ -25,7 +25,7 @@
 @property (assign) IBOutlet NSProgressIndicator *progessIndicator;
 @property (retain) QWMessage *message;
 
-- (IBAction)retweetCicked:(id)sender;
+- (IBAction)retweetClicked:(id)sender;
 - (IBAction)addFavoriteClicked:(id)sender;
 - (IBAction)imageClicked:(id)sender;
 - (IBAction)headClicked:(id)sender;

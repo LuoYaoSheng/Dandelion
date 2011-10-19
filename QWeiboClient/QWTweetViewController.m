@@ -365,6 +365,17 @@
     NSLog(@"Selection changed");
 }
 
+- (void)retweet
+{
+    if (self.listView.selectedRow != NSUIntegerMax)
+        [self listView:self.listView retweetForRow:self.listView.selectedRow];
+}
+
+- (BOOL)canRetweet
+{
+    return self.listView.selectedRow != NSUIntegerMax;
+}
+
 - (void)listView:(PXListView *)aListView retweetForRow:(NSUInteger)rowIndex
 {
     [self.mainWindowController retweetMessage:[self.listContent objectAtIndex:rowIndex]];

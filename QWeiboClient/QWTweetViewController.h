@@ -38,5 +38,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type userName:(NSString *)userName;
 - (void)getLastTweets;
 - (void)fetchNewerTweets;
+- (void)retweet;
+- (BOOL)canRetweet;
 
 @end

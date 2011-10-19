@@ -11,8 +11,9 @@
 #import "QWMessage.h"
 #import "DragDropImageView.h"
 
-@interface QWPublishMessageWindowController : NSWindowController<DragDropImageViewDelegate> {
+@interface QWPublishMessageWindowController : NSWindowController<DragDropImageViewDelegate, NSTextViewDelegate> {
     QWeiboAsyncApi *api;
+    NSButton *_publishButton;
 }
 
 @property (assign) IBOutlet NSTextField *atLabel;
@@ -22,6 +23,7 @@
 @property (assign) IBOutlet NSTextField *imageLabel;
 @property (assign) IBOutlet NSButton *deleteImageButton;
 @property (copy) NSString *filePath;
+@property (assign) IBOutlet NSButton *publishButton;
 
 - (IBAction)publishClicked:(id)sender;
 - (IBAction)cacelClicked:(id)sender;

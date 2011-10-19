@@ -156,7 +156,7 @@
     return [super accessibilityAttributeValue:attribute];
 }
 
-- (IBAction)retweetCicked:(id)sender 
+- (IBAction)retweetClicked:(id)sender 
 {
     [[self listView] handleRetweetCickedInCell:self];
 }
@@ -189,6 +189,11 @@
         self.imageButton.image = message.thumbnailImage;
         [self.imageButton setHidden:NO];
         [self.progessIndicator setHidden:YES];
+        
+        NSRect imageButtonFrame = self.imageButton.frame;
+        float widthDiff = imageButtonFrame.size.width - self.imageButton.image.size.width;
+        imageButtonFrame = NSMakeRect(imageButtonFrame.origin.x+widthDiff/2, imageButtonFrame.origin.y, self.imageButton.image.size.width, self.imageButton.image.size.height);
+        self.imageButton.frame = imageButtonFrame;
     }
 }
 
@@ -210,6 +215,11 @@
     [[self.imageButton animator] setAlphaValue:1.0];
     [self.progessIndicator setHidden:YES];
     [NSAnimationContext endGrouping];
+    
+    NSRect imageButtonFrame = self.imageButton.frame;
+    float widthDiff = imageButtonFrame.size.width - self.imageButton.image.size.width;
+    imageButtonFrame = NSMakeRect(imageButtonFrame.origin.x+widthDiff/2, imageButtonFrame.origin.y, self.imageButton.image.size.width, self.imageButton.image.size.height);
+    self.imageButton.frame = imageButtonFrame;
 }
 
 @end

@@ -17,6 +17,7 @@
 @synthesize deleteImageButton = _deleteImageButton;
 @synthesize atLabel = _atLabel;
 @synthesize filePath = _filePath;
+@synthesize publishButton = _publishButton;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -38,11 +39,13 @@
     self.imageView.allowDrag = NO;
     self.imageView.delegate = self;
     if (self.orgMessage) {
+        [self.publishButton setEnabled:YES];
         self.atLabel.stringValue = [NSString stringWithFormat:@"@%@", self.orgMessage.nick];
         self.imageView.allowDrop = NO;
         self.imageLabel.stringValue = @"不能添加图片";
         [self.deleteImageButton setHidden:YES];
     } else {
+        [self.publishButton setEnabled:NO];
         self.imageView.allowDrop = YES;
         self.imageLabel.stringValue = @"拖动图片到这里";
         [self.deleteImageButton setHidden:NO];
@@ -70,6 +73,13 @@
     [NSApp endSheet:self.window];
 }
 
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    if ([menuItem action] == @selector(publishClicked:)) 
+        return self.publishButton.isEnabled;
+    return YES;
+}
+
 - (IBAction)cacelClicked:(id)sender {
     [NSApp endSheet:self.window];    
 }
@@ -84,6 +94,14 @@
 {
     [self.imageLabel setHidden:YES];
     self.filePath = filePath;
+}
+
+- (void)textViewDidChangeSelection:(NSNotification *)notification
+{
+    if (![self.messageTextView.string isEqualToString:@""] || self.atLabel.stringValue)
+        [self.publishButton setEnabled:YES];
+    else
+        [self.publishButton setEnabled:NO];
 }
 
 @end

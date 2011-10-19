@@ -86,6 +86,20 @@
     [super dealloc];
 }
 
+- (IBAction)retweet:(id)sender
+{
+    QWTweetViewController *tweetViewController = (QWTweetViewController *)currentViewController;
+    [tweetViewController retweet];
+}
+     
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    QWTweetViewController *tweetViewController = (QWTweetViewController *)currentViewController;
+    if ([menuItem action] == @selector(retweet:)) 
+        return [tweetViewController canRetweet];
+    return YES;
+}
+
 - (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type userName:(NSString *)userName
 {
     NSViewController* controller = [allControllers objectForKey:name];
@@ -225,10 +239,9 @@
 {
     NSString *result = notification.object;
     NSLog(@"%@", result);
-    NSViewController *viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline userName:nil];
-    [self activateViewController:viewController];
-    QWTweetViewController *timelineController = (QWTweetViewController *)viewController;
-    [timelineController getLastTweets];
+    
+    [self toggleTab:QWShowTabTimeline withInfo:nil];
+    [(QWTweetViewController *)currentViewController getLastTweets];
     
     [api getUserInfo];
 }
