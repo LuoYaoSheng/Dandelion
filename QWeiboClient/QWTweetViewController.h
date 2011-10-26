@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PXListView.h"
-#import "QWeiboAsyncApi.h"
+#import <QWeiboSDK/QWeiboAsyncApi.h>
 #import "ListViewEndCell.h"
 #import "QWMainWindowController.h"
 

@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "QWVerifyWindowController.h"
-#import "QWeiboAsyncApi.h"
-#import "QWMessage.h"
+#import <QWeiboSDK/QWeiboAsyncApi.h>
+#import <QWeiboSDK/QWMessage.h>
 #import "QWViewImageWindowController.h"
 #import <Growl/Growl.h>
 

@@ -7,8 +7,8 @@
 //
 
 #import "QWTweetViewController.h"
-#import <YAJL/YAJL.h>
-#import "QWMessage.h"
+//#import <YAJL/YAJL.h>
+#import <QWeiboSDK/QWMessage.h>
 #import "MyListViewCell.h"
 #import "ListViewEndCell.h"
 #import <Growl/Growl.h>
@@ -65,7 +65,7 @@
         self.listContent = [[[NSMutableArray alloc] init] autorelease];
         self.heightList = [[[NSMutableArray alloc] init] autorelease];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
-        api = [[QWeiboAsyncApi alloc] init];
+        api = [[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET];
         api.delegate = self;
         _userName = [userName copy];
 

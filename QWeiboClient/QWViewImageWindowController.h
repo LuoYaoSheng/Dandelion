@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "QWMessage.h"
+#import <QWeiboSDK/QWMessage.h>
 
 @interface QWViewImageWindowController : NSWindowController {
 

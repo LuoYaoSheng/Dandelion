@@ -9,7 +9,7 @@
 #import "QWMainWindowController.h"
 #import "AppDelegate.h"
 #import "QWTweetViewController.h"
-#import "QWPerson.h"
+#import <QWeiboSDK/QWPerson.h>
 #import "QWPublishMessageWindowController.h"
 
 @interface QWMainWindowController ()
@@ -49,7 +49,7 @@
         // Initialization code here.
         allControllers = [[NSMutableDictionary alloc] init];
         selectedTab = 1;
-        api = [[QWeiboAsyncApi alloc] init];
+        api = [[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hasSendMessage:) name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedUpdate:) name:GET_UPDATE_COUNT_NOTIFICATION object:nil];

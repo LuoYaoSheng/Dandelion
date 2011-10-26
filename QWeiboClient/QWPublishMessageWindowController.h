@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "QWeiboAsyncApi.h"
-#import "QWMessage.h"
+#import <QWeiboSDK/QWeiboAsyncApi.h>
+#import <QWeiboSDK/QWMessage.h>
 #import "DragDropImageView.h"
 
 @interface QWPublishMessageWindowController : NSWindowController<DragDropImageViewDelegate, NSTextViewDelegate> {

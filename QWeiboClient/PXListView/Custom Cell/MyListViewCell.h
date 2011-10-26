@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PXListViewCell.h"
-#import "QWMessage.h"
+#import <QWeiboSDK/QWMessage.h>
 
 @interface MyListViewCell : PXListViewCell
 {

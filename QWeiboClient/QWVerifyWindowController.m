@@ -10,8 +10,8 @@
 #import "AppDelegate.h"
 #import <WebKit/WebFrame.h>
 #import <WebKit/WebPolicyDelegate.h>
-#import "QWeiboAsyncApi.h"
-#import "NSURL+QAdditions.h"
+#import <QWeiboSDK/QWeiboAsyncApi.h>
+#import <QWeiboSDK/NSURL+QAdditions.h>
 
 @interface QWVerifyWindowController (Private)
 
@@ -86,10 +86,8 @@
     if (verifier && ![verifier isEqualToString:@""]) {
         NSString *requestToken = [[NSUserDefaults standardUserDefaults] stringForKey:REQUEST_TOKEN_KEY];
         NSString *requestTokenSecret = [[NSUserDefaults standardUserDefaults] stringForKey:REQUEST_TOKEN_SECRET_KEY];
-		QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
-		NSString *retString = [api getAccessTokenWithConsumerKey:APP_KEY 
-												  consumerSecret:APP_SECRET 
-												 requestTokenKey:requestToken 
+		QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET] autorelease];
+		NSString *retString = [api getAccessTokenWithRequestTokenKey:requestToken 
 											  requestTokenSecret:requestTokenSecret 
 														  verify:verifier];
 		NSLog(@"\nget access token:%@", retString);

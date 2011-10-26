@@ -24,7 +24,7 @@
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
-        api = [[QWeiboAsyncApi alloc] init];
+        api = [[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET];
     }
     
     return self;
