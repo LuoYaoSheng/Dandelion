@@ -22,7 +22,7 @@ typedef enum {
     QWShowTabSearch
 } QWShowTab;
 
-@interface QWMainWindowController : NSWindowController<GrowlApplicationBridgeDelegate>
+@interface QWMainWindowController : NSWindowController<GrowlApplicationBridgeDelegate, NSWindowDelegate>
 {
     NSMutableDictionary *allControllers;
     NSViewController *currentViewController;

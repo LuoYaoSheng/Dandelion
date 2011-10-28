@@ -75,6 +75,11 @@
     [viewController loadView];
 }
 
+- (void)windowDidBecomeKey:(NSNotification *)notification
+{
+    [NSApp setMainMenu:[[NSApp delegate] mainMenu]];
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_USER_INFO_NOTIFICATION object:nil];

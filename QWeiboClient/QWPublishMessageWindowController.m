@@ -98,10 +98,28 @@
 
 - (void)textViewDidChangeSelection:(NSNotification *)notification
 {
-    if (![self.messageTextView.string isEqualToString:@""] || self.atLabel.stringValue)
+    if ((self.messageTextView.string && ![self.messageTextView.string isEqualToString:@""]) || (self.atLabel.stringValue && ![self.atLabel.stringValue isEqualToString:@""]))
         [self.publishButton setEnabled:YES];
     else
         [self.publishButton setEnabled:NO];
 }
+
+- (BOOL)readSelectionFromPasteboard:(NSPasteboard *)pb
+{
+    NSArray *types = [pb types]; 
+    if ([types containsObject:NSStringPboardType]) { 
+        NSString *value = [pb stringForType:NSStringPboardType]; 
+        self.messageTextView.string = value;
+        return YES; 
+    } 
+    
+    return NO; 
+}
+
+- (void)writeToPasteboard:(NSPasteboard *)pb withString:string
+{ 
+    [pb declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self]; 
+    [pb setString:string forType:NSStringPboardType]; 
+} 
 
 @end

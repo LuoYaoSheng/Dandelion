@@ -22,6 +22,7 @@
 @implementation AppDelegate
 
 @synthesize windowController = _windowController;
+@synthesize mainMenu = _mainMenu;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

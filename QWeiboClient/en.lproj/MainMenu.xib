@@ -266,15 +266,6 @@
 							<string key="NSTitle">微博</string>
 							<object class="NSMutableArray" key="NSMenuItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSMenuItem" id="925472624">
-									<reference key="NSMenu" ref="257289510"/>
-									<string key="NSTitle">发布</string>
-									<string type="base64-UTF8" key="NSKeyEquiv">DQ</string>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="35465992"/>
-									<reference key="NSMixedImage" ref="502551668"/>
-								</object>
 								<object class="NSMenuItem" id="271321470">
 									<reference key="NSMenu" ref="257289510"/>
 									<string key="NSTitle">转发</string>
@@ -494,19 +485,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">publishClicked:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="925472624"/>
-					</object>
-					<int key="connectionID">547</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">retweet:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="271321470"/>
 					</object>
 					<int key="connectionID">551</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mainMenu</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="649796088"/>
+					</object>
+					<int key="connectionID">552</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -782,15 +773,9 @@
 						<reference key="object" ref="257289510"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="925472624"/>
 							<reference ref="271321470"/>
 						</object>
 						<reference key="parent" ref="73239835"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">546</int>
-						<reference key="object" ref="925472624"/>
-						<reference key="parent" ref="257289510"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">548</int>
@@ -830,7 +815,6 @@
 					<string>5.IBPluginDependency</string>
 					<string>544.IBPluginDependency</string>
 					<string>545.IBPluginDependency</string>
-					<string>546.IBPluginDependency</string>
 					<string>548.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
 					<string>57.IBPluginDependency</string>
@@ -887,7 +871,6 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -902,7 +885,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">551</int>
+			<int key="maxID">552</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
