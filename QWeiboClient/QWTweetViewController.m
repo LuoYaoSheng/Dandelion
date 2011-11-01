@@ -160,6 +160,9 @@
 
 - (void)beginUpdating
 {
+    if (timer) {
+        [timer invalidate];
+    }
     NSTimeInterval interval;
     switch (self.tweetType) {
         case TweetTypeTimeline:
