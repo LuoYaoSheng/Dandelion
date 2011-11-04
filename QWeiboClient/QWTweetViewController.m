@@ -225,28 +225,36 @@
     [self.listContent insertObjects:tweets atIndexes:indexSet];
     if (tweets.count > 0) {
         newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
-        for (QWMessage *message in tweets) {
-            switch (self.tweetType) {
-                case TweetTypeTimeline: {
-                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-                    if (self.tweetType != self.mainWindowController.selectedTweetType)
-                        [self.mainWindowController.timelineBadge setHidden:NO];
-                    break;
+        if (tweets.count > 10) {
+            [GrowlApplicationBridge notifyWithTitle:nil description:[NSString stringWithFormat:@"%d条新消息", tweets.count] notificationName:GROWL_NOTIFICATION_TIMELINE iconData:nil priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
+            if (self.tweetType != self.mainWindowController.selectedTweetType)
+                [self.mainWindowController.timelineBadge setHidden:NO];
+        } else {
+            for (QWMessage *message in tweets) {
+                switch (self.tweetType) {
+                    case TweetTypeTimeline: {
+                        [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
+                        if (self.tweetType != self.mainWindowController.selectedTweetType)
+                            [self.mainWindowController.timelineBadge setHidden:NO];
+                        break;
+                    }
+                    case TweetTypeMethions: {
+                        if (message.type != QWMessageTypeRetweet) { //Retweet will be shown in timeline also, needn't growl it
+                            [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
+                        }
+                        if (self.tweetType != self.mainWindowController.selectedTweetType)
+                            [self.mainWindowController.timelineBadge setHidden:NO];
+                        break;
+                    }
+                    case TweetTypeMessages: {
+                        [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
+                        if (self.tweetType != self.mainWindowController.selectedTweetType)
+                            [self.mainWindowController.timelineBadge setHidden:NO];
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                case TweetTypeMethions: {
-                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-                    if (self.tweetType != self.mainWindowController.selectedTweetType)
-                        [self.mainWindowController.timelineBadge setHidden:NO];
-                    break;
-                }
-                case TweetTypeMessages: {
-                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-                    if (self.tweetType != self.mainWindowController.selectedTweetType)
-                        [self.mainWindowController.timelineBadge setHidden:NO];
-                    break;
-                }
-                default:
-                    break;
             }
         }
         [self reloadTable:YES];
