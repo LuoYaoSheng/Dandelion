@@ -373,6 +373,9 @@
 - (void)listViewSelectionDidChange:(NSNotification*)aNotification
 {
     NSLog(@"Selection changed");
+    QWMessage *message = [self.listContent objectAtIndex:self.listView.selectedRow];
+    NSLog(@"%@", message);
+    
 }
 
 - (void)retweet

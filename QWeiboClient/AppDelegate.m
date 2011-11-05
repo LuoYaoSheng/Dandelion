@@ -26,6 +26,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    // status menu
     _statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
     [_statusItem setImage:[NSImage imageNamed:@"status_on.png"]];
     [_statusItem setAlternateImage:[NSImage imageNamed:@"status_off.png"]];

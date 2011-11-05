@@ -62,6 +62,10 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    
+    // add url schema support
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    
     [GrowlApplicationBridge setGrowlDelegate:self]; // add Growl support!
     [self updateBadge:nil];
 
@@ -90,6 +94,13 @@
     [api release];
     [_viewImageController release];
     [super dealloc];
+}
+
+- (void)handleURLEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
+{
+    NSString* url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+    NSLog(@"%@", url);
+    [self toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:[url stringByReplacingOccurrencesOfString:@"Dandelion://" withString:@""], @"userName", nil]];
 }
 
 #pragma mark - GrowlApplicationBridgeDelegate
