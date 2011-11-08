@@ -37,3 +37,4 @@
 #define UPDATE_INTERVAL_MENTHIONS                           120
 #define UPDATE_INTERVAL_MESSAGES                            300
 
+#define FACE_LINE_SIZE                                      15

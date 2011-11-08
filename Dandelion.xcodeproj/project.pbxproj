@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35019D881468D91200FDEED2 /* ImagePickerMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35019D851468D91200FDEED2 /* ImagePickerMenuItemView.m */; };
+		35019D891468D91200FDEED2 /* MenuItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35019D871468D91200FDEED2 /* MenuItemViewController.m */; };
+		35019D8B1468DB2800FDEED2 /* smileEmoji.png in Resources */ = {isa = PBXBuildFile; fileRef = 35019D8A1468DB2800FDEED2 /* smileEmoji.png */; };
+		35019D951468F82D00FDEED2 /* MyTextAttachmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35019D941468F82D00FDEED2 /* MyTextAttachmentCell.m */; };
 		350713FF14497D100080D041 /* FlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 350713FE14497D100080D041 /* FlippedView.m */; };
 		3509E84F143CACA00053EF3F /* favorite_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 3509E845143CACA00053EF3F /* favorite_off.png */; };
 		3509E850143CACA00053EF3F /* favorite_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 3509E846143CACA00053EF3F /* favorite_on.png */; };
@@ -222,6 +226,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		35019D841468D91100FDEED2 /* ImagePickerMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerMenuItemView.h; sourceTree = "<group>"; };
+		35019D851468D91200FDEED2 /* ImagePickerMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerMenuItemView.m; sourceTree = "<group>"; };
+		35019D861468D91200FDEED2 /* MenuItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemViewController.h; sourceTree = "<group>"; };
+		35019D871468D91200FDEED2 /* MenuItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemViewController.m; sourceTree = "<group>"; };
+		35019D8A1468DB2800FDEED2 /* smileEmoji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smileEmoji.png; sourceTree = "<group>"; };
+		35019D931468F82D00FDEED2 /* MyTextAttachmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextAttachmentCell.h; sourceTree = "<group>"; };
+		35019D941468F82D00FDEED2 /* MyTextAttachmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextAttachmentCell.m; sourceTree = "<group>"; };
 		350713FD14497D100080D041 /* FlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlippedView.h; sourceTree = "<group>"; };
 		350713FE14497D100080D041 /* FlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlippedView.m; sourceTree = "<group>"; };
 		3509E845143CACA00053EF3F /* favorite_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_off.png; sourceTree = "<group>"; };
@@ -485,6 +496,7 @@
 				353C6CC4144C537200E67DE4 /* blackx.png */,
 				359E5EBB144D6E14009E5ADC /* head.jpg */,
 				359E5EBD144D7C80009E5ADC /* badge-favorite.png */,
+				35019D8A1468DB2800FDEED2 /* smileEmoji.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -563,6 +575,10 @@
 				35E6368414494A2200619046 /* QWViewImageWindowController.h */,
 				35E6368514494A2300619046 /* QWViewImageWindowController.m */,
 				35E6368714494A4900619046 /* QWViewImageWindowController.xib */,
+				35019D841468D91100FDEED2 /* ImagePickerMenuItemView.h */,
+				35019D851468D91200FDEED2 /* ImagePickerMenuItemView.m */,
+				35019D861468D91200FDEED2 /* MenuItemViewController.h */,
+				35019D871468D91200FDEED2 /* MenuItemViewController.m */,
 				35263AB2140F1F4800944D3E /* Supporting Files */,
 			);
 			name = Dandelion;
@@ -601,6 +617,8 @@
 				35F0E127144E8268002A9191 /* TextViewPassive.m */,
 				35F0E129144E877B002A9191 /* ButtonPassive.h */,
 				35F0E12A144E877B002A9191 /* ButtonPassive.m */,
+				35019D931468F82D00FDEED2 /* MyTextAttachmentCell.h */,
+				35019D941468F82D00FDEED2 /* MyTextAttachmentCell.m */,
 			);
 			name = CustomControl;
 			sourceTree = "<group>";
@@ -1019,6 +1037,7 @@
 				35C6DFA514679FE200EF052F /* 鼓掌.gif in Resources */,
 				35C6DFA614679FE200EF052F /* 龇牙.gif in Resources */,
 				35C6DFAF1467B12700EF052F /* face.plist in Resources */,
+				35019D8B1468DB2800FDEED2 /* smileEmoji.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,6 +1076,9 @@
 				354A8E8F144DC4290012D2BD /* NSImage+Categories.m in Sources */,
 				35F0E128144E8268002A9191 /* TextViewPassive.m in Sources */,
 				35F0E12B144E877B002A9191 /* ButtonPassive.m in Sources */,
+				35019D881468D91200FDEED2 /* ImagePickerMenuItemView.m in Sources */,
+				35019D891468D91200FDEED2 /* MenuItemViewController.m in Sources */,
+				35019D951468F82D00FDEED2 /* MyTextAttachmentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
