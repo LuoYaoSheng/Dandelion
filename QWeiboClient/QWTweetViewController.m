@@ -239,7 +239,7 @@
                         break;
                     }
                     case TweetTypeMethions: {
-                        if (message.type != QWMessageTypeRetweet) { //Retweet will be shown in timeline also, needn't growl it
+                        if (message.type == QWMessageTypeDialog) { //Retweet will be shown in timeline also, needn't growl it
                             [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
                         }
                         if (self.tweetType != self.mainWindowController.selectedTweetType)
