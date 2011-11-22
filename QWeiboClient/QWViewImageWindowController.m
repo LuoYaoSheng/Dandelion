@@ -58,6 +58,17 @@
         imageViewFrame.size = NSMakeSize(imageRep.pixelsWide, imageRep.pixelsHigh);
         self.imageView.frame = imageViewFrame;
         self.imageView.superview.frame = self.imageView.frame;
+        
+        CGSize windowSize = self.imageView.frame.size;
+        CGSize screenSize = [[NSScreen mainScreen] frame].size;
+        NSSize newWindowSize = CGSizeMake(MIN(windowSize.width+2, screenSize.width/2), windowSize.height+24);
+        NSRect windowFrame = self.window.frame;
+        float xDelta = newWindowSize.width - windowFrame.size.width;
+        float yDelta = newWindowSize.height - windowFrame.size.height;
+        windowFrame.origin.y -= yDelta;
+        windowFrame.size.width += xDelta;
+        windowFrame.size.height += yDelta;
+        [self.window setFrame:windowFrame display:YES animate:YES];
     }
 }
 
@@ -81,9 +92,21 @@
     [NSAnimationContext endGrouping];
     
     NSRect imageViewFrame = self.imageView.frame;
-    imageViewFrame.size = self.imageView.image.size;
+    NSImageRep *imageRep = [[self.imageView.image representations] lastObject];
+    imageViewFrame.size = NSMakeSize(imageRep.pixelsWide, imageRep.pixelsHigh);
     self.imageView.frame = imageViewFrame;
     self.imageView.superview.frame = self.imageView.frame;
+    
+    CGSize windowSize = self.imageView.frame.size;
+    CGSize screenSize = [[NSScreen mainScreen] frame].size;
+    NSSize newWindowSize = CGSizeMake(MIN(windowSize.width+2, screenSize.width/2), windowSize.height+24);
+    NSRect windowFrame = self.window.frame;
+    float xDelta = newWindowSize.width - windowFrame.size.width;
+    float yDelta = newWindowSize.height - windowFrame.size.height;
+    windowFrame.origin.y -= yDelta;
+    windowFrame.size.width += xDelta;
+    windowFrame.size.height += yDelta;
+    [self.window setFrame:windowFrame display:YES animate:YES];
 }
 
 - (void)dealloc
