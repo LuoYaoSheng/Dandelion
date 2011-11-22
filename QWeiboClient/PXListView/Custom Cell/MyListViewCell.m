@@ -75,13 +75,11 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-	if([self isSelected]) {
+    if (self.isNew) {
+		[RGBCOLOR(230,243,248) set];
+    } else if([self isSelected]) {
 		[RGBCOLOR(220, 220, 220) set];
-	}
-//	else if (self.isNew) {
-//		[RGBCOLOR(230,243,248) set];
-//    } 
-    else {
+	} else {
         [RGBCOLOR(240,240,240) set];
     }
 

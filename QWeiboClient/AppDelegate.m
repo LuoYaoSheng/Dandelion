@@ -65,7 +65,6 @@
 
 - (void)checkForLogin:(NSNotification *)notification
 {    
-    [self.windowController.window close];
     self.windowController = nil;
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_KEY];
     NSString *accessTokenSecret = [[NSUserDefaults standardUserDefaults] stringForKey:ACCESS_TOKEN_SECRET_KEY];

@@ -84,12 +84,10 @@
     [NSApp setMainMenu:[[NSApp delegate] mainMenu]];
 }
 
+
+
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_USER_INFO_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:GET_UPDATE_COUNT_NOTIFICATION object:nil];
-
     [allControllers release];
     [api release];
     [_viewImageController release];
@@ -277,6 +275,9 @@
 }
 
 - (IBAction)logout:(id)sender {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.window close];
+    [[NSAppleEventManager sharedAppleEventManager] removeEventHandlerForEventClass:kInternetEventClass andEventID:kAEGetURL];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:ACCESS_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:ACCESS_TOKEN_SECRET_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
