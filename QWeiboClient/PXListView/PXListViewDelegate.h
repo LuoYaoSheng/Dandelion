@@ -23,7 +23,7 @@ extern NSString * const PXListViewSelectionDidChange;
 @optional
 - (void)listViewSelectionDidChange:(NSNotification*)aNotification;
 - (void)listView:(PXListView*)aListView rowDoubleClicked:(NSUInteger)rowIndex;
-
+- (void)listView:(PXListView*)aListView mouseMoved:(NSUInteger)rowIndex;
 - (void)listView:(PXListView *)aListView retweetForRow:(NSUInteger)rowIndex;
 - (void)listView:(PXListView *)aListView addFavoriteForRow:(NSUInteger)rowIndex;
 - (void)listView:(PXListView *)aListView imageClickedForRow:(NSUInteger)rowIndex;

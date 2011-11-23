@@ -41,7 +41,7 @@ typedef enum {
 @property (readonly, retain) QWViewImageWindowController *viewImageController;
 
 - (IBAction)switchButtonClicked:(id)sender;
-- (void)toggleTab:(QWShowTab)tab withInfo:(NSDictionary *)info;
+- (void)toggleTab:(QWShowTab)tab withInfo:(NSDictionary *)info refresh:(BOOL)refresh;
 - (IBAction)publishMessage:(id)sender;
 - (IBAction)logout:(id)sender;
 - (void)retweetMessage:(QWMessage *)message;

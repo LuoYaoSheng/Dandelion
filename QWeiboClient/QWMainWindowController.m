@@ -98,7 +98,7 @@
 {
     NSString* url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
     NSLog(@"%@", url);
-    [self toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:[url stringByReplacingOccurrencesOfString:@"Dandelion://" withString:@""], @"userName", nil]];
+    [self toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:[url stringByReplacingOccurrencesOfString:@"Dandelion://" withString:@""], @"userName", nil] refresh:YES];
 }
 
 #pragma mark - GrowlApplicationBridgeDelegate
@@ -116,15 +116,15 @@
     TweetType tweetType = (TweetType)[clickContext intValue];
     switch (tweetType) {
         case TweetTypeTimeline: {
-            [self toggleTab:QWShowTabTimeline withInfo:nil];
+            [self toggleTab:QWShowTabTimeline withInfo:nil refresh:NO];
             break;
         }
         case TweetTypeMethions: {
-            [self toggleTab:QWShowTabMethions withInfo:nil];
+            [self toggleTab:QWShowTabMethions withInfo:nil refresh:NO];
             break;
         }
         case TweetTypeMessages: {
-            [self toggleTab:QWShowTabMessages withInfo:nil];
+            [self toggleTab:QWShowTabMessages withInfo:nil refresh:NO];
             break;
         }
         default:
@@ -187,10 +187,10 @@
 
 - (IBAction)switchButtonClicked:(id)sender
 {
-    [self toggleTab:(QWShowTab)(((NSButtonCell *)self.matrix.selectedCell).tag) withInfo:nil];
+    [self toggleTab:(QWShowTab)(((NSButtonCell *)self.matrix.selectedCell).tag) withInfo:nil refresh:YES];
 }
 
-- (void)toggleTab:(QWShowTab)tab withInfo:(NSDictionary *)info
+- (void)toggleTab:(QWShowTab)tab withInfo:(NSDictionary *)info refresh:(BOOL)refresh
 {
     [self switchImageForButton:[self.matrix cellWithTag:selectedTab]];
     [self switchImageForButton:[self.matrix cellWithTag:tab]];
@@ -248,7 +248,7 @@
     }
     if (viewController)
         [self activateViewController:viewController];
-    if (selectedTab == tab) {
+    if (refresh && selectedTab == tab) {
         if ([viewController isMemberOfClass:[QWTweetViewController class]]) {
             [(QWTweetViewController *)viewController getLastTweets];
         }
@@ -271,7 +271,7 @@
 
 - (IBAction)headButtonClicked:(id)sender 
 {
-    [self toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:nil, @"userName", nil]];   
+    [self toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:nil, @"userName", nil] refresh:YES];   
 }
 
 - (IBAction)logout:(id)sender {
@@ -289,7 +289,7 @@
     NSString *result = notification.object;
     NSLog(@"%@", result);
     
-    [self toggleTab:QWShowTabTimeline withInfo:nil];
+    [self toggleTab:QWShowTabTimeline withInfo:nil refresh:YES];
     [(QWTweetViewController *)currentViewController getLastTweets];
     
     [api getUserInfo];

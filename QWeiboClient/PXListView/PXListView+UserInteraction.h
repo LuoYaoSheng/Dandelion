@@ -13,6 +13,7 @@
 @interface PXListView (UserInteraction)
 
 - (void)handleMouseDown:(NSEvent*)theEvent inCell:(PXListViewCell*)theCell;
+- (void)handleMouseMoved:(NSEvent*)theEvent inCell:(PXListViewCell*)theCell;
 - (void)handleMouseDownOutsideCells:(NSEvent*)theEvent;
 
 - (void)handleRetweetCickedInCell:(PXListViewCell*)theCell;

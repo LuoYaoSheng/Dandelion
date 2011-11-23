@@ -28,6 +28,23 @@
 @synthesize scrollView = _scrollView;
 @synthesize progessIndicator = _progessIndicator;
 @synthesize message = _message;
+@synthesize newTweetBG = _newTweetBG;
+@synthesize isNew = _isNew;
+
+- (BOOL)isNew
+{
+    return _isNew;
+}
+
+- (void)setIsNew:(BOOL)isNew
+{
+    _isNew = isNew;
+    if (isNew) {
+        [self.newTweetBG setAlphaValue:1];
+    } else {
+        [self.newTweetBG setAlphaValue:0];
+    }
+}
 
 #pragma mark - Init/Dealloc
 
@@ -69,18 +86,17 @@
 {
     self.headButton.image = nil;
 	self.textLabel.string = @"";
+    self.isNew = NO;
 }
 
 #pragma mark - Drawing
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    if (self.isNew) {
-		[RGBCOLOR(230,243,248) set];
-    } else if([self isSelected]) {
+    if([self isSelected]) {
 		[RGBCOLOR(220, 220, 220) set];
 	} else {
-        [RGBCOLOR(240,240,240) set];
+        [RGBCOLOR(240, 240, 240) set];
     }
 
     //Draw the border and background
@@ -95,6 +111,17 @@
     [[self.timeLabel animator] setAlphaValue:0];
     [[self.toolbarView animator] setAlphaValue:1];
     [NSAnimationContext endGrouping];
+}
+
+- (void)mouseMoved:(NSEvent *)theEvent
+{
+    if (self.isNew) {
+        [[self listView] handleMouseMoved:theEvent inCell:self];
+        [NSAnimationContext beginGrouping];
+        [[NSAnimationContext currentContext] setDuration:0.3f];
+        [[self.newTweetBG animator] setAlphaValue:0];
+        [NSAnimationContext endGrouping];
+    }
 }
 
 - (void)mouseExited:(NSEvent *)theEvent

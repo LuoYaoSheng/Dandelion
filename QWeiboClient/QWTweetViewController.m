@@ -416,7 +416,12 @@
 - (void)listView:(PXListView *)aListView headClickedForRow:(NSUInteger)rowIndex
 {
     QWMessage *message = [self.listContent objectAtIndex:rowIndex];
-    [self.mainWindowController toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:message.name, @"userName", nil]];
+    [self.mainWindowController toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:message.name, @"userName", nil] refresh:YES];
+}
+
+- (void)listView:(PXListView *)aListView mouseMoved:(NSUInteger)rowIndex
+{
+    ((QWMessage *)[self.listContent objectAtIndex:rowIndex]).isNew = NO;
 }
 
 - (void)listViewResize:(PXListView *)aListView

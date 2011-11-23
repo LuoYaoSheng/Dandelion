@@ -23,6 +23,8 @@
 @property (assign) IBOutlet NSView *toolbarView;
 @property (assign) IBOutlet NSScrollView *scrollView;
 @property (assign) IBOutlet NSProgressIndicator *progessIndicator;
+@property (assign) IBOutlet NSTextField *newTweetBG;
+@property (assign) BOOL isNew;
 @property (retain) QWMessage *message;
 
 - (IBAction)retweetClicked:(id)sender;

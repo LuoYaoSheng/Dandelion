@@ -61,7 +61,7 @@
         
         CGSize windowSize = self.imageView.frame.size;
         CGSize screenSize = [[NSScreen mainScreen] frame].size;
-        NSSize newWindowSize = CGSizeMake(MIN(windowSize.width+2, screenSize.width/2), windowSize.height+24);
+        NSSize newWindowSize = CGSizeMake(MIN(windowSize.width+2, screenSize.width*0.8), windowSize.height+24);
         NSRect windowFrame = self.window.frame;
         float xDelta = newWindowSize.width - windowFrame.size.width;
         float yDelta = newWindowSize.height - windowFrame.size.height;
@@ -99,7 +99,7 @@
     
     CGSize windowSize = self.imageView.frame.size;
     CGSize screenSize = [[NSScreen mainScreen] frame].size;
-    NSSize newWindowSize = CGSizeMake(MIN(windowSize.width+2, screenSize.width/2), windowSize.height+24);
+    NSSize newWindowSize = CGSizeMake(MIN(windowSize.width+2, screenSize.width*0.8), windowSize.height+24);
     NSRect windowFrame = self.window.frame;
     float xDelta = newWindowSize.width - windowFrame.size.width;
     float yDelta = newWindowSize.height - windowFrame.size.height;

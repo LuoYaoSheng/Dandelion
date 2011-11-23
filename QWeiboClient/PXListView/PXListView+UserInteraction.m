@@ -245,6 +245,13 @@ static PXIsDragStartResult PXIsDragStart( NSEvent *startEvent, NSTimeInterval th
     }
 }
 
+- (void)handleMouseMoved:(NSEvent *)theEvent inCell:(PXListViewCell *)theCell
+{
+    if([[self delegate] respondsToSelector:@selector(listView:mouseMoved:)]) {
+        [[self delegate] listView:self mouseMoved:[theCell row]];
+    }
+}
+
 - (void)handleAddFavoriteClickedInCell:(PXListViewCell*)theCell
 {
     if([[self delegate] respondsToSelector:@selector(listView:addFavoriteForRow:)]) {
