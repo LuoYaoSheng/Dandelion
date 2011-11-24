@@ -18,7 +18,6 @@
 - (NSViewController*)viewControllerForName:(NSString*)name tweetType:(TweetType)type userName:(NSString *)userName;
 - (void)switchImageForButton:(NSButton *)button;
 - (void)didEndSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-- (void)updateBadge:(NSDictionary *)info;
 
 @end
 
@@ -52,7 +51,7 @@
         api = [[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hasSendMessage:) name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedUpdate:) name:GET_UPDATE_COUNT_NOTIFICATION object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNewTweet:) name:UPDATE_NEWTWEET_NOTIFICATION object:nil];
         self.selectedTweetType = TweetTypeTimeline;
     }
     
@@ -67,7 +66,6 @@
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
     
     [GrowlApplicationBridge setGrowlDelegate:self]; // add Growl support!
-    [self updateBadge:nil];
 
     [api getUserInfo];
 
@@ -199,21 +197,18 @@
     switch (tab) {
         case QWShowTabTimeline:
         {
-            [self.timelineBadge setHidden:YES];
             viewController = [self viewControllerForName:@"QWTimelineViewController" tweetType:TweetTypeTimeline userName:nil];
             self.selectedTweetType = TweetTypeTimeline;
             break;
         }
         case QWShowTabMethions:
         {
-            [self.mentionsBadge setHidden:YES];
             viewController = [self viewControllerForName:@"QWMentionsViewController" tweetType:TweetTypeMethions userName:nil];
             self.selectedTweetType = TweetTypeMethions;
             break;
         }
         case QWShowTabMessages:
         {
-            [self.messagesBadge setHidden:YES];
             viewController = [self viewControllerForName:@"QWMessagesViewController" tweetType:TweetTypeMessages userName:nil];
             self.selectedTweetType = TweetTypeMessages;
             break;
@@ -315,36 +310,30 @@
     self.headButton.image = [[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:person.head]] autorelease];
 }
 
-- (void)receivedUpdate:(NSNotification *)notification
-{
-    NSLog(@"%@", notification.object);
-    [self updateBadge:notification.object];
-}
 
-- (void)updateBadge:(NSDictionary *)info
+- (void)updateNewTweet:(NSNotification *)notification
 {
-    int timelineCount = [[info objectForKey:@"home"] intValue];
-    int mentionsCount = [[info objectForKey:@"mentions"] intValue];
-    int messagesCount = [[info objectForKey:@"private"] intValue];
+    int timelineCount = [(QWTweetViewController *)[allControllers objectForKey:@"QWTimelineViewController"] newTweetCount];
+    int mentionsCount = [(QWTweetViewController *)[allControllers objectForKey:@"QWMentionsViewController"] newTweetCount];
+    int messagesCount = [(QWTweetViewController *)[allControllers objectForKey:@"QWMessagesViewController"] newTweetCount];
 
-    if (timelineCount > 0) {
+    if (timelineCount > 0)
         [self.timelineBadge setHidden:NO];
-        ((QWTweetViewController *)[allControllers objectForKey:@"QWTimelineViewController"]).newTweetCount = timelineCount;
-        NSString *timelineDescription = [NSString stringWithFormat:@"%d条新微博", timelineCount];
-        [GrowlApplicationBridge notifyWithTitle:timelineDescription description:@"" notificationName:GROWL_NOTIFICATION_TIMELINE iconData:nil priority:0 isSticky:YES clickContext:nil];
-    }
-    if (mentionsCount > 0) {
+    else 
+        [self.timelineBadge setHidden:YES];
+    if (mentionsCount > 0)
         [self.mentionsBadge setHidden:NO];
-        ((QWTweetViewController *)[allControllers objectForKey:@"QWMentionsViewController"]).newTweetCount = mentionsCount;
-        NSString *mentionsDescription = [NSString stringWithFormat:@"%d条新引用", mentionsCount];
-        [GrowlApplicationBridge notifyWithTitle:mentionsDescription description:@"" notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:nil priority:0 isSticky:YES clickContext:nil];
-    }
-    if (messagesCount > 0) {
+    else 
+        [self.mentionsBadge setHidden:YES];
+    if (messagesCount > 0)
         [self.messagesBadge setHidden:NO];
-        ((QWTweetViewController *)[allControllers objectForKey:@"QWMessagesViewController"]).newTweetCount = messagesCount;
-        NSString *messagesDescription = [NSString stringWithFormat:@"%d条新私信", messagesCount];
-        [GrowlApplicationBridge notifyWithTitle:messagesDescription description:@"" notificationName:GROWL_NOTIFICATION_MESSAGES iconData:nil priority:0 isSticky:YES clickContext:nil];
-    }
+    else 
+        [self.messagesBadge setHidden:YES];
+    
+    if (timelineCount>0 || mentionsCount>0 || messagesCount>0)
+        [NSApp setApplicationIconImage:[NSImage imageNamed:@"weibo_badge.icns"]];
+    else
+        [NSApp setApplicationIconImage:[NSImage imageNamed:@"weibo.icns"]];
 }
 
 @end

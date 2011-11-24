@@ -27,13 +27,12 @@
     NSTimer *timer;
 }
 
-
 @property (nonatomic, retain) NSMutableArray *listContent;
 @property (assign) IBOutlet PXListView *listView;
 @property (assign) QWMainWindowController *mainWindowController;
-@property (assign) int newTweetCount;
 @property (copy) NSString *userName;
 @property (assign) TweetType tweetType;
+@property (nonatomic, assign) int newTweetCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type userName:(NSString *)userName;
 - (void)getLastTweets;

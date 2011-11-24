@@ -37,9 +37,9 @@
 @synthesize heightList = _heightList;
 @synthesize reloadCell = _reloadCell;
 @synthesize mainWindowController = _mainWindowController;
-@synthesize newTweetCount = _newTweetCount;
 @synthesize userName = _userName;
 @synthesize tweetType = _tweetType;
+@synthesize newTweetCount = _newTweetCount;
 
 - (NSString *)userName
 {
@@ -55,12 +55,18 @@
     }
 }
 
+- (void)setNewTweetCount:(int)newTweetCount
+{
+    _newTweetCount = newTweetCount;
+    // post new tweet change
+    [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_NEWTWEET_NOTIFICATION object:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type userName:(NSString *)userName
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
-        self.newTweetCount = 0;
         self.tweetType = type;
         self.listContent = [[[NSMutableArray alloc] init] autorelease];
         self.heightList = [[[NSMutableArray alloc] init] autorelease];
@@ -74,6 +80,7 @@
         newestPageTime = 0;
         isLoading = NO;
         pos = 0;
+        _newTweetCount = 0;
         
         [self getLastTweets];
     }
@@ -134,7 +141,7 @@
             self.title = @"";
             break;
     }
-    
+    self.newTweetCount = 0;
     isLoading = YES;
     if (self.tweetType == TweetTypeSearch) {
         pos = 0;
@@ -223,33 +230,27 @@
 {
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tweets.count)];
     [self.listContent insertObjects:tweets atIndexes:indexSet];
+    self.newTweetCount += tweets.count;
+    
     if (tweets.count > 0) {
         newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
         if (tweets.count > 10) {
             [GrowlApplicationBridge notifyWithTitle:nil description:[NSString stringWithFormat:@"%d条新消息", tweets.count] notificationName:GROWL_NOTIFICATION_TIMELINE iconData:nil priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-            if (self.tweetType != self.mainWindowController.selectedTweetType)
-                [self.mainWindowController.timelineBadge setHidden:NO];
         } else {
             for (QWMessage *message in tweets) {
                 switch (self.tweetType) {
                     case TweetTypeTimeline: {
                         [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-                        if (self.tweetType != self.mainWindowController.selectedTweetType)
-                            [self.mainWindowController.timelineBadge setHidden:NO];
                         break;
                     }
                     case TweetTypeMethions: {
                         if (message.type == QWMessageTypeDialog) { //Retweet will be shown in timeline also, needn't growl it
                             [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
                         }
-                        if (self.tweetType != self.mainWindowController.selectedTweetType)
-                            [self.mainWindowController.timelineBadge setHidden:NO];
                         break;
                     }
                     case TweetTypeMessages: {
                         [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-                        if (self.tweetType != self.mainWindowController.selectedTweetType)
-                            [self.mainWindowController.timelineBadge setHidden:NO];
                         break;
                     }
                     default:
@@ -258,7 +259,6 @@
             }
         }
         [self reloadTable:YES];
-//        [NSApp setApplicationIconImage:[NSImage imageNamed:@"weibo_badge.icns"]];
     }
 }
 
@@ -421,7 +421,10 @@
 
 - (void)listView:(PXListView *)aListView mouseMoved:(NSUInteger)rowIndex
 {
-    ((QWMessage *)[self.listContent objectAtIndex:rowIndex]).isNew = NO;
+    if (((QWMessage *)[self.listContent objectAtIndex:rowIndex]).isNew) {
+        ((QWMessage *)[self.listContent objectAtIndex:rowIndex]).isNew = NO;
+        self.newTweetCount--;
+    }
 }
 
 - (void)listViewResize:(PXListView *)aListView

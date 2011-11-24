@@ -25,6 +25,7 @@
 #define PUBLISH_MESSAGE_NOTIFICATION                        @"PUBLISH_MESSAGE_NOTIFICATION"
 #define LOGOUT_NOTIFICATION                                 @"LOGOUT_NOTIFICATION"
 #define GET_UPDATE_COUNT_NOTIFICATION                       @"GET_UPDATE_COUNT_NOTIFICATION"
+#define UPDATE_NEWTWEET_NOTIFICATION                        @"UPDATE_NEWTWEET_NOTIFICATION"
 
 #define VERIFY_URL                                          @"http://open.t.qq.com/cgi-bin/authorize?oauth_token="
 
