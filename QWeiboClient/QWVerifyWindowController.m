@@ -90,7 +90,7 @@
 		NSString *retString = [api getAccessTokenWithRequestTokenKey:requestToken 
 											  requestTokenSecret:requestTokenSecret 
 														  verify:verifier];
-		NSLog(@"\nget access token:%@", retString);
+		NIF_TRACE(@"\nget access token:%@", retString);
         NSDictionary *params = [NSURL parseURLQueryString:retString];
         [[NSUserDefaults standardUserDefaults] setObject:[params objectForKey:@"oauth_token"] forKey:ACCESS_TOKEN_KEY];
         [[NSUserDefaults standardUserDefaults] setObject:[params objectForKey:@"oauth_token_secret"] forKey:ACCESS_TOKEN_SECRET_KEY];

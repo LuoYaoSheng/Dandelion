@@ -27,6 +27,7 @@
 - (void)fetchOlderTweets;
 - (void)beginUpdating;
 - (void)stopUpdating;
+- (void)dealWithNewTweets:(NSArray *)tweets;
 
 @end
 
@@ -73,6 +74,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
         api = [[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET];
         api.delegate = self;
+        api.tweetType = self.tweetType;
         _userName = [userName copy];
 
         hasNext = YES;
@@ -148,7 +150,7 @@
         [api getPublicTimelineWithPos:pos pageSize:20];
     }
     else
-        [api getLastTweetsWithTweetType:self.tweetType pageSize:20 userName:self.userName];
+        [api getLastTweetsWithPageSize:20 userName:self.userName];
 }
 
 - (void)fetchOlderTweets
@@ -157,12 +159,12 @@
     if (self.tweetType == TweetTypeSearch)
         [api getPublicTimelineWithPos:pos pageSize:20];
     else
-        [api getOlderTweetsWithTweetType:self.tweetType pageSize:20 pageTime:oldestPageTime userName:self.userName];
+        [api getOlderTweetsWithPageSize:20 pageTime:oldestPageTime userName:self.userName];
 }
 
 - (void)fetchNewerTweets
 {
-    [api getNewerTweetsWithTweetType:self.tweetType pageSize:10 pageTime:newestPageTime userName:self.userName];
+    [api getNewerTweetsWithPageSize:10 pageTime:newestPageTime userName:self.userName];
 }
 
 - (void)beginUpdating
@@ -211,6 +213,14 @@
     hasNext = ![[info objectForKey:@"hasNext"] boolValue];
 //    pos = [[info objectForKey:@"pos"] intValue];
     pos += 20;
+    
+    NSMutableArray *newTweets = [NSMutableArray array];
+    for (QWMessage *message in tweets) {
+        if (message.isNew)
+            [newTweets addObject:message];
+    }
+    [self dealWithNewTweets:newTweets];
+    
     [self reloadTable:YES];
     [self beginUpdating];
 }
@@ -230,35 +240,40 @@
 {
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tweets.count)];
     [self.listContent insertObjects:tweets atIndexes:indexSet];
-    self.newTweetCount += tweets.count;
     
+    [self dealWithNewTweets:tweets];
     if (tweets.count > 0) {
         newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
-        if (tweets.count > 10) {
-            [GrowlApplicationBridge notifyWithTitle:nil description:[NSString stringWithFormat:@"%d条新消息", tweets.count] notificationName:GROWL_NOTIFICATION_TIMELINE iconData:nil priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-        } else {
-            for (QWMessage *message in tweets) {
-                switch (self.tweetType) {
-                    case TweetTypeTimeline: {
-                        [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-                        break;
-                    }
-                    case TweetTypeMethions: {
-                        if (message.type == QWMessageTypeDialog) { //Retweet will be shown in timeline also, needn't growl it
-                            [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-                        }
-                        break;
-                    }
-                    case TweetTypeMessages: {
-                        [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
-                        break;
-                    }
-                    default:
-                        break;
+        [self reloadTable:YES];
+    }
+}
+
+- (void)dealWithNewTweets:(NSArray *)tweets
+{
+    self.newTweetCount += tweets.count;
+    if (tweets.count > 10) {
+        [GrowlApplicationBridge notifyWithTitle:nil description:[NSString stringWithFormat:@"%d条新消息", tweets.count] notificationName:GROWL_NOTIFICATION_TIMELINE iconData:nil priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
+    } else {
+        for (QWMessage *message in tweets) {
+            switch (self.tweetType) {
+                case TweetTypeTimeline: {
+                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_TIMELINE iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
+                    break;
                 }
+                case TweetTypeMethions: {
+                    if (message.type == QWMessageTypeDialog) { //Retweet will be shown in timeline also, needn't growl it
+                        [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MENTHIONS iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
+                    }
+                    break;
+                }
+                case TweetTypeMessages: {
+                    [GrowlApplicationBridge notifyWithTitle:message.nick description:message.text notificationName:GROWL_NOTIFICATION_MESSAGES iconData:[NSData dataWithContentsOfURL:[NSURL URLWithString:message.head]] priority:0 isSticky:NO clickContext:[NSNumber numberWithInt:self.tweetType]];
+                    break;
+                }
+                default:
+                    break;
             }
         }
-        [self reloadTable:YES];
     }
 }
 
@@ -372,9 +387,9 @@
 
 - (void)listViewSelectionDidChange:(NSNotification*)aNotification
 {
-    NSLog(@"Selection changed");
+    NIF_TRACE(@"Selection changed");
     QWMessage *message = [self.listContent objectAtIndex:self.listView.selectedRow];
-    NSLog(@"%@", message);
+    NIF_TRACE(@"%@", message);
     
 }
 

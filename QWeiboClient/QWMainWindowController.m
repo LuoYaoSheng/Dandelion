@@ -95,7 +95,7 @@
 - (void)handleURLEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
 {
     NSString* url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-    NSLog(@"%@", url);
+    NIF_TRACE(@"%@", url);
     [self toggleTab:QWShowTabPeople withInfo:[NSDictionary dictionaryWithObjectsAndKeys:[url stringByReplacingOccurrencesOfString:@"Dandelion://" withString:@""], @"userName", nil] refresh:YES];
 }
 
@@ -282,7 +282,7 @@
 - (void)hasSendMessage:(NSNotification *)notification
 {
     NSString *result = notification.object;
-    NSLog(@"%@", result);
+    NIF_TRACE(@"%@", result);
     
     [self toggleTab:QWShowTabTimeline withInfo:nil refresh:YES];
     [(QWTweetViewController *)currentViewController getLastTweets];

@@ -245,6 +245,7 @@
 		3509E84C143CACA00053EF3F /* search_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_on.png; sourceTree = "<group>"; };
 		3509E84D143CACA00053EF3F /* timeline_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_off.png; sourceTree = "<group>"; };
 		3509E84E143CACA00053EF3F /* timeline_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_on.png; sourceTree = "<group>"; };
+		351140FA14947DE600B0263C /* NIFLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIFLog.h; sourceTree = "<group>"; };
 		3517188E143B035E00DB2726 /* RoundedButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedButtonCell.h; sourceTree = "<group>"; };
 		3517188F143B035E00DB2726 /* RoundedButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedButtonCell.m; sourceTree = "<group>"; };
 		35263AA7140F1F4800944D3E /* Dandelion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dandelion.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -588,6 +589,7 @@
 		35263AB2140F1F4800944D3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				351140FA14947DE600B0263C /* NIFLog.h */,
 				35263AB3140F1F4800944D3E /* QWeiboClient-Info.plist */,
 				35C6DFAE1467B12700EF052F /* face.plist */,
 				35263AB4140F1F4800944D3E /* InfoPlist.strings */,

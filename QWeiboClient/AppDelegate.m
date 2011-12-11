@@ -74,7 +74,7 @@
         [_logoutMenuItem setEnabled:NO];
         QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET] autorelease];
         NSString *retString = [api getRequestToken];
-        NSLog(@"Get requestToken:%@", retString);
+        NIF_TRACE(@"Get requestToken:%@", retString);
         
         NSDictionary *params = [NSURL parseURLQueryString:retString];
         [[NSUserDefaults standardUserDefaults] setObject:[params objectForKey:@"oauth_token"] forKey:REQUEST_TOKEN_KEY];
