@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+	<channel>
+		<title>Dandelion's Changelog</title>
+		<link>http://phaibin.tk/app/dandelion/appcast.xml</link>
+		<description>Most recent changes with links to updates.</description>
+		<language>en</language>
+		<item>
+			<title>Version 1.1.1</title>
+			<sparkle:releaseNotesLink>
+				http://phaibin.tk/app/dandelion/release_notes.html
+			</sparkle:releaseNotesLink>
+			<pubDate>Mon Apr 23 21:07:58 CST 2012</pubDate>
+			<enclosure url="http://phaibin.tk/app/dandelion/Dandelion_1.1.1.zip" sparkle:version="1.1.1" length="1361465" type="application/octet-stream" sparkle:dsaSignature="MCwCFDxBmaNVUVsFNB74fP0YSsPl3oq1AhRuS6AGUoOcNAnPnW15xtvjgiOZew==" />
+		</item>
+	</channel>
+</rss>
