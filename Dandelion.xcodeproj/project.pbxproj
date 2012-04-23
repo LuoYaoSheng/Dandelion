@@ -23,6 +23,9 @@
 		3509E857143CACA00053EF3F /* timeline_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 3509E84D143CACA00053EF3F /* timeline_off.png */; };
 		3509E858143CACA00053EF3F /* timeline_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 3509E84E143CACA00053EF3F /* timeline_on.png */; };
 		35171890143B035E00DB2726 /* RoundedButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3517188F143B035E00DB2726 /* RoundedButtonCell.m */; };
+		352219DD1545845A003D1302 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352219DC1545845A003D1302 /* Sparkle.framework */; };
+		352219DE15458462003D1302 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 352219DC1545845A003D1302 /* Sparkle.framework */; };
+		352219E0154584D3003D1302 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 352219DF154584D3003D1302 /* dsa_pub.pem */; };
 		35263AAC140F1F4800944D3E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35263AAB140F1F4800944D3E /* Cocoa.framework */; };
 		35263AB6140F1F4800944D3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35263AB4140F1F4800944D3E /* InfoPlist.strings */; };
 		35263AB8140F1F4800944D3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 35263AB7140F1F4800944D3E /* main.m */; };
@@ -218,6 +221,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				3582C8FC14651FAC00F47560 /* QWeiboSDK.framework in CopyFiles */,
+				352219DE15458462003D1302 /* Sparkle.framework in CopyFiles */,
 				35C9475814453A1300E895DA /* Growl.framework in CopyFiles */,
 				357ADA8D14580AFF006CA936 /* YAJL.framework in CopyFiles */,
 			);
@@ -248,6 +252,8 @@
 		351140FA14947DE600B0263C /* NIFLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIFLog.h; sourceTree = "<group>"; };
 		3517188E143B035E00DB2726 /* RoundedButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedButtonCell.h; sourceTree = "<group>"; };
 		3517188F143B035E00DB2726 /* RoundedButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedButtonCell.m; sourceTree = "<group>"; };
+		352219DC1545845A003D1302 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = QWeiboClient/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		352219DF154584D3003D1302 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		35263AA7140F1F4800944D3E /* Dandelion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dandelion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35263AAB140F1F4800944D3E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		35263AAE140F1F4800944D3E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -462,6 +468,7 @@
 				35263AAC140F1F4800944D3E /* Cocoa.framework in Frameworks */,
 				35C947571445397700E895DA /* Growl.framework in Frameworks */,
 				357ADA8B14580AF4006CA936 /* YAJL.framework in Frameworks */,
+				352219DD1545845A003D1302 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +537,7 @@
 		35263AAA140F1F4800944D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				352219DC1545845A003D1302 /* Sparkle.framework */,
 				357ADA8A14580AF4006CA936 /* YAJL.framework */,
 				35C947561445397700E895DA /* Growl.framework */,
 				352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */,
@@ -589,6 +597,7 @@
 		35263AB2140F1F4800944D3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				352219DF154584D3003D1302 /* dsa_pub.pem */,
 				351140FA14947DE600B0263C /* NIFLog.h */,
 				35263AB3140F1F4800944D3E /* QWeiboClient-Info.plist */,
 				35C6DFAE1467B12700EF052F /* face.plist */,
@@ -1040,6 +1049,7 @@
 				35C6DFA614679FE200EF052F /* 龇牙.gif in Resources */,
 				35C6DFAF1467B12700EF052F /* face.plist in Resources */,
 				35019D8B1468DB2800FDEED2 /* smileEmoji.png in Resources */,
+				352219E0154584D3003D1302 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,6 +28,7 @@
 #define UPDATE_NEWTWEET_NOTIFICATION                        @"UPDATE_NEWTWEET_NOTIFICATION"
 
 #define VERIFY_URL                                          @"http://open.t.qq.com/cgi-bin/authorize?oauth_token="
+#define RELEASE_NOTES_URL                                   @"http://phaibin.tk/app/dandelion/release_notes.html"
 
 #define GROWL_NOTIFICATION_TIMELINE                         @"Timeline"
 #define GROWL_NOTIFICATION_MENTHIONS                        @"Mentions"

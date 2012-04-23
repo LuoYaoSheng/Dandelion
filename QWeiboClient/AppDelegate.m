@@ -87,6 +87,11 @@
     }
 }
 
+- (IBAction)openReleaseNotes:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:RELEASE_NOTES_URL]];
+}
+
 - (void)dealloc
 {
     [_windowController release];

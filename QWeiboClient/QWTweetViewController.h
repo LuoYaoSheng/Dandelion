@@ -33,6 +33,7 @@
 @property (copy) NSString *userName;
 @property (assign) TweetType tweetType;
 @property (nonatomic, assign) int newTweetCount;
+@property (nonatomic, copy) NSString *lastId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tweetType:(TweetType)type userName:(NSString *)userName;
 - (void)getLastTweets;

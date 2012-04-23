@@ -41,6 +41,7 @@
 @synthesize userName = _userName;
 @synthesize tweetType = _tweetType;
 @synthesize newTweetCount = _newTweetCount;
+@synthesize lastId = _lastId;
 
 - (NSString *)userName
 {
@@ -80,6 +81,7 @@
         hasNext = YES;
         oldestPageTime = 0;
         newestPageTime = 0;
+        _lastId = @"0";
         isLoading = NO;
         pos = 0;
         _newTweetCount = 0;
@@ -164,7 +166,7 @@
 
 - (void)fetchNewerTweets
 {
-    [api getNewerTweetsWithPageSize:10 pageTime:newestPageTime userName:self.userName];
+    [api getNewerTweetsWithPageSize:10 pageTime:newestPageTime lastId:self.lastId userName:self.userName];
 }
 
 - (void)beginUpdating
@@ -208,8 +210,11 @@
     [self.listContent removeAllObjects];
     [self.listContent addObjectsFromArray:tweets];
     oldestPageTime = ((QWMessage *)[tweets lastObject]).timestamp;
-    if (tweets.count > 0)
-        newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
+    if (tweets.count > 0) {
+        QWMessage *lastMessage = (QWMessage *)[tweets objectAtIndex:0];
+        newestPageTime = lastMessage.timestamp;
+        self.lastId = lastMessage.tweetId;
+    }
     hasNext = ![[info objectForKey:@"hasNext"] boolValue];
 //    pos = [[info objectForKey:@"pos"] intValue];
     pos += 20;
@@ -243,7 +248,9 @@
     
     [self dealWithNewTweets:tweets];
     if (tweets.count > 0) {
-        newestPageTime = ((QWMessage *)[tweets objectAtIndex:0]).timestamp;
+        QWMessage *lastMessage = (QWMessage *)[tweets objectAtIndex:0];
+        newestPageTime = lastMessage.timestamp;
+        self.lastId = lastMessage.tweetId;
         [self reloadTable:YES];
     }
 }
@@ -455,6 +462,7 @@
     [_reloadCell release];
     [api release];
     [_userName release];
+    [_lastId release];
     [super dealloc];  
 }
 
