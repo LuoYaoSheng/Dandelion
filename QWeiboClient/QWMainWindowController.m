@@ -11,6 +11,7 @@
 #import "QWTweetViewController.h"
 #import <QWeiboSDK/QWPerson.h>
 #import "QWPublishMessageWindowController.h"
+#import "QWPeopleViewController.h"
 
 @interface QWMainWindowController ()
 
@@ -154,6 +155,9 @@
     if (type == TweetTypeNone) {
         Class controllerClass = NSClassFromString( name );
         controller = [[controllerClass alloc] initWithNibName:name bundle:nil];
+    } else if ([name isEqualToString:@"QWPeopleViewController"]) {
+        controller = [[QWPeopleViewController alloc] initWithNibName:@"QWPeopleViewController" bundle:nil tweetType:type userName:userName];
+        ((QWTweetViewController *)controller).mainWindowController = self;
     } else {
         controller = [[QWTweetViewController alloc] initWithNibName:@"QWTweetViewController" bundle:nil tweetType:type userName:userName];
         ((QWTweetViewController *)controller).mainWindowController = self;
@@ -222,7 +226,7 @@
         case QWShowTabPeople:
         {
             if (info && [info objectForKey:@"userName"]) {
-                 viewController = [self viewControllerForName:@"QWPeopleViewController" tweetType:TweetTypeUserBroadcast userName:[info objectForKey:@"userName"]];
+                viewController = [self viewControllerForName:@"QWPeopleViewController" tweetType:TweetTypeUserBroadcast userName:[info objectForKey:@"userName"]];
                 ((QWTweetViewController *)viewController).tweetType = TweetTypeUserBroadcast;
                 ((QWTweetViewController *)viewController).userName = [info objectForKey:@"userName"];
             } else {

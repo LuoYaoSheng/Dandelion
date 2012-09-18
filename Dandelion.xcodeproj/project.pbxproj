@@ -54,6 +54,9 @@
 		3582C8FB14651F0C00F47560 /* QWeiboSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35FA49FC14651E53000404EA /* QWeiboSDK.framework */; };
 		3582C8FC14651FAC00F47560 /* QWeiboSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 35FA49FC14651E53000404EA /* QWeiboSDK.framework */; };
 		3583177E144AB9AD0057A1FE /* DragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3583177D144AB9AD0057A1FE /* DragDropImageView.m */; };
+		3584B0921608573600157996 /* QWPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3584B0901608573600157996 /* QWPeopleViewController.m */; };
+		3584B0931608573600157996 /* QWPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3584B0911608573600157996 /* QWPeopleViewController.xib */; };
+		3584B09616085B0800157996 /* UserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3584B09516085B0800157996 /* UserInfoView.m */; };
 		359E5EBC144D6E14009E5ADC /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 359E5EBB144D6E14009E5ADC /* head.jpg */; };
 		359E5EBE144D7C80009E5ADC /* badge-favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 359E5EBD144D7C80009E5ADC /* badge-favorite.png */; };
 		35B12EB1141FAF3000F963FC /* ToolboxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB0141FAF3000F963FC /* ToolboxView.m */; };
@@ -295,6 +298,11 @@
 		35809B701444441000CB02C2 /* blue_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue_dot.png; sourceTree = "<group>"; };
 		3583177C144AB9AC0057A1FE /* DragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragDropImageView.h; sourceTree = "<group>"; };
 		3583177D144AB9AD0057A1FE /* DragDropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragDropImageView.m; sourceTree = "<group>"; };
+		3584B08F1608573600157996 /* QWPeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWPeopleViewController.h; sourceTree = "<group>"; };
+		3584B0901608573600157996 /* QWPeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWPeopleViewController.m; sourceTree = "<group>"; };
+		3584B0911608573600157996 /* QWPeopleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWPeopleViewController.xib; sourceTree = "<group>"; };
+		3584B09416085B0800157996 /* UserInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoView.h; sourceTree = "<group>"; };
+		3584B09516085B0800157996 /* UserInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoView.m; sourceTree = "<group>"; };
 		359E5EBB144D6E14009E5ADC /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head.jpg; sourceTree = "<group>"; };
 		359E5EBD144D7C80009E5ADC /* badge-favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-favorite.png"; sourceTree = "<group>"; };
 		35B12EAF141FAF3000F963FC /* ToolboxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolboxView.h; sourceTree = "<group>"; };
@@ -578,6 +586,9 @@
 				35809B3E1443D1FC00CB02C2 /* QWTweetViewController.h */,
 				35809B3F1443D1FC00CB02C2 /* QWTweetViewController.m */,
 				35809B401443D1FC00CB02C2 /* QWTweetViewController.xib */,
+				3584B08F1608573600157996 /* QWPeopleViewController.h */,
+				3584B0901608573600157996 /* QWPeopleViewController.m */,
+				3584B0911608573600157996 /* QWPeopleViewController.xib */,
 				35B61E65143EF13C0001741D /* QWPublishMessageWindowController.h */,
 				35B61E66143EF13D0001741D /* QWPublishMessageWindowController.m */,
 				35B61E68143EF1540001741D /* QWPublishMessageWindowController.xib */,
@@ -614,6 +625,8 @@
 			children = (
 				35B12EAF141FAF3000F963FC /* ToolboxView.h */,
 				35B12EB0141FAF3000F963FC /* ToolboxView.m */,
+				3584B09416085B0800157996 /* UserInfoView.h */,
+				3584B09516085B0800157996 /* UserInfoView.m */,
 				35D7C02214397B51000F82DD /* MyView.h */,
 				35D7C02314397B51000F82DD /* MyView.m */,
 				3517188E143B035E00DB2726 /* RoundedButtonCell.h */,
@@ -1050,6 +1063,7 @@
 				35C6DFAF1467B12700EF052F /* face.plist in Resources */,
 				35019D8B1468DB2800FDEED2 /* smileEmoji.png in Resources */,
 				352219E0154584D3003D1302 /* dsa_pub.pem in Resources */,
+				3584B0931608573600157996 /* QWPeopleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1091,6 +1105,8 @@
 				35019D881468D91200FDEED2 /* ImagePickerMenuItemView.m in Sources */,
 				35019D891468D91200FDEED2 /* MenuItemViewController.m in Sources */,
 				35019D951468F82D00FDEED2 /* MyTextAttachmentCell.m in Sources */,
+				3584B0921608573600157996 /* QWPeopleViewController.m in Sources */,
+				3584B09616085B0800157996 /* UserInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

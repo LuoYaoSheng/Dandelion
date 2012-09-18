@@ -99,7 +99,7 @@
 
 - (void)awakeFromNib
 {
-   
+    [super awakeFromNib];
     [self.listView setCellSpacing:0.0f];
 	[self.listView setAllowsEmptySelection:YES];
 	[self.listView setAllowsMultipleSelection:YES];
@@ -108,6 +108,11 @@
 - (void)windowResized:(NSNotification *)notification
 {
     [self reloadTable:NO];
+}
+
+- (void)getUserInfo
+{
+    
 }
 
 - (void)getLastTweets
