@@ -73,7 +73,7 @@
         self.listContent = [[[NSMutableArray alloc] init] autorelease];
         self.heightList = [[[NSMutableArray alloc] init] autorelease];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowResized:) name:LISTVIEW_RESIZED_NOTIFICATION object:nil];
-        api = [[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET];
+        api = [[QWeiboAsyncApi alloc] init];
         api.delegate = self;
         api.tweetType = self.tweetType;
         _userName = [userName copy];

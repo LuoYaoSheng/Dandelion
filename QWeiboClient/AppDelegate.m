@@ -72,7 +72,7 @@
         [self loginFinished:nil];
     } else {
         [_logoutMenuItem setEnabled:NO];
-        QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET] autorelease];
+        QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
         NSString *retString = [api getRequestToken];
         NIF_TRACE(@"Get requestToken:%@", retString);
         

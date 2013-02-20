@@ -49,7 +49,7 @@
         // Initialization code here.
         allControllers = [[NSMutableDictionary alloc] init];
         selectedTab = 1;
-        api = [[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET];
+        api = [[QWeiboAsyncApi alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo:) name:GET_USER_INFO_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hasSendMessage:) name:PUBLISH_MESSAGE_NOTIFICATION object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNewTweet:) name:UPDATE_NEWTWEET_NOTIFICATION object:nil];

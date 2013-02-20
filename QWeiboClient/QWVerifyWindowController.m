@@ -86,7 +86,7 @@
     if (verifier && ![verifier isEqualToString:@""]) {
         NSString *requestToken = [[NSUserDefaults standardUserDefaults] stringForKey:REQUEST_TOKEN_KEY];
         NSString *requestTokenSecret = [[NSUserDefaults standardUserDefaults] stringForKey:REQUEST_TOKEN_SECRET_KEY];
-		QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] initWithAppKey:APP_KEY AppSecret:APP_SECRET] autorelease];
+		QWeiboAsyncApi *api = [[[QWeiboAsyncApi alloc] init] autorelease];
 		NSString *retString = [api getAccessTokenWithRequestTokenKey:requestToken 
 											  requestTokenSecret:requestTokenSecret 
 														  verify:verifier];

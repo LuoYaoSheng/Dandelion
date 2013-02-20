@@ -35,7 +35,6 @@
 		35263ACD140F1F9800944D3E /* QWMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35263ACC140F1F9800944D3E /* QWMainWindowController.m */; };
 		35263ADC140F22A500944D3E /* QWMainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35263ADB140F22A500944D3E /* QWMainWindowController.xib */; };
 		352A7D5D140F5C5B00F3E6B3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */; };
-		352EE05B1441314500AB7913 /* weibo.icns in Resources */ = {isa = PBXBuildFile; fileRef = 352EE05A1441314500AB7913 /* weibo.icns */; };
 		352EE05E14413F3D00AB7913 /* NSScrollView+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE05D14413F3D00AB7913 /* NSScrollView+Categories.m */; };
 		352EE06B1441457300AB7913 /* ListViewEndCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 352EE06A1441457300AB7913 /* ListViewEndCell.m */; };
 		352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 352EE06C1441458200AB7913 /* ListViewEndCell.xib */; };
@@ -51,14 +50,15 @@
 		35809B6E1444229F00CB02C2 /* status_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B6C1444229F00CB02C2 /* status_on.png */; };
 		35809B6F1444229F00CB02C2 /* status_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B6D1444229F00CB02C2 /* status_off.png */; };
 		35809B711444441000CB02C2 /* blue_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 35809B701444441000CB02C2 /* blue_dot.png */; };
-		3582C8FB14651F0C00F47560 /* QWeiboSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35FA49FC14651E53000404EA /* QWeiboSDK.framework */; };
-		3582C8FC14651FAC00F47560 /* QWeiboSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 35FA49FC14651E53000404EA /* QWeiboSDK.framework */; };
 		3583177E144AB9AD0057A1FE /* DragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3583177D144AB9AD0057A1FE /* DragDropImageView.m */; };
 		3584B0921608573600157996 /* QWPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3584B0901608573600157996 /* QWPeopleViewController.m */; };
 		3584B0931608573600157996 /* QWPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3584B0911608573600157996 /* QWPeopleViewController.xib */; };
 		3584B09616085B0800157996 /* UserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3584B09516085B0800157996 /* UserInfoView.m */; };
 		359E5EBC144D6E14009E5ADC /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 359E5EBB144D6E14009E5ADC /* head.jpg */; };
 		359E5EBE144D7C80009E5ADC /* badge-favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 359E5EBD144D7C80009E5ADC /* badge-favorite.png */; };
+		35AFE79A16D49935004D3637 /* QWeiboSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AFE79716D4990D004D3637 /* QWeiboSDK.framework */; };
+		35AFE79D16D49A71004D3637 /* weibo_badge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 35AFE79B16D49A71004D3637 /* weibo_badge.icns */; };
+		35AFE79E16D49A71004D3637 /* weibo.icns in Resources */ = {isa = PBXBuildFile; fileRef = 35AFE79C16D49A71004D3637 /* weibo.icns */; };
 		35B12EB1141FAF3000F963FC /* ToolboxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB0141FAF3000F963FC /* ToolboxView.m */; };
 		35B12EB4141FB18F00F963FC /* QWVerifyWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35B12EB3141FB18F00F963FC /* QWVerifyWindowController.m */; };
 		35B12EB6141FB1A300F963FC /* QWVerifyWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35B12EB5141FB1A300F963FC /* QWVerifyWindowController.xib */; };
@@ -189,7 +189,6 @@
 		35D7C02014397A4B000F82DD /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C01514397A4B000F82DD /* PXListView+UserInteraction.m */; };
 		35D7C02114397A4B000F82DD /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C01714397A4B000F82DD /* PXListView.m */; };
 		35D7C02414397B51000F82DD /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D7C02314397B51000F82DD /* MyView.m */; };
-		35E6366D1448022A00619046 /* weibo_badge.icns in Resources */ = {isa = PBXBuildFile; fileRef = 35E6366C1448022A00619046 /* weibo_badge.icns */; };
 		35E636701448437400619046 /* toolbar-reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 35E6366E1448437400619046 /* toolbar-reply.png */; };
 		35E636711448437400619046 /* toolbar-addfavor.png in Resources */ = {isa = PBXBuildFile; fileRef = 35E6366F1448437400619046 /* toolbar-addfavor.png */; };
 		35E6368614494A2300619046 /* QWViewImageWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E6368514494A2300619046 /* QWViewImageWindowController.m */; };
@@ -200,18 +199,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3582C8F914651EBB00F47560 /* PBXContainerItemProxy */ = {
+		35AFE79616D4990D004D3637 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 35FA49F714651E52000404EA /* QWeiboSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3514F0DE1457A0F50054812F;
-			remoteInfo = QWeiboSDK;
-		};
-		35FA49FB14651E53000404EA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 35FA49F714651E52000404EA /* QWeiboSDK.xcodeproj */;
+			containerPortal = 35AFE79216D4990D004D3637 /* QWeiboSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 3514F0DF1457A0F50054812F;
+			remoteInfo = QWeiboSDK;
+		};
+		35AFE79816D49916004D3637 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35AFE79216D4990D004D3637 /* QWeiboSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3514F0DE1457A0F50054812F;
 			remoteInfo = QWeiboSDK;
 		};
 /* End PBXContainerItemProxy section */
@@ -223,7 +222,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3582C8FC14651FAC00F47560 /* QWeiboSDK.framework in CopyFiles */,
 				352219DE15458462003D1302 /* Sparkle.framework in CopyFiles */,
 				35C9475814453A1300E895DA /* Growl.framework in CopyFiles */,
 				357ADA8D14580AFF006CA936 /* YAJL.framework in CopyFiles */,
@@ -275,7 +273,6 @@
 		35263ADB140F22A500944D3E /* QWMainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QWMainWindowController.xib; sourceTree = "<group>"; };
 		352A7D0B140F308C00F3E6B3 /* QWConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWConstants.h; sourceTree = "<group>"; };
 		352A7D5C140F5C5B00F3E6B3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		352EE05A1441314500AB7913 /* weibo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = weibo.icns; path = ../../weibo.icns; sourceTree = "<group>"; };
 		352EE05C14413F3D00AB7913 /* NSScrollView+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+Categories.h"; sourceTree = "<group>"; };
 		352EE05D14413F3D00AB7913 /* NSScrollView+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+Categories.m"; sourceTree = "<group>"; };
 		352EE0691441457300AB7913 /* ListViewEndCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewEndCell.h; sourceTree = "<group>"; };
@@ -305,6 +302,9 @@
 		3584B09516085B0800157996 /* UserInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoView.m; sourceTree = "<group>"; };
 		359E5EBB144D6E14009E5ADC /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head.jpg; sourceTree = "<group>"; };
 		359E5EBD144D7C80009E5ADC /* badge-favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-favorite.png"; sourceTree = "<group>"; };
+		35AFE79216D4990D004D3637 /* QWeiboSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QWeiboSDK.xcodeproj; path = QWeiboSDK/QWeiboSDK.xcodeproj; sourceTree = "<group>"; };
+		35AFE79B16D49A71004D3637 /* weibo_badge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = weibo_badge.icns; sourceTree = "<group>"; };
+		35AFE79C16D49A71004D3637 /* weibo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = weibo.icns; sourceTree = "<group>"; };
 		35B12EAF141FAF3000F963FC /* ToolboxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolboxView.h; sourceTree = "<group>"; };
 		35B12EB0141FAF3000F963FC /* ToolboxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolboxView.m; sourceTree = "<group>"; };
 		35B12EB2141FB18F00F963FC /* QWVerifyWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWVerifyWindowController.h; sourceTree = "<group>"; };
@@ -451,7 +451,6 @@
 		35D7C01914397A4B000F82DD /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXListViewDelegate.h; sourceTree = "<group>"; };
 		35D7C02214397B51000F82DD /* MyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyView.h; sourceTree = "<group>"; };
 		35D7C02314397B51000F82DD /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
-		35E6366C1448022A00619046 /* weibo_badge.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = weibo_badge.icns; sourceTree = SOURCE_ROOT; };
 		35E6366E1448437400619046 /* toolbar-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-reply.png"; sourceTree = "<group>"; };
 		35E6366F1448437400619046 /* toolbar-addfavor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-addfavor.png"; sourceTree = "<group>"; };
 		35E6368414494A2200619046 /* QWViewImageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWViewImageWindowController.h; sourceTree = "<group>"; };
@@ -463,7 +462,6 @@
 		35F0E127144E8268002A9191 /* TextViewPassive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewPassive.m; sourceTree = "<group>"; };
 		35F0E129144E877B002A9191 /* ButtonPassive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPassive.h; sourceTree = "<group>"; };
 		35F0E12A144E877B002A9191 /* ButtonPassive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonPassive.m; sourceTree = "<group>"; };
-		35FA49F714651E52000404EA /* QWeiboSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QWeiboSDK.xcodeproj; path = ../QWeiboSDK/QWeiboSDK/QWeiboSDK.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -471,7 +469,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3582C8FB14651F0C00F47560 /* QWeiboSDK.framework in Frameworks */,
+				35AFE79A16D49935004D3637 /* QWeiboSDK.framework in Frameworks */,
 				352A7D5D140F5C5B00F3E6B3 /* WebKit.framework in Frameworks */,
 				35263AAC140F1F4800944D3E /* Cocoa.framework in Frameworks */,
 				35C947571445397700E895DA /* Growl.framework in Frameworks */,
@@ -491,8 +489,6 @@
 				35E6366F1448437400619046 /* toolbar-addfavor.png */,
 				35809B6C1444229F00CB02C2 /* status_on.png */,
 				35809B6D1444229F00CB02C2 /* status_off.png */,
-				352EE05A1441314500AB7913 /* weibo.icns */,
-				35E6366C1448022A00619046 /* weibo_badge.icns */,
 				35B61E54143EE1780001741D /* messages_off.png */,
 				35B61E55143EE1780001741D /* messages_on.png */,
 				3509E845143CACA00053EF3F /* favorite_off.png */,
@@ -513,6 +509,8 @@
 				359E5EBB144D6E14009E5ADC /* head.jpg */,
 				359E5EBD144D7C80009E5ADC /* badge-favorite.png */,
 				35019D8A1468DB2800FDEED2 /* smileEmoji.png */,
+				35AFE79B16D49A71004D3637 /* weibo_badge.icns */,
+				35AFE79C16D49A71004D3637 /* weibo.icns */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -527,7 +525,7 @@
 		35263A9C140F1F4800944D3E = {
 			isa = PBXGroup;
 			children = (
-				35FA49F714651E52000404EA /* QWeiboSDK.xcodeproj */,
+				35AFE79216D4990D004D3637 /* QWeiboSDK.xcodeproj */,
 				35263AB1140F1F4800944D3E /* Dandelion */,
 				35263AAA140F1F4800944D3E /* Frameworks */,
 				35263AA8140F1F4800944D3E /* Products */,
@@ -618,6 +616,14 @@
 				35263ABA140F1F4800944D3E /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		35AFE79316D4990D004D3637 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				35AFE79716D4990D004D3637 /* QWeiboSDK.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		35B61E64143EF0CE0001741D /* CustomControl */ = {
@@ -841,14 +847,6 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		35FA49F814651E52000404EA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				35FA49FC14651E53000404EA /* QWeiboSDK.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -864,7 +862,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3582C8FA14651EBB00F47560 /* PBXTargetDependency */,
+				35AFE79916D49916004D3637 /* PBXTargetDependency */,
 			);
 			name = Dandelion;
 			productName = QWeiboClient;
@@ -877,7 +875,7 @@
 		35263A9E140F1F4800944D3E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 35263AA1140F1F4800944D3E /* Build configuration list for PBXProject "Dandelion" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -891,8 +889,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 35FA49F814651E52000404EA /* Products */;
-					ProjectRef = 35FA49F714651E52000404EA /* QWeiboSDK.xcodeproj */;
+					ProductGroup = 35AFE79316D4990D004D3637 /* Products */;
+					ProjectRef = 35AFE79216D4990D004D3637 /* QWeiboSDK.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -903,11 +901,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		35FA49FC14651E53000404EA /* QWeiboSDK.framework */ = {
+		35AFE79716D4990D004D3637 /* QWeiboSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = QWeiboSDK.framework;
-			remoteRef = 35FA49FB14651E53000404EA /* PBXContainerItemProxy */;
+			remoteRef = 35AFE79616D4990D004D3637 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -936,14 +934,12 @@
 				35B61E56143EE1780001741D /* messages_off.png in Resources */,
 				35B61E57143EE1780001741D /* messages_on.png in Resources */,
 				35B61E69143EF1550001741D /* QWPublishMessageWindowController.xib in Resources */,
-				352EE05B1441314500AB7913 /* weibo.icns in Resources */,
 				352EE06D1441458200AB7913 /* ListViewEndCell.xib in Resources */,
 				352EE0781441916700AB7913 /* end.png in Resources */,
 				35809B421443D1FC00CB02C2 /* QWTweetViewController.xib in Resources */,
 				35809B6E1444229F00CB02C2 /* status_on.png in Resources */,
 				35809B6F1444229F00CB02C2 /* status_off.png in Resources */,
 				35809B711444441000CB02C2 /* blue_dot.png in Resources */,
-				35E6366D1448022A00619046 /* weibo_badge.icns in Resources */,
 				35E636701448437400619046 /* toolbar-reply.png in Resources */,
 				35E636711448437400619046 /* toolbar-addfavor.png in Resources */,
 				35E6368814494A4900619046 /* QWViewImageWindowController.xib in Resources */,
@@ -1064,6 +1060,8 @@
 				35019D8B1468DB2800FDEED2 /* smileEmoji.png in Resources */,
 				352219E0154584D3003D1302 /* dsa_pub.pem in Resources */,
 				3584B0931608573600157996 /* QWPeopleViewController.xib in Resources */,
+				35AFE79D16D49A71004D3637 /* weibo_badge.icns in Resources */,
+				35AFE79E16D49A71004D3637 /* weibo.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1113,10 +1111,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3582C8FA14651EBB00F47560 /* PBXTargetDependency */ = {
+		35AFE79916D49916004D3637 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = QWeiboSDK;
-			targetProxy = 3582C8F914651EBB00F47560 /* PBXContainerItemProxy */;
+			targetProxy = 35AFE79816D49916004D3637 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1153,6 +1151,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1167,6 +1169,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "/Users/leon/Desktop/Cocoa/QWeiboClient/QWeiboClient/QWeiboSDK4iOS/**";
 				LD_RUNPATH_SEARCH_PATHS = "";
@@ -1183,6 +1186,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1191,6 +1198,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "/Users/leon/Desktop/Cocoa/QWeiboClient/QWeiboClient/QWeiboSDK4iOS/**";
 				LD_RUNPATH_SEARCH_PATHS = "";
@@ -1204,6 +1212,7 @@
 		35263AC9140F1F4800944D3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/QWeiboClient/Frameworks\"",
@@ -1222,6 +1231,7 @@
 		35263ACA140F1F4800944D3E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/QWeiboClient/Frameworks\"",

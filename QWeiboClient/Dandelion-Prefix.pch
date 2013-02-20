@@ -6,6 +6,12 @@
     #import <Cocoa/Cocoa.h>
 #endif
 
+#ifndef __OPTIMIZE__
+#    define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#    define NSLog(...) {}
+#endif
+
 #import "QWConstants.h"
 #import "NIFLog.h"
 #import "NSObject+Universal.h"
